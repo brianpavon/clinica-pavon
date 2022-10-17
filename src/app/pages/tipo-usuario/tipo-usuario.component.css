@@ -7,10 +7,15 @@
     width: 100vw;
 }
 
-.col3{
-    width: 100%;
+.boton-imagen{
+    height: 20vh;
+    background-color: rgb(101, 89, 89);
+    border-radius: 20px;
 }
 
-.regForm{
-    max-width: 65vh;
+button{
+    border: 0;
+}
+button:hover{
+    transform: scale(0.9);
 }

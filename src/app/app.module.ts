@@ -15,6 +15,8 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
     HomeComponent,
     NavbarComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    TipoUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
     AngularFireModule.initializeApp(environment.firebase),
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

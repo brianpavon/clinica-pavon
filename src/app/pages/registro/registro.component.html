@@ -1,1 +1,111 @@
-<p>registro works!</p>
+<div class="body">
+    <div *ngIf="!tipoUsuario">
+        <app-tipo-usuario (tipoUsuario)="cargarUsuario($event)"></app-tipo-usuario>
+    </div>    
+    <div *ngIf="tipoUsuario" class="justify-content-center">
+        <form [formGroup]="formRegistro" (ngSubmit)="crearUsuario()" class="regForm">
+            <h1  class="h3 mb-3 font-weight-normal text-center" style="color: white;">Registro</h1>
+            <img class="mx-auto d-block" src="assets/images/register.png" alt="" width="72" height="72">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+                </div>                    
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput formControlName="apellido">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Edad</mat-label>
+                        <input matInput type="number" formControlName="edad">
+                    </mat-form-field>
+                </div>                    
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>DNI</mat-label>
+                        <input matInput type="number" formControlName="dni">
+                    </mat-form-field>
+                </div>
+            </div>            
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6">                    
+                    <mat-form-field appearance="fill">
+                        <mat-label>Contraseña</mat-label>                        
+                        <input matInput type="password" formControlName="clave">
+                    </mat-form-field>
+                </div>                    
+            </div>
+            
+            <!-- <div class="row justify-content-center">
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Perfil</mat-label>
+                    <mat-select [(value)]="tipoUsuario" (selectionChange)="eligeTipoUsuario()" formControlName="rol">
+                      <mat-option value="paciente">Paciente</mat-option>
+                      <mat-option value="medico">Médico</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+            
+
+            <div class="row" >
+                <div class="col-md-6" *ngIf="tipoUsuario == 'medico'">
+                    <mat-form-field appearance="fill" class="col3">                        
+                        <mat-label>Especialidad</mat-label>
+                        <mat-select formControlName="especialidad">
+                            <mat-option value="traumatologo">Traumatologo</mat-option>
+                            <mat-option value="clinico">Clínico</mat-option>
+                        </mat-select>
+                    </mat-form-field>               
+                </div>
+                <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
+                    <mat-form-field appearance="fill" class="col3">
+                        <mat-label>Obra Social</mat-label>
+                        <input matInput formControlName="obraSocial">
+                    </mat-form-field>
+                </div>         
+                <div [ngClass]="tipoUsuario == 'medico' || tipoUsuario == 'admin' ? 'col-md-6' : 'col-sm-4' " *ngIf="tipoUsuario == 'paciente' || tipoUsuario == 'medico' || tipoUsuario == 'admin' ">
+                    <div class="col3">
+                        <button type="button" (click)="fotoPerfil.click()" mat-flat-button color="primary">Subir Foto de Perfil</button>
+                        <input name="fotoPerfil" #fotoPerfil (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoPerfil">
+                    </div>
+                </div>
+                <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente' ">                   
+                    <div class="col3">
+                        <button type="button" (click)="fotoDos.click()" mat-flat-button color="primary">Subir Segunda Foto</button>
+                        <input name="fotoDos" #fotoDos (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoDos">
+                    </div>
+                </div>
+            </div>
+           
+
+            <div class="row justify-content-center mt-3">                             
+                <button type="button" (click)="cambiarUsuario()" type="button" mat-flat-button color="primary">Cambiar Tipo Usuario</button>
+            </div>
+            
+            <!--<mat-label style="color: red;">*Campos requeridos</mat-label>-->
+            <hr>
+            <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
+        </form>
+    </div>
+    <!-- <div *ngIf="tipoUsuario == 'medico'" class="col-md-2 order-md-2 mb-5">
+        <app-especialidades></app-especialidades>
+    </div> -->
+</div>
+

@@ -1,0 +1,34 @@
+<div class="body">
+    <div class="container">
+        
+        <mat-toolbar class="justify-content-center mt-2 mb-5">
+              <span>Elija un tipo de perfil</span>
+        </mat-toolbar>
+        
+        <div class="row d-flex justify-content-around">
+            <div class="col-sm-2">
+                <p class="text-center" style="font-size: x-large;">Pacientes</p>
+            </div>
+
+            <div class="col-sm-2" >
+                <p class="text-center" style="font-size: x-large;">Médicos</p>
+            </div>
+            <div class="col-sm-2" >
+                <p class="text-center" style="font-size: x-large;">Administradores</p>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-around">
+            <button type="button" (click)="cargarTipoUsuario('paciente')" class="col-sm-2 boton-imagen">                
+                <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
+            </button>
+
+            <button type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('medico')">
+                <img src="/assets/images/medicos.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
+            </button>
+
+            <button type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('admin')">
+                <img src="/assets/images/admin.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
+            </button>
+        </div>
+    </div>
+</div>
