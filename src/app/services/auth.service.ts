@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { tap,first } from 'rxjs/operators';
 import { UsuariosService } from './usuarios.service';
+import { LogService } from './log.service';
+import { Logs } from 'src/app/interfaces/logs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class AuthService {
   toast;
   userFirebase : any;
   usuarioDB : any
-  constructor(private auth:AngularFireAuth,private router:Router,private userService : UsuariosService) { 
+  nuevoLog !: Logs;
+  constructor(private auth:AngularFireAuth,private router:Router,private userService : UsuariosService,private logServ : LogService) { 
     auth.authState.subscribe(user=>{
       //console.log(user);
     });
@@ -31,8 +34,16 @@ export class AuthService {
 
   //Funciones
   async login(email:string, password:string){
-    return this.auth.signInWithEmailAndPassword(email,password).then(
+    return this.auth.signInWithEmailAndPassword(email,password).then(      
       async e=>{
+        let fecha = this.devolverFecha();
+        let mail = e.user?.email;
+        //console.log(this.nuevoLog);
+        this.nuevoLog = {usuario:mail,fecha:fecha};
+        //console.log(this.nuevoLog);
+        
+        this.logServ.guardarLog(this.nuevoLog);
+        
         if(e.user?.email == 'admin@mail.com' ){
           this.router.navigate(['/panel-control']);
           setTimeout(() => {
@@ -90,7 +101,7 @@ export class AuthService {
     );
   }  
   
-  logout(){
+  logout(){    
     return this.auth.signOut();
   }
 
@@ -243,6 +254,13 @@ export class AuthService {
         return user?.sendEmailVerification();
       }
     )
+  }
+
+  devolverFecha(){
+    let date = new Date()
+    let mes = date.getMonth()+1;
+    let fecha = `${date.getDate()}/${mes}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    return fecha;
   }
 
   

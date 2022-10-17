@@ -20,9 +20,10 @@ export class LoginComponent implements OnInit {
   }
 
   async login(email: string, password: string) {
-    try {
+    try {    
       
-      await this.auth.login(email, password);
+      await this.auth.login(email, password);      
+      
       // this.listaUsuarios  = [];
       // this.pacientes  = 3;
       // this.medicos  = 2;  
