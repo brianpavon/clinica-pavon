@@ -1,0 +1,53 @@
+<div class="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>Pacientes</mat-card-title>
+                        <mat-card-subtitle>
+                            <a routerLink="/panel-control/usuarios" mat-stroked-button color="accent">Ver</a>
+                        </mat-card-subtitle>
+                        <img mat-card-sm-image src="/assets/images/pacientes.png" >
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        Acceda a la información de los pacientes.
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-4">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                    <mat-card-title>Especialistas</mat-card-title>
+                    <mat-card-subtitle>
+                        <a routerLink="/panel-control/especialistas" mat-stroked-button color="accent">Ver</a>
+                    </mat-card-subtitle>
+                    <img mat-card-sm-image src="/assets/images/medicos.png" >
+                    <a *ngIf="nuevosMedicos" color="warn" mat-icon-button class="notificacion example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                        <span>Nuevos especialistas para aprobar el alta.</span>
+                        <mat-icon>notification_important</mat-icon>
+                    </a>                    
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        Acceda a la información de los especialistas.
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            
+            <div class="col-md-4">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                    <mat-card-title>Administradores</mat-card-title>
+                    <mat-card-subtitle>
+                        <a routerLink="/registro" mat-stroked-button color="accent">Nuevo Usuario</a>
+                    </mat-card-subtitle>
+                    <img mat-card-sm-image src="/assets/images/admin.png" >                    
+                    </mat-card-title-group>
+                    <mat-card-content>
+                    Genere nuevos usuarios.
+                    </mat-card-content>
+                </mat-card> 
+            </div>
+        </div>
+    </div>
+</div>

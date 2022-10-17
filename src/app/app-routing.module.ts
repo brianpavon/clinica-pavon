@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'registro',component:RegistroComponent},
+  {path: 'panel-control', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   {path:'',redirectTo:'home',pathMatch:'full'},
 ];
 

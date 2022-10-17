@@ -13,7 +13,7 @@
             <div class="col-sm-2" >
                 <p class="text-center" style="font-size: x-large;">Médicos</p>
             </div>
-            <div class="col-sm-2" >
+            <div class="col-sm-2" *ngIf="esAdmin">
                 <p class="text-center" style="font-size: x-large;">Administradores</p>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <img src="/assets/images/medicos.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
             </button>
 
-            <button type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('admin')">
+            <button *ngIf="esAdmin" type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('admin')">
                 <img src="/assets/images/admin.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
             </button>
         </div>

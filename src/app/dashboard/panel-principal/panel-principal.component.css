@@ -1,0 +1,33 @@
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(240, 221, 233);
+    width: 100vw;
+}    
+
+a.notificacion {
+    border-bottom: 1px dashed;
+    text-decoration: none
+}
+a.notificacion:hover {
+    cursor: pointer;
+    position: relative
+}
+a.notificacion span {
+    display: none
+}
+a.notificacion:hover span {
+    /*border: #c0c0c0 1px dotted;*/
+    padding: 5px 20px 5px 5px;
+    display: block;
+    z-index: 100;
+    /*background: url(../images/status-info.png) #f0f0f0 no-repeat 100% 5%;*/
+    left: 0px;
+    margin: 10px;
+    width: 250px;
+    position: absolute;
+    bottom: 35px;
+    text-decoration: none
+}
