@@ -19,6 +19,7 @@ export class RegistroComponent implements OnInit {
   segundaFoto !:File;
   pathFotoPerfil : string = '';
   pathSegundaFoto : string = '';
+  especialidades : string[] = [];
 
   constructor(private fb : FormBuilder,private spinner : NgxSpinnerService,private usuarioServ : UsuariosService,private auth : AuthService,private imgServ : ImagenService) {
     this.formRegistro = this.fb.group(
@@ -49,7 +50,9 @@ export class RegistroComponent implements OnInit {
     delete this.formRegistro.value.captcha;
     this.nuevoUsuario = this.formRegistro.value;
     this.nuevoUsuario.rol = this.tipoUsuario;
-    //console.log(this.nuevoUsuario);
+    // console.log(this.nuevoUsuario);
+    // console.log(typeof this.nuevoUsuario.especialidad);
+    
     
     this.tipoUsuario == 'paciente' ? delete this.nuevoUsuario.especialidad : delete this.nuevoUsuario.obraSocial;
     if(this.tipoUsuario == 'admin'){      
@@ -146,6 +149,20 @@ export class RegistroComponent implements OnInit {
   cambiarUsuario(){
     this.tipoUsuario = '' ;
     this.formRegistro.reset();
+  }
+
+  agregarEspecialidad(checkbox:any){
+    //me llega el checkbox, obtengo el value y si esta checkeado o no
+    
+    let espec = checkbox.source.value;
+    let agregar = checkbox.checked
+    
+    if(agregar){      
+      this.especialidades.push(espec)
+    }else{
+      this.especialidades = this.especialidades.filter(espe => espe != espec);
+    }    
+    this.formRegistro.controls.especialidad.patchValue(this.especialidades)
   }
 
 

@@ -17,6 +17,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EspecialidadesComponent } from './pages/especialidades/especialidades.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     LoginComponent,
     RegistroComponent,
-    TipoUsuarioComponent
+    TipoUsuarioComponent,
+    EspecialidadesComponent
   ],
   imports: [
     BrowserModule,

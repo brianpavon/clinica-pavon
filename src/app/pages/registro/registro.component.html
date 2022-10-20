@@ -65,7 +65,7 @@
             
 
             <div class="row" >
-                <div class="col-md-6" *ngIf="tipoUsuario == 'medico'">
+                <!-- <div class="col-md-6" *ngIf="tipoUsuario == 'medico'">
                     <mat-form-field appearance="fill" class="col3">                        
                         <mat-label>Especialidad</mat-label>
                         <mat-select formControlName="especialidad">
@@ -73,7 +73,8 @@
                             <mat-option value="clinico">Clínico</mat-option>
                         </mat-select>
                     </mat-form-field>               
-                </div>
+                </div> --> 
+                <input class="d-none" type="text" formControlName="especialidad">
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
                     <mat-form-field appearance="fill" class="col3">
                         <mat-label>Obra Social</mat-label>
@@ -104,8 +105,8 @@
             <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
         </form>
     </div>
-    <!-- <div *ngIf="tipoUsuario == 'medico'" class="col-md-2 order-md-2 mb-5">
-        <app-especialidades></app-especialidades>
-    </div> -->
+    <div *ngIf="tipoUsuario == 'medico'" class="col-md-2 order-md-2 mb-5">
+        <app-especialidades (especialidadSeleccionada)="agregarEspecialidad($event)"></app-especialidades>
+    </div>    
 </div>
 

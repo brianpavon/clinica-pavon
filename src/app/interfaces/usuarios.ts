@@ -7,7 +7,7 @@ export interface Usuarios {
     dni:number;
     email:string;
     clave:string;    
-    especialidad?:string;
+    especialidad?:string[];
     obraSocial?:string;
     fotoPerfil:string;
     fotoDos?:string;
