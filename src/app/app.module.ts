@@ -16,7 +16,7 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EspecialidadesComponent } from './pages/especialidades/especialidades.component';
 
 @NgModule({
@@ -36,7 +36,8 @@ import { EspecialidadesComponent } from './pages/especialidades/especialidades.c
     NgxSpinnerModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
