@@ -6,13 +6,15 @@ import { DashboardComponent } from './dashboard.component';
 import { PanelPrincipalComponent } from './panel-principal/panel-principal.component';
 import { MaterialModule } from '../material/material.module';
 import { EspecialistasComponent } from './especialistas/especialistas.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     PanelPrincipalComponent,
-    EspecialistasComponent
+    EspecialistasComponent,
+    UsuariosComponent
   ],
   imports: [
     CommonModule,
