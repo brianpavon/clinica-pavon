@@ -13,12 +13,21 @@
                         <mat-label>Nombre</mat-label>
                         <input matInput formControlName="nombre">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.nombre.errors?.required && formRegistro.controls.nombre.touched">Debe completar el nombre.</p>
+                        <p *ngIf="formRegistro.controls.nombre.errors?.['minlength']">Debe tener al menos 5 caracteres.</p>
+                        <p *ngIf="formRegistro.controls.nombre.errors?.['pattern']">Solo se aceptan letras.</p>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Apellido</mat-label>
                         <input matInput formControlName="apellido">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.apellido.errors?.required && formRegistro.controls.apellido.touched">Debe completar el apellido.</p>
+                        <p *ngIf="formRegistro.controls.apellido.errors?.['minlength']">Debe tener al menos 5 caracteres.</p>                        
+                    </div>
                 </div>
             </div>
 
@@ -28,12 +37,23 @@
                         <mat-label>Edad</mat-label>
                         <input matInput type="number" formControlName="edad">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.edad.errors?.required && formRegistro.controls.edad.touched">Debe completar la edad.</p>
+                        <p *ngIf="formRegistro.controls.edad.errors?.['min']">La edad mínima es 1 año.</p>
+                        <p *ngIf="formRegistro.controls.edad.errors?.['max']">La edad máxima es 120 años.</p>
+                        <p *ngIf="formRegistro.controls.edad.errors?.['pattern']">La edad son números.</p>
+                    </div>
                 </div>                    
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>DNI</mat-label>
                         <input matInput type="number" formControlName="dni">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.dni.errors?.required && formRegistro.controls.dni.touched">Debe completar el DNI.</p>
+                        <p *ngIf="formRegistro.controls.dni.errors?.['minlength']">Debe tener al menos 6 caracteres.</p>
+                        <p *ngIf="formRegistro.controls.dni.errors?.['pattern']">El DNI son números.</p>
+                    </div>
                 </div>
             </div>            
 
@@ -43,24 +63,43 @@
                         <mat-label>Email</mat-label>
                         <input matInput type="email" formControlName="email">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.email.errors?.required && formRegistro.controls.email.touched">Debe completar el email.</p>
+                        <p *ngIf="formRegistro.controls.email.errors?.['email']">Ingrese un formato válido de mail.</p>
+                    </div>
                 </div>
                 <div class="col-sm-6">                    
                     <mat-form-field appearance="fill">
                         <mat-label>Contraseña</mat-label>                        
                         <input matInput type="password" formControlName="clave">
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.clave.errors?.required && formRegistro.controls.clave.touched">Debe completar la contraseña.</p>
+                        <p *ngIf="formRegistro.controls.clave.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</p>
+                    </div>
                 </div>                    
             </div>
             
 
             <div class="row" >                
+                
+    
                 <input *ngIf="tipoUsuario == 'medico'" class="d-none" type="text" formControlName="especialidad">
+                <div class="invalid">
+                    <p *ngIf="formRegistro.controls.especialidad.errors?.required">Debe elegir al menos una especialidad.</p>
+                </div>
+
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
                     <mat-form-field appearance="fill" class="col3">
                         <mat-label>Obra Social</mat-label>
                         <input matInput formControlName="obraSocial">
                     </mat-form-field>
-                </div>         
+                    <div class="invalid">
+                        <p *ngIf="formRegistro.controls.obraSocial.errors?.required && formRegistro.controls.obraSocial.touched">Debe completar su Obra Social.</p>
+                        <p *ngIf="formRegistro.controls.obraSocial.errors?.['minlength']">Debe tener al menos 3 caracteres.</p>  
+                    </div>
+                </div>
+                         
                 <div [ngClass]="tipoUsuario == 'medico' || tipoUsuario == 'admin' ? 'col-md-6' : 'col-sm-4' " *ngIf="tipoUsuario == 'paciente' || tipoUsuario == 'medico' || tipoUsuario == 'admin' ">
                     <div class="col3">
                         <button type="button" (click)="fotoPerfil.click()" mat-flat-button color="primary">Subir Foto de Perfil</button>
@@ -74,7 +113,6 @@
                     </div>
                 </div>
             </div>
-           
 
             <div class="row justify-content-center mt-3">                             
                 <button type="button" (click)="cambiarUsuario()" type="button" mat-flat-button color="primary">Cambiar Tipo Usuario</button>

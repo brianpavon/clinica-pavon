@@ -24,18 +24,16 @@ export class RegistroComponent implements OnInit {
   constructor(private fb : FormBuilder,private spinner : NgxSpinnerService,private usuarioServ : UsuariosService,private auth : AuthService,private imgServ : ImagenService) {
     this.formRegistro = this.fb.group(
       {
-        'nombre':['',[Validators.required,Validators.minLength(2)]],
-        'apellido':['',[Validators.required,Validators.minLength(2)]],
-        'edad':['',[Validators.required,Validators.min(1),Validators.max(120)]],
-        'dni':['',[Validators.required,Validators.minLength(6)]],
+        'nombre':['',[Validators.required,Validators.minLength(5),Validators.pattern('^[A-Za-z ]*')]],
+        'apellido':['',[Validators.required,Validators.minLength(5)]],
+        'edad':['',[Validators.required,Validators.min(1),Validators.max(120),Validators.pattern('^[0-9]*')]],
+        'dni':['',[Validators.required,Validators.minLength(6),Validators.pattern('^[0-9]*')]],
         'email': ['',[Validators.required,Validators.email]],
-        'clave':['',[Validators.required,Validators.minLength(6)]],
-        //'rol': ['',[Validators.required]],
+        'clave':['',[Validators.required,Validators.minLength(6)]],        
         'obraSocial': ['',[Validators.required,Validators.minLength(3)]],
         'especialidad' : ['',[Validators.required]],
         'fotoDos' : ['',[Validators.required]],
         'fotoPerfil' : ['',[Validators.required]],
-        // 'captcha' : [null,Validators.required]
       }
     );
   }
@@ -88,7 +86,7 @@ export class RegistroComponent implements OnInit {
   eligeTipoUsuario(){
     //console.log(this.tipoUsuario);
     if(this.tipoUsuario == 'paciente'){
-      this.formRegistro.get('obraSocial')?.setValidators([Validators.required]);
+      this.formRegistro.get('obraSocial')?.setValidators([Validators.required,Validators.minLength(3)]);
       this.formRegistro.get('obraSocial')?.updateValueAndValidity();
 
       this.formRegistro.get('especialidad')?.clearValidators();

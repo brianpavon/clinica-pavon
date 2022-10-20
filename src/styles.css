@@ -6,3 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spinner{
     width: 60px !important;
 }
+
+.invalid{
+    color: red;
+}
+

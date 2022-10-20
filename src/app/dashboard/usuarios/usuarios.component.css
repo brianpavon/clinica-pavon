@@ -1,0 +1,13 @@
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(167, 217, 240);
+    width: 100vw;
+}
+
+table {
+    width: 80%;
+  }
+  

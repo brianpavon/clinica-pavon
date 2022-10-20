@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -9,10 +10,17 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class PanelPrincipalComponent implements OnInit {
   nuevosMedicos !: boolean;
 
-  constructor(private userService : UsuariosService) { }
+  constructor(private userService : UsuariosService,private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.chequearNuevosMedicos();
+    /** spinner starts on init */
+    this.spinner.show();
+  
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
   }
 
   chequearNuevosMedicos(){
