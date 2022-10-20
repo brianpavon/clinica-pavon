@@ -13,7 +13,7 @@
                         <mat-label>Nombre</mat-label>
                         <input matInput formControlName="nombre">
                     </mat-form-field>
-                </div>                    
+                </div>
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Apellido</mat-label>
@@ -52,29 +52,9 @@
                 </div>                    
             </div>
             
-            <!-- <div class="row justify-content-center">
-                
-                <mat-form-field appearance="fill">
-                    <mat-label>Tipo de Perfil</mat-label>
-                    <mat-select [(value)]="tipoUsuario" (selectionChange)="eligeTipoUsuario()" formControlName="rol">
-                      <mat-option value="paciente">Paciente</mat-option>
-                      <mat-option value="medico">Médico</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div> -->
-            
 
-            <div class="row" >
-                <!-- <div class="col-md-6" *ngIf="tipoUsuario == 'medico'">
-                    <mat-form-field appearance="fill" class="col3">                        
-                        <mat-label>Especialidad</mat-label>
-                        <mat-select formControlName="especialidad">
-                            <mat-option value="traumatologo">Traumatologo</mat-option>
-                            <mat-option value="clinico">Clínico</mat-option>
-                        </mat-select>
-                    </mat-form-field>               
-                </div> --> 
-                <input class="d-none" type="text" formControlName="especialidad">
+            <div class="row" >                
+                <input *ngIf="tipoUsuario == 'medico'" class="d-none" type="text" formControlName="especialidad">
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
                     <mat-form-field appearance="fill" class="col3">
                         <mat-label>Obra Social</mat-label>
@@ -99,8 +79,6 @@
             <div class="row justify-content-center mt-3">                             
                 <button type="button" (click)="cambiarUsuario()" type="button" mat-flat-button color="primary">Cambiar Tipo Usuario</button>
             </div>
-            
-            <!--<mat-label style="color: red;">*Campos requeridos</mat-label>-->
             <hr>
             <button type="submit" [disabled]="formRegistro.invalid" class="btn btn-block" mat-flat-button color="accent">Registrarme</button>
         </form>
