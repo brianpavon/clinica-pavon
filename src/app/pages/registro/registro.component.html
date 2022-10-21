@@ -105,11 +105,23 @@
                         <button type="button" (click)="fotoPerfil.click()" mat-flat-button color="primary">Subir Foto de Perfil</button>
                         <input name="fotoPerfil" #fotoPerfil (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoPerfil">
                     </div>
+                    <div *ngIf="!pathFotoPerfil" class="invalid">
+                        <p >No hay foto cargada.</p>
+                    </div>
+                    <div class="letrasBlancas" *ngIf="pathFotoPerfil">
+                        <p >Foto subida: {{ pathFotoPerfil }}</p>
+                    </div>
                 </div>
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente' ">                   
                     <div class="col3">
                         <button type="button" (click)="fotoDos.click()" mat-flat-button color="primary">Subir Segunda Foto</button>
                         <input name="fotoDos" #fotoDos (change)="guardarImagen($event)" hidden type="file" accept=".jpg, .png, .jpeg, .svg" formControlName="fotoDos">
+                    </div>
+                    <div *ngIf="!pathSegundaFoto" class="invalid">
+                        <p >No hay foto cargada.</p>
+                    </div>
+                    <div class="letrasBlancas" *ngIf="pathSegundaFoto">
+                        <p >Foto subida: {{ pathSegundaFoto }}</p>
                     </div>
                 </div>
             </div>
