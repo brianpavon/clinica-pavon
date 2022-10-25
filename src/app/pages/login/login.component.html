@@ -2,7 +2,15 @@
     <div class="container">
         <div class="row d-flex justify-content-around">
           
-            <div class="col-md-4">
+          <div class="d-flex col-md-4 align-items-center flex-column" style="border-right: 2px solid black;">
+            <div class="list-group" *ngFor="let usuario of listaUsuarios" >
+              <button (click)="login(usuario.email,usuario.clave)" type="button"  class="boton-imagen mb-2" title="Ingresar como {{ usuario.nombre }} {{ usuario.apellido }}. Su rol es: {{ usuario.rol }}">
+                <img [src]="usuario.fotoPerfil.startsWith('https') ? usuario.fotoPerfil : '/assets/images/gif-buscar.gif'" class="mx-auto d-block" alt="..." width="75%" height="75%" >
+              </button>        
+            </div>
+          </div>
+
+          <div class="col-md-4">
               <form class="form-signin">
               
               <img class="mx-auto d-block" src="assets/images/foto-login.png" alt="" width="72" height="72">
@@ -20,12 +28,6 @@
             </form>
           </div>
 
-          <div class="d-flex col-md-4 align-items-center flex-column" style="border-left: 2px solid black;">
-            <label>Ingresos Rápidos</label>
-            <button (click)="login('admin@mail.com','123456')" type="button" mat-flat-button color="primary"  class="boton-imagen mb-2">Admin</button>
-            <button (click)="login('tomax53585@imdutex.com','123456')" type="button" mat-flat-button color="accent"  class="boton-imagen mb-2">Especialista</button>
-            <button (click)="login('yskvqofjdodruadtfx@tmmbt.net','123456')" type="button" mat-flat-button color="warn"  class="boton-imagen mb-2">Usuario</button>
-          </div>
 
         </div>
       </div>

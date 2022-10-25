@@ -6,3 +6,15 @@
     background-color: rgb(203, 197, 242);    
     width: 100vw;
 }
+
+
+.boton-imagen{
+    height: 12vh;
+    background-color: rgb(101, 89, 89);
+    /*border-radius: 18px;*/
+    width: 18vh;
+}
+
+button:hover{
+    transform: scale(0.9);
+}

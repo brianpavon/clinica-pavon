@@ -1,34 +1,35 @@
 <div class="body">
     <div class="container">
         
-        <mat-toolbar class="justify-content-center mt-2 mb-5">
+        <mat-toolbar class="justify-content-center mt-2 mb-4">
               <span>Elija un tipo de perfil</span>
         </mat-toolbar>
-        
-        <div class="row d-flex justify-content-around">
-            <div class="col-sm-2">
-                <p class="text-center" style="font-size: x-large;">Pacientes</p>
-            </div>
 
-            <div class="col-sm-2" >
-                <p class="text-center" style="font-size: x-large;">Médicos</p>
-            </div>
-            <div class="col-sm-2" *ngIf="esAdmin">
-                <p class="text-center" style="font-size: x-large;">Administradores</p>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-around">
-            <button type="button" (click)="cargarTipoUsuario('paciente')" class="col-sm-2 boton-imagen">                
-                <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
-            </button>
+        <div class="d-flex align-items-center flex-column">
+            <div class="list-group">
+                
+                <div class="text-center mb-3">
+                    <p style="font-size: x-large;">Pacientes</p>
+                    <button   class="boton-imagen mb-2" (click)="cargarTipoUsuario('paciente')">
+                      <img src="/assets/images/pacientes.png" class="mx-auto d-block" alt="img-paciente" width="75%" height="75%" >
+                    </button>
+                </div>
 
-            <button type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('medico')">
-                <img src="/assets/images/medicos.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
-            </button>
+                <div class="text-center mb-3 mt-2">
+                    <p style="font-size: x-large;">Médicos</p>
+                    <button   class="boton-imagen mb-2" (click)="cargarTipoUsuario('medico')">
+                      <img src="/assets/images/medicos.png" class="mx-auto d-block" alt="img-medico" width="75%" height="75%" >
+                    </button>
+                </div>
+                
+                <div *ngIf="esAdmin" class="text-center mt-2">
+                    <p style="font-size: x-large;">Administradores</p>
+                    <button   class="boton-imagen mb-2" (click)="cargarTipoUsuario('admin')">
+                      <img src="/assets/images/admin.png" class="mx-auto d-block" alt="img-admin" width="75%" height="75%" >
+                    </button>
+                </div>
 
-            <button *ngIf="esAdmin" type="button" class="col-sm-2 boton-imagen " (click)="cargarTipoUsuario('admin')">
-                <img src="/assets/images/admin.png" alt="..." class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
-            </button>
+            </div>
         </div>
     </div>
 </div>

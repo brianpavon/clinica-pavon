@@ -8,9 +8,10 @@
 }
 
 .boton-imagen{
-    height: 20vh;
+    height: 16vh;
     background-color: rgb(101, 89, 89);
     border-radius: 20px;
+    width: 16vh;
 }
 
 button{
