@@ -38,7 +38,8 @@ De acuerdo al perfil elegido se solicitaran ciertos datos.
 La Clínica Online tiene 3 tipos de usuarios.
 Administrador, Especialista/Médico y Paciente
 
-![Captura](https://user-images.githubusercontent.com/53911453/172965020-c7a83991-f320-4894-8d65-b403478535e0.PNG)
+![image](https://user-images.githubusercontent.com/53911453/198408964-f7bd5d6b-b00b-4aa5-be77-65c7ab96fc65.png)
+
 
 El usuario Administrador es el único que puede crear administradores.
 Los nuevos usuarios que quieran ingresar pueden seleccionar entre perfil `Paciente` y `Médico`
