@@ -18,6 +18,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { TipoUsuarioComponent } from './pages/tipo-usuario/tipo-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EspecialidadesComponent } from './pages/especialidades/especialidades.component';
+import { CaptchaComponent } from './pages/captcha/captcha.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EspecialidadesComponent } from './pages/especialidades/especialidades.c
     LoginComponent,
     RegistroComponent,
     TipoUsuarioComponent,
-    EspecialidadesComponent
+    EspecialidadesComponent,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,

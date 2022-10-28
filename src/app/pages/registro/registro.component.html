@@ -11,7 +11,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Nombre</mat-label>
-                        <input matInput formControlName="nombre">
+                        <input class="letrasBlancas" matInput formControlName="nombre">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.nombre.errors?.required && formRegistro.controls.nombre.touched">Debe completar el nombre.</p>
@@ -22,7 +22,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Apellido</mat-label>
-                        <input matInput formControlName="apellido">
+                        <input class="letrasBlancas" matInput formControlName="apellido">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.apellido.errors?.required && formRegistro.controls.apellido.touched">Debe completar el apellido.</p>
@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Edad</mat-label>
-                        <input matInput type="number" formControlName="edad">
+                        <input class="letrasBlancas" matInput type="number" formControlName="edad">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.edad.errors?.required && formRegistro.controls.edad.touched">Debe completar la edad.</p>
@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>DNI</mat-label>
-                        <input matInput type="number" formControlName="dni">
+                        <input class="letrasBlancas" matInput type="number" formControlName="dni">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.dni.errors?.required && formRegistro.controls.dni.touched">Debe completar el DNI.</p>
@@ -61,7 +61,7 @@
                 <div class="col-md-6">
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
-                        <input matInput type="email" formControlName="email">
+                        <input class="letrasBlancas" matInput type="email" formControlName="email">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.email.errors?.required && formRegistro.controls.email.touched">Debe completar el email.</p>
@@ -71,7 +71,7 @@
                 <div class="col-sm-6">                    
                     <mat-form-field appearance="fill">
                         <mat-label>Contraseña</mat-label>                        
-                        <input matInput type="password" formControlName="clave">
+                        <input class="letrasBlancas" matInput type="password" formControlName="clave">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.clave.errors?.required && formRegistro.controls.clave.touched">Debe completar la contraseña.</p>
@@ -92,7 +92,7 @@
                 <div class="col-sm-4" *ngIf="tipoUsuario == 'paciente'">
                     <mat-form-field appearance="fill" class="col3">
                         <mat-label>Obra Social</mat-label>
-                        <input matInput formControlName="obraSocial">
+                        <input class="letrasBlancas" matInput formControlName="obraSocial">
                     </mat-form-field>
                     <div class="invalid">
                         <p *ngIf="formRegistro.controls.obraSocial.errors?.required && formRegistro.controls.obraSocial.touched">Debe completar su Obra Social.</p>
@@ -125,6 +125,13 @@
                     </div>
                 </div>
             </div>
+
+            <app-captcha *ngIf="!esPersona" (captcha)="captchaValido($event)"></app-captcha>
+            <div *ngIf="esPersona" class="letrasBlancas row d-flex justify-content-center">
+                <p class="mt-2">Captcha válido.</p>
+                <img src="/assets/images/exito.png" alt="exito" height="20%">
+            </div>
+            <input class="d-none" type="text" formControlName="captcha">
 
             <div class="row justify-content-center mt-3">                             
                 <button type="button" (click)="cambiarUsuario()" type="button" mat-flat-button color="primary">Cambiar Tipo Usuario</button>

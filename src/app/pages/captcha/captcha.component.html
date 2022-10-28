@@ -1,0 +1,17 @@
+<div class="body">
+    <div class="container">
+        
+        <div class="row justify-content-center">
+            <span class="letrasBlancas">Seleccione la imagen del auto</span>
+        </div>
+        
+       
+        <div class="row d-flex justify-content-around" >
+            <button type="button" *ngFor="let opcion of opcionesDesordenadas" (click)="validarCaptcha(opcion)"  class="col-sm-2 boton-imagen">                
+                <img src="/assets/images/{{opcion}}.png" class="mx-auto d-block" alt="..." width="70%" height="70%" style="margin-top: 10%;">
+            </button>
+        </div>
+
+    </div>
+</div>
+

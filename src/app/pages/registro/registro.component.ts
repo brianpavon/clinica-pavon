@@ -20,6 +20,7 @@ export class RegistroComponent implements OnInit {
   pathFotoPerfil : string = '';
   pathSegundaFoto : string = '';
   especialidades : string[] = [];
+  esPersona : boolean = false;
 
   constructor(private fb : FormBuilder,private spinner : NgxSpinnerService,private usuarioServ : UsuariosService,private auth : AuthService,private imgServ : ImagenService) {
     this.formRegistro = this.fb.group(
@@ -34,11 +35,13 @@ export class RegistroComponent implements OnInit {
         'especialidad' : ['',[Validators.required]],
         'fotoDos' : ['',[Validators.required]],
         'fotoPerfil' : ['',[Validators.required]],
+        'captcha' : ['',[Validators.required]]
       }
     );
   }
 
   ngOnInit(): void {
+        
   }
 
   async crearUsuario(){
@@ -141,10 +144,11 @@ export class RegistroComponent implements OnInit {
 
   cargarUsuario(usuario:string){
     this.tipoUsuario = usuario;
-    this.eligeTipoUsuario();
+    this.eligeTipoUsuario();    
   }
 
   cambiarUsuario(){
+    //this.esPersona = false;
     this.tipoUsuario = '' ;
     this.formRegistro.reset();
   }
@@ -161,6 +165,12 @@ export class RegistroComponent implements OnInit {
       this.especialidades = this.especialidades.filter(espe => espe != espec);
     }    
     this.formRegistro.controls.especialidad.patchValue(this.especialidades)
+  }
+
+
+  captchaValido(ok:boolean){
+    this.esPersona = ok;
+    this.formRegistro.controls.captcha.patchValue(ok);
   }
 
 
