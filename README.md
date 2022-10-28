@@ -17,7 +17,8 @@ Debe ser un email válido ya que luego deberá verificar su cuenta y la contrase
 En caso de no estar registrado desde `Registrarse` se puede crear una nueva cuenta. 
 Ese botón redirige a la sección de Registro
 
-![image](https://user-images.githubusercontent.com/53911453/172966000-db40ccd6-4ff7-4bef-8294-354bcebb18e7.png)
+![image](https://user-images.githubusercontent.com/53911453/198407991-8526499a-75e7-424c-beb4-594b9d8d95ea.png)
+
 
 De acuerdo al perfil elegido se solicitaran ciertos datos.
 
@@ -37,7 +38,8 @@ De acuerdo al perfil elegido se solicitaran ciertos datos.
 La Clínica Online tiene 3 tipos de usuarios.
 Administrador, Especialista/Médico y Paciente
 
-![Captura](https://user-images.githubusercontent.com/53911453/172965020-c7a83991-f320-4894-8d65-b403478535e0.PNG)
+![image](https://user-images.githubusercontent.com/53911453/198408964-f7bd5d6b-b00b-4aa5-be77-65c7ab96fc65.png)
+
 
 El usuario Administrador es el único que puede crear administradores.
 Los nuevos usuarios que quieran ingresar pueden seleccionar entre perfil `Paciente` y `Médico`
