@@ -4,16 +4,20 @@ import { CommonModule } from '@angular/common';
 import { PerfilUsuarioRoutingModule } from './perfil-usuario-routing.module';
 import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
+import { MaterialModule } from '../material/material.module';
+import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-especialista.component';
 
 
 @NgModule({
   declarations: [
     PerfilUsuarioComponent,
-    MiPerfilComponent
+    MiPerfilComponent,
+    HorariosEspecialistaComponent
   ],
   imports: [
     CommonModule,
-    PerfilUsuarioRoutingModule
+    PerfilUsuarioRoutingModule,
+    MaterialModule
   ]
 })
 export class PerfilUsuarioModule { }

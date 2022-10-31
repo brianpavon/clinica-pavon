@@ -11,6 +11,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class MiPerfilComponent implements OnInit {
   dataUsuario : Usuarios | any;
+  especialidades : string[] = [];
+  urlImg !: string;
+  urlSegImg !:  string;
 
   constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService){ 
 
@@ -24,8 +27,30 @@ export class MiPerfilComponent implements OnInit {
     this.auth.obtenerUsuarioLogueado().subscribe(
       async usuarioLogueado =>{
         this.dataUsuario = await this.userServ.devolverDataUsuarioDB(usuarioLogueado?.uid);
-        //console.log(dataFirestore?.dni);
+        //console.log(this.dataUsuario?.especialidad);
+        if(this.dataUsuario.rol == 'medico'){
+          this.especialidades = this.dataUsuario.especialidad;
+        }
+        //obtengo la imagen de perfil
+        this.imgServ.descargarImagen(this.dataUsuario.fotoPerfil).subscribe(
+          url=>{
+            this.urlImg = url;
+          }
+        )
+        if(this.dataUsuario.rol == 'paciente'){
+          this.imgServ.descargarImagen(this.dataUsuario.fotoDos).subscribe(
+            url=>{
+              this.urlSegImg = url;
+            }
+          )
+        }
       }
     )
   }
+
+  cargarHorarios(){
+    
+  }
+
+
 }
