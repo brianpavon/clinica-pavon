@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Usuarios } from 'src/app/interfaces/usuarios';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImagenService } from 'src/app/services/imagen.service';
@@ -12,8 +12,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class MiPerfilComponent implements OnInit {
   dataUsuario : Usuarios | any;
   especialidades : string[] = [];
+  dispoNueva : any;
   urlImg !: string;
-  urlSegImg !:  string;
+  urlSegImg !:  string;  
 
   constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService){ 
 
@@ -48,8 +49,12 @@ export class MiPerfilComponent implements OnInit {
     )
   }
 
-  cargarHorarios(){
-    
+  pasarDisp(esp:string){
+    this.dispoNueva = {
+      user: this.dataUsuario,
+      especSelecc: esp
+    }
+    //console.log(this.dispoNueva);    
   }
 
 

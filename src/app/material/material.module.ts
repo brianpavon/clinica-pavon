@@ -12,6 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   exports:[
     MatSliderModule,
@@ -44,6 +46,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatRadioModule,
   ]
 })
 export class MaterialModule { }

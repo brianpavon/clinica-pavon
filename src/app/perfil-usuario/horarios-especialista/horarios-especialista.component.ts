@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -7,10 +7,26 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./horarios-especialista.component.css']
 })
 export class HorariosEspecialistaComponent implements OnInit {
+  @Input() disponibilidad : any;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
-   
+  
+  
+  checkDia(event:any){
+    //console.log(event.source.name);
+    let diaCheck = event.checked;
+    let id = event.source.name;
+    if(diaCheck)
+      document.getElementById(`${id}Btn`)?.classList.remove('mat-button-disabled');
+    else
+      document.getElementById(`${id}Btn`)?.classList.add('mat-button-disabled');
+  }
+
+  nuevaDispo(){
+    console.log('test');
+    
+  }
 }
