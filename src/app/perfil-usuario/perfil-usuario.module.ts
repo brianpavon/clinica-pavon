@@ -6,6 +6,7 @@ import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MaterialModule } from '../material/material.module';
 import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-especialista.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-
   imports: [
     CommonModule,
     PerfilUsuarioRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class PerfilUsuarioModule { }

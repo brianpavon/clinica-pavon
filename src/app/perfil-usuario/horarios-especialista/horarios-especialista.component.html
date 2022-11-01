@@ -14,27 +14,28 @@
         <div class="modal-body">
             <h3 class="text-center">Va a cargar su diponibilidad para la especialidad: <span style="color:red;">{{ disponibilidad.especSelecc }}</span></h3>
             <span class="text-center mb-3">Los horarios de atención son de lunes a viernes de 8 a 19hs, sábados de 8 a 14hs.</span>
+            <form [formGroup]="lunesForm" (ngSubmit)="nuevaDispo()">
             <div class="row mb-2 mt-3">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="lunes" (change)="checkDia($event)">Lunes</mat-slide-toggle>
+                    <div class="col-md-2 d-flex align-self-center">
+                        <mat-slide-toggle name="lunes" (change)="checkDia($event)" formControlName="lunes">Lunes</mat-slide-toggle>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Desde</mat-label>
+                            <input class="letrasBlancas" matInput type="number" formControlName="lunesDesde">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Hasta</mat-label>
+                            <input class="letrasBlancas" matInput type="number" formControlName="martesDesde">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2 d-flex align-self-center">
+                        <button type="submit" mat-flat-button color="primary" id="lunesBtn" (click)="nuevaDispo()">Guardar</button>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
-                    </mat-form-field>
-                </div>
-                <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
-                    </mat-form-field>
-                </div>
-                <div class="col-md-2 d-flex align-self-center">
-                    <button mat-flat-button disabled color="primary" id="lunesBtn" (click)="nuevaDispo()">Guardar</button>
-                </div>
-                
-            </div>
+            </form>
 
             <hr>
             
@@ -54,9 +55,9 @@
                         <input class="letrasBlancas" matInput type="number">
                     </mat-form-field>
                 </div>
-                <div class="col-md-2 d-flex align-self-center">
+                <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="martesBtn">Guardar</button>
-                </div>
+                </div> -->
             </div>
 
             <hr>
@@ -77,9 +78,9 @@
                         <input class="letrasBlancas" matInput type="number">
                     </mat-form-field>
                 </div>
-                <div class="col-md-2 d-flex align-self-center">
+                <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="miercolesBtn">Guardar</button>
-                </div>
+                </div> -->
             </div>
 
             <hr>
@@ -100,9 +101,9 @@
                         <input class="letrasBlancas" matInput type="number">
                     </mat-form-field>
                 </div>
-                <div class="col-md-2 d-flex align-self-center">
+                <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="juevesBtn">Guardar</button>
-                </div>
+                </div> -->
             </div>
 
             <hr>
@@ -123,9 +124,9 @@
                         <input class="letrasBlancas" matInput type="number">
                     </mat-form-field>
                 </div>
-                <div class="col-md-2 d-flex align-self-center">
+                <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="viernesBtn">Guardar</button>
-                </div>
+                </div> -->
             </div>
 
             <hr>
@@ -146,9 +147,9 @@
                         <input class="letrasBlancas" matInput type="number">
                     </mat-form-field>
                 </div>
-                <div class="col-md-2 d-flex align-self-center">
+                <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="sabadoBtn">Guardar</button>
-                </div>
+                </div> -->
             </div>
 
         </div>
