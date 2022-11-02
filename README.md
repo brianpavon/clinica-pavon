@@ -24,13 +24,15 @@ De acuerdo al perfil elegido se solicitaran ciertos datos.
 
 # Perfil Paciente
 
-![image](https://user-images.githubusercontent.com/53911453/172966256-54421e3f-db62-4dcd-b83d-550cd6f7929e.png)
+![image](https://user-images.githubusercontent.com/53911453/199496928-79454bb7-37bc-4efa-9edc-99535509593b.png)
 
 
 # Perfil Médico
 
-![image](https://user-images.githubusercontent.com/53911453/172966286-a13f7945-0d57-49c4-a614-8d067ff3f962.png)
+![perfil-medico](https://user-images.githubusercontent.com/53911453/199497787-72b7ebe2-c867-4852-b48e-eddc9e0ad55b.png)
 
+Se abrirá un formulario para que pueda cargar la nueva especialidad.
+![image](https://user-images.githubusercontent.com/53911453/199497964-8de507e4-a8e8-40e8-acd8-d8db4aff075a.png)
 
 
 ## Tipos de Usuarios
@@ -65,6 +67,13 @@ Desde aquí se ve la información referida a los pacientes
 
 ![image](https://user-images.githubusercontent.com/53911453/172967564-3176c7a9-07bb-4e7a-b9b6-3fe06cfc571d.png)
 
+## Perfil Médico
+Si el usuario logueado es médico cuando se dirija a su perfil, va a poder cargar su disponibilidad horaria para las especialidades que haya seleccionado.
 
+![mi-perfil-medico](https://user-images.githubusercontent.com/53911453/199498854-26f25b38-19a8-4e43-aec1-c07f4b00b3c6.png)
+
+La pantalla para cargar la disponibilidad horaria, es la siguiente.
+
+![menu-dispo](https://user-images.githubusercontent.com/53911453/199499622-f95085ac-f20c-42e2-a7ed-37d029e2a048.png)
 
   
