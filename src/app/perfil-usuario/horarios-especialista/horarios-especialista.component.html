@@ -11,152 +11,280 @@
               <span class="letrasBlancas" aria-hidden="true">&times;</span>
             </button>
         </div>
+        <form [formGroup]="formDisponibilidad" (ngSubmit)="nuevaDispo()">
         <div class="modal-body">
-            <h3 class="text-center">Va a cargar su diponibilidad para la especialidad: <span style="color:red;">{{ disponibilidad.especSelecc }}</span></h3>
+            <h3 class="text-center">Va a cargar su diponibilidad para la especialidad: <span style="color:red;">{{ data.especSelecc }}</span></h3>
             <span class="text-center mb-3">Los horarios de atención son de lunes a viernes de 8 a 19hs, sábados de 8 a 14hs.</span>
-            <form [formGroup]="lunesForm" (ngSubmit)="nuevaDispo()">
+           
+            <!-- LUNES -->
             <div class="row mb-2 mt-3">
-                    <div class="col-md-2 d-flex align-self-center">
-                        <mat-slide-toggle name="lunes" (change)="checkDia($event)" formControlName="lunes">Lunes</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="lunes" (change)="checkDia($event)" formControlName="lunes">Lunes</mat-slide-toggle>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                         <mat-label>Horario Desde</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="lunesDesde" (selectionChange)="validarHora('lunes')">
+                             <mat-option *ngFor="let horario of horariosDesde" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
+                    </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.lunesDesde.errors?.required && formDisponibilidad.controls.lunesDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.lunesDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.lunesDesde.errors?.['max']">Hasta 19.</p>
+                        <!-- <p *ngIf="formDisponibilidad.controls.lunesDesde.value == formDisponibilidad.controls.lunesHasta.value">El horario desde no puede ser igual al hasta</p>
+                        <p *ngIf="formDisponibilidad.controls.lunesDesde.value > formDisponibilidad.controls.lunesHasta.value">El horario desde no puede ser mayor al hasta</p> -->
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Desde</mat-label>
-                            <input class="letrasBlancas" matInput type="number" formControlName="lunesDesde">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Hasta</mat-label>
-                            <input class="letrasBlancas" matInput type="number" formControlName="martesDesde">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-2 d-flex align-self-center">
-                        <button type="submit" mat-flat-button color="primary" id="lunesBtn" (click)="nuevaDispo()">Guardar</button>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                         <mat-label>Horario Hasta</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="lunesHasta" (selectionChange)="validarHora('lunes')">
+                             <mat-option *ngFor="let horario of horariosHasta" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
+                    </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.lunesHasta.errors?.required && formDisponibilidad.controls.lunesHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.lunesHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.lunesHasta.errors?.['max']">Hasta 19.</p>                        
                     </div>
                 </div>
-            </form>
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.lunesHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
+                </div>
+            </div>           
 
             <hr>
             
+            <!-- MARTES -->
             <div class="row mb-2">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="martes" (change)="checkDia($event)">Martes</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="martes" (change)="checkDia($event)" formControlName="martes">Martes</mat-slide-toggle>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
-                    </mat-form-field>
+                         <mat-label>Horario Desde</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="martesDesde" (selectionChange)="validarHora('martes')">
+                             <mat-option *ngFor="let horario of horariosDesde" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
+                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.martesDesde.errors?.required && formDisponibilidad.controls.martesDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.martesDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.martesDesde.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                         <mat-label>Horario Hasta</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="martesHasta" (selectionChange)="validarHora('martes')">
+                             <mat-option *ngFor="let horario of horariosHasta" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.martesHasta.errors?.required && formDisponibilidad.controls.martesHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.martesHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.martesHasta.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
-                <!-- <div class="col-md-2 d-flex align-self-center">
-                    <button mat-flat-button disabled color="primary" id="martesBtn">Guardar</button>
-                </div> -->
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.martesHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
+                </div>
             </div>
 
             <hr>
 
+            <!-- MIERCOLES -->
             <div class="row mb-2">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="miercoles" (change)="checkDia($event)">Miércoles</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="miercoles" (change)="checkDia($event)" formControlName="miercoles">Miércoles</mat-slide-toggle>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                         <mat-label>Horario Desde</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="miercolesDesde" (selectionChange)="validarHora('miercoles')">
+                             <mat-option *ngFor="let horario of horariosDesde" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.miercolesDesde.errors?.required && formDisponibilidad.controls.miercolesDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.miercolesDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.miercolesDesde.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                         <mat-label>Horario Hasta</mat-label>
+                         <mat-select class="letrasBlancas" formControlName="miercolesHasta" (selectionChange)="validarHora('miercoles')">
+                             <mat-option *ngFor="let horario of horariosHasta" [value]="horario">
+                                 {{horario}}
+                             </mat-option>
+                         </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.miercolesHasta.errors?.required && formDisponibilidad.controls.miercolesHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.miercolesHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.miercolesHasta.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
-                <!-- <div class="col-md-2 d-flex align-self-center">
-                    <button mat-flat-button disabled color="primary" id="miercolesBtn">Guardar</button>
-                </div> -->
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.miercolesHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
+                </div>
             </div>
 
             <hr>
 
+            <!-- JUEVES -->
             <div class="row mb-2">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="jueves" (change)="checkDia($event)">Jueves</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="jueves" (change)="checkDia($event)" formControlName="jueves">Jueves</mat-slide-toggle>
                 </div>
                 <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                   <mat-form-field appearance="fill">
+                        <mat-label>Horario Desde</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="juevesDesde" (selectionChange)="validarHora('jueves')">
+                            <mat-option *ngFor="let horario of horariosDesde" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.juevesDesde.errors?.required && formDisponibilidad.controls.juevesDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.juevesDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.juevesDesde.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                   <mat-form-field appearance="fill">
+                        <mat-label>Horario Hasta</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="juevesHasta" (selectionChange)="validarHora('jueves')">
+                            <mat-option *ngFor="let horario of horariosHasta" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.juevesHasta.errors?.required && formDisponibilidad.controls.juevesHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.juevesHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.juevesHasta.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
-                <!-- <div class="col-md-2 d-flex align-self-center">
-                    <button mat-flat-button disabled color="primary" id="juevesBtn">Guardar</button>
-                </div> -->
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.juevesHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
+                </div>
             </div>
 
             <hr>
 
+            <!-- VIERNES -->
             <div class="row mb-2">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="viernes" (change)="checkDia($event)">Viernes</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="viernes" (change)="checkDia($event)" formControlName="viernes">Viernes</mat-slide-toggle>
                 </div>
                 <div class="col-md-4">
-                    <mat-form-field appearance="fill">
+                    <!-- <mat-form-field appearance="fill">
                         <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                        <input class="letrasBlancas" matInput type="number" formControlName="viernesDesde">
+                    </mat-form-field> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Horario Desde</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="viernesDesde" (selectionChange)="validarHora('viernes')">
+                            <mat-option *ngFor="let horario of horariosDesde" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.viernesDesde.errors?.required && formDisponibilidad.controls.viernesDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.viernesDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.viernesDesde.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <mat-form-field appearance="fill">
+                    <!-- <mat-form-field appearance="fill">
                         <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                        <input class="letrasBlancas" matInput type="number" formControlName="viernesHasta">
+                    </mat-form-field> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Horario Hasta</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="viernesHasta" (selectionChange)="validarHora('viernes')">
+                            <mat-option *ngFor="let horario of horariosHasta" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.viernesHasta.errors?.required && formDisponibilidad.controls.viernesHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.viernesHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.viernesHasta.errors?.['max']">Hasta 19.</p>                        
+                    </div>
                 </div>
                 <!-- <div class="col-md-2 d-flex align-self-center">
                     <button mat-flat-button disabled color="primary" id="viernesBtn">Guardar</button>
                 </div> -->
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.viernesHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
+                </div>
             </div>
 
             <hr>
 
+            <!-- SABADO -->
             <div class="row mb-2">
-                <div class="col-md-2 d-flex align-self-center">
-                    <mat-slide-toggle name="sabado" (change)="checkDia($event)">Sábado</mat-slide-toggle>
+                <div class="col-md-4 d-flex align-self-center">
+                    <mat-slide-toggle name="sabado" (change)="checkDia($event)" formControlName="sabado">Sábado</mat-slide-toggle>
+                </div>
+                <div class="col-md-4">                    
+                    <mat-form-field appearance="fill">
+                        <mat-label>Horario Desde</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="sabadoDesde" (selectionChange)="validarHora('sabado')">
+                            <mat-option *ngFor="let horario of [8,9,10,11,12,13]" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.sabadoDesde.errors?.required && formDisponibilidad.controls.sabadoDesde.touched">Debe completar desde que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.sabadoDesde.errors?.['min']">Desde 8.</p>
+                        <p *ngIf="formDisponibilidad.controls.sabadoDesde.errors?.['max']">Hasta 13.</p>                        
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <mat-form-field appearance="fill">
-                        <mat-label>Desde</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
+                        <mat-label>Horario Hasta</mat-label>
+                        <mat-select class="letrasBlancas" formControlName="sabadoHasta" (selectionChange)="validarHora('sabado')">
+                            <mat-option *ngFor="let horario of [9,10,11,12,13,14]" [value]="horario">
+                                {{horario}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+                    <div class="invalid">
+                        <p *ngIf="formDisponibilidad.controls.sabadoHasta.errors?.required && formDisponibilidad.controls.sabadoHasta.touched">Debe completar hasta que horario.</p>
+                        <p *ngIf="formDisponibilidad.controls.sabadoHasta.errors?.['min']">Desde 9.</p>
+                        <p *ngIf="formDisponibilidad.controls.sabadoHasta.errors?.['max']">Hasta 14.</p>                        
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Hasta</mat-label>
-                        <input class="letrasBlancas" matInput type="number">
-                    </mat-form-field>
+                <div class="invalid ml-3">
+                    <p *ngIf="formDisponibilidad.controls.sabadoHasta.errors?.['igualMayor']">El horario hasta tiene que ser mayor al desde.</p>
                 </div>
-                <!-- <div class="col-md-2 d-flex align-self-center">
-                    <button mat-flat-button disabled color="primary" id="sabadoBtn">Guardar</button>
-                </div> -->
             </div>
-
         </div>
         <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-          <button mat-flat-button color="primary">Guardar</button>
+          <button class="mr-2" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
+          <button type="submit" mat-flat-button color="primary" [disabled]="formDisponibilidad.invalid || hayCheck==0">Guardar</button>
+          <!-- <button type="submit" mat-flat-button color="primary">Guardar</button> -->
         </div>
+        </form>
       </div>
     </div>
 </div>

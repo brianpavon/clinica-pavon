@@ -12,7 +12,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class MiPerfilComponent implements OnInit {
   dataUsuario : Usuarios | any;
   especialidades : string[] = [];
-  dispoNueva : any;
+  especialidadesCargadas : string[] = [];
+  objData : any;
   urlImg !: string;
   urlSegImg !:  string;  
 
@@ -50,11 +51,16 @@ export class MiPerfilComponent implements OnInit {
   }
 
   pasarDisp(esp:string){
-    this.dispoNueva = {
+    this.objData = {
       user: this.dataUsuario,
       especSelecc: esp
     }
     //console.log(this.dispoNueva);    
+  }
+
+  sacarEsp(esp : string){
+    this.especialidades = this.especialidades.filter(e=>e != esp);
+    this.especialidadesCargadas.push(esp);    
   }
 
 
