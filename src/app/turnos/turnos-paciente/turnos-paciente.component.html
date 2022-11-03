@@ -1,6 +1,6 @@
 <div class="body">
     <div class="container">
-        <mat-toolbar class="justify-content-center mt-2 mb-5">
+        <mat-toolbar class="justify-content-center mt-2 mb-2">
             <span>Mis Turnos</span>
         </mat-toolbar>
         <div class="row justify-content-center">            
@@ -12,17 +12,17 @@
                 </ng-container>
       
                 <ng-container matColumnDef="medico">
-                    <th mat-header-cell *matHeaderCellDef>Apellido</th>
+                    <th mat-header-cell *matHeaderCellDef>Especialista</th>
                     <td mat-cell *matCellDef="let element">{{ element.medico.nombre | titlecase }} {{ element.medico.apellido | titlecase }}</td>
                 </ng-container>
       
                 <ng-container matColumnDef="especialidad">
-                    <th mat-header-cell *matHeaderCellDef>DNI</th>
+                    <th mat-header-cell *matHeaderCellDef>Especialidad</th>
                     <td mat-cell *matCellDef="let element">{{ element.especialidad | titlecase }}</td>
                 </ng-container>
       
                 <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef>Email</th>
+                    <th mat-header-cell *matHeaderCellDef>Fecha</th>
                     <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
                 </ng-container>
 
