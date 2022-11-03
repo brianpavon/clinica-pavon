@@ -4,8 +4,8 @@
             <!-- BOTONES -->
             <div class="col-md-6">
                 <div class="row">
-            
                     <div class="example-button-row">            
+                        <h2 class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija una Especialidad</h2>
                         <button class="mr-2 ml-2" *ngFor="let especialidad of especialidadesDisponibles" mat-flat-button (click)="filtrarAlMedico(especialidad)">{{especialidad}}</button>            
                     </div>
                     
@@ -13,20 +13,23 @@
                 <hr *ngIf="medicosDisponibles.length">
                 <div class="row mt-3">
                     
-                    <div class="example-button-row">            
+                    <div class="example-button-row">
+                        <h2 *ngIf="medicosDisponibles.length" class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija un Médico</h2>            
                         <button class="mr-2 ml-2" *ngFor="let medico of medicosDisponibles" mat-flat-button color="accent" (click)="cargarFechas(medico)">{{medico.nombre}} {{medico.apellido}}</button>            
                     </div>
                     
                 </div>
                 <hr *ngIf="fechasDisponibles.length">
                 <div class="row mt-3">
-                    <div class="example-button-row">            
+                    <div class="example-button-row">
+                        <h2 *ngIf="fechasDisponibles.length" class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija una Fecha</h2>
                         <button class="mr-2 ml-2" *ngFor="let fecha of fechasDisponibles" mat-flat-button color="warn" (click)="cargarTurnos(fecha)" >{{ fecha | titlecase}}</button>            
                     </div>            
                 </div>
                 <hr *ngIf="horasLibres.length">
                 <div class="row mt-3">
-                    <div class="example-button-row">            
+                    <div class="example-button-row">
+                        <h2 *ngIf="horasLibres.length" class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija un Horario</h2>            
                         <button class="mr-2 ml-2 mt-1" *ngFor="let hora of horasLibres" mat-flat-button color="primary" (click)="cargarHora(hora)">{{ hora }}</button>            
                     </div>    
                 </div>
