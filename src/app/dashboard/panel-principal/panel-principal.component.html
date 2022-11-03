@@ -1,5 +1,8 @@
 <div class="body">
     <div class="container">
+        <mat-toolbar class="justify-content-center mb-2">            
+            <span >Sección Principal</span>            
+        </mat-toolbar>
         <div class="row">
             <div class="col-md-4">
                 <mat-card class="example-card">
@@ -47,6 +50,44 @@
                     Genere nuevos usuarios.
                     </mat-card-content>
                 </mat-card> 
+            </div>
+        </div>
+        
+        <hr>
+        
+        <!-- <h2 class="h3 mb-3 font-weight-normal text-center">Sección Turnos</h2> -->
+        <mat-toolbar class="justify-content-center"color="primary">            
+            <span >Sección Turnos</span>            
+        </mat-toolbar>
+
+        <div class="row mt-2 justify-content-center d-flex">
+            <div class="col-md-4">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>Turnos de la Clínica</mat-card-title>
+                        <mat-card-subtitle>
+                            <a routerLink="/turnos/todos-los-turnos" mat-stroked-button color="accent">Ver</a>
+                        </mat-card-subtitle>
+                        <img mat-card-sm-image src="/assets/images/turnos.png" >
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        Visualice todos los turnos de la Clínica.
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-4">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>Solictar un Turno</mat-card-title>
+                        <mat-card-subtitle>
+                            <a mat-stroked-button color="accent">Pedir</a>
+                        </mat-card-subtitle>
+                        <img mat-card-sm-image src="/assets/images/pedir-turno.png" >
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        Solicite un Turno para un paciente.
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
     </div>
