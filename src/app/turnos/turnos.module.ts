@@ -6,12 +6,16 @@ import { TurnosComponent } from './turnos.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TurnosPacienteComponent } from './turnos-paciente/turnos-paciente.component';
+import { TurnosMedicoComponent } from './turnos-medico/turnos-medico.component';
 
 
 @NgModule({
   declarations: [
     TurnosComponent,
-    SolicitarTurnoComponent
+    SolicitarTurnoComponent,
+    TurnosPacienteComponent,
+    TurnosMedicoComponent
   ],
   imports: [
     CommonModule,
