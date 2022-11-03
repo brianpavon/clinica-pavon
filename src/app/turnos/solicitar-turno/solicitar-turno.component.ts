@@ -182,7 +182,7 @@ export class SolicitarTurnoComponent implements OnInit {
       fecha:this.formTurno.get('fecha')?.value,
       horario:this.formTurno.get('horario')?.value,
       duracion:30,
-      id:`${this.medicoElegido.id}-${this.paciente.id}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`
+      id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`
     } 
     
     //console.log(Date.parse(this.nuevoTurno.fecha) );
@@ -190,7 +190,7 @@ export class SolicitarTurnoComponent implements OnInit {
     let existeTurno = await this.turnosServ.devolverTurnoDB(this.nuevoTurno.id)
     if(existeTurno){
       Swal.fire({
-        title:`Ya existe un turno en ese horario.`,
+        title:`Disculpe, ese turno ya fue tomado.`,
         icon:'error',      
       })
     }else{
