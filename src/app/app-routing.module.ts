@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'panel-control', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'mi-perfil', loadChildren: () => import('./perfil-usuario/perfil-usuario.module').then(m => m.PerfilUsuarioModule)},
   {path:'',redirectTo:'home',pathMatch:'full'},
+  { path: 'turnos', loadChildren: () => import('./turnos/turnos.module').then(m => m.TurnosModule) },
 ];
 
 @NgModule({
