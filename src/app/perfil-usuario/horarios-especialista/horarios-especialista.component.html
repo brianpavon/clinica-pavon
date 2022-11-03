@@ -7,7 +7,7 @@
       <div class="modal-content fondo">
         <div class="modal-header">
           <h4 class="modal-title" id="exampleModalLabel">Mi Disponibilidad</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetearForm()">
               <span class="letrasBlancas" aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -280,7 +280,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button class="mr-2" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
+          <button class="mr-2" mat-flat-button color="warn" data-dismiss="modal" (click)="resetearForm()">Cancelar</button>
           <button type="submit" mat-flat-button color="primary" [disabled]="formDisponibilidad.invalid || hayCheck==0">Guardar</button>
           <!-- <button type="submit" mat-flat-button color="primary">Guardar</button> -->
         </div>

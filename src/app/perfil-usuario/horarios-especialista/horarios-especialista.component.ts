@@ -19,6 +19,7 @@ export class HorariosEspecialistaComponent implements OnInit {
   horariosHasta : number[] = [9,10,11,12,13,14,15,16,17,18,19];
   nuevaDisponibilidad !: Disponibilidad;
   dias : Dia[] =[]
+  dispoFirestore : Disponibilidad[] = [];
 
   constructor(private fb : FormBuilder,private dispServ : DisponibilidadService) {
     this.formDisponibilidad = this.fb.group({
@@ -95,7 +96,7 @@ export class HorariosEspecialistaComponent implements OnInit {
           let horaHasta = hasta < 10 ? `0${hasta}:00` : `${hasta}:00`;
           //los turnos son de media hora
           let cantTurnos = ( parseInt(horaHasta) - parseInt(horaDesde) )*2;
-          let diaNuevo : Dia = {dia:dia,desde:horaDesde,hasta:horaHasta,cantTurnos:cantTurnos};
+          let diaNuevo : Dia = {dia:dia,desde:horaDesde,hasta:horaHasta,cantTurnos:cantTurnos,duracion:30};
           //console.log(this.everyNminutes(30,desde,hasta));
           
           this.dias.push(diaNuevo);
@@ -107,7 +108,7 @@ export class HorariosEspecialistaComponent implements OnInit {
     this.nuevaDisponibilidad = {especialidad:  this.data.especSelecc,medico:this.data.user,dias:this.dias};
     //console.log(this.nuevaDisponibilidad);
     //guarda la disponibilidad
-    //this.dispServ.guardarDisponibilidad(this.nuevaDisponibilidad);
+    this.dispServ.guardarDisponibilidad(this.nuevaDisponibilidad);
     
     Swal.fire({
       title:`Su disponibilidad fue guardada.`,
@@ -117,8 +118,8 @@ export class HorariosEspecialistaComponent implements OnInit {
       //@ts-ignore
       $('#exampleModal').modal('hide');      
     }, 1000);
-    this.hayCheck = 0
-    this.formDisponibilidad.reset();
+    
+    this.resetearForm()
     this.quitarEsp.emit(this.data.especSelecc);
   }
   
@@ -133,5 +134,19 @@ export class HorariosEspecialistaComponent implements OnInit {
       this.formDisponibilidad.get(`${dia}Hasta`)?.setErrors(null);
     }
   } 
+
+  removeValidators(form: FormGroup) {
+    for (const key in form.controls) {
+        form.get(key)?.clearValidators();
+        form.get(key)?.updateValueAndValidity();
+    }
+  }
+
+  resetearForm(){
+    this.hayCheck = 0;
+    this.removeValidators(this.formDisponibilidad)
+    this.formDisponibilidad.reset();
+  }
+  
 
 }
