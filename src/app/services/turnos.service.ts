@@ -19,8 +19,8 @@ export class TurnosService {
     this.firestore.collection('turnos').doc(turnoNuevo.id.toString()).set(turnoNuevo,{merge:true});
   }
 
-  traerDisponibilidades(){
-    this.itemsCollection = this.firestore.collection<Turnos>('disponibilidad');
+  traerTurnos(){
+    this.itemsCollection = this.firestore.collection<Turnos>('turnos');
     return this.todosLosTurnos = this.itemsCollection.valueChanges();
   }
 

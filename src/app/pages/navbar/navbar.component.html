@@ -17,7 +17,8 @@
         <li class="nav-item active dropdown" *ngIf="rol">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mis Turnos</a>
           <div class="dropdown-menu">            
-            <a class="dropdown-item" >Mis Turnos</a>            
+            <a class="dropdown-item" *ngIf="rol == 'paciente'" routerLink="/turnos/turnos-paciente">Mis Turnos</a>
+            <a class="dropdown-item" *ngIf="rol == 'medico'" routerLink="/turnos/turnos-especialista">Mis Turnos</a>
             <a class="dropdown-item" routerLink="/turnos/pedir-turno">Solicitar Turno</a>
           </div>
         </li>
