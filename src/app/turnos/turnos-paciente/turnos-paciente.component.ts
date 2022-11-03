@@ -12,9 +12,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./turnos-paciente.component.css']
 })
 export class TurnosPacienteComponent implements OnInit {
+  displayedColumns: string[] = ['nombre', 'medico', 'especialidad', 'fecha','hora','estado','acciones'];
 
   turnosPaciente : Turnos[] = [];
   usuarioLogueado !: Usuarios | undefined;
+
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { 
 
   }
