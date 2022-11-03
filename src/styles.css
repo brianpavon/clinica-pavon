@@ -19,3 +19,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 1090 !important;
 }
 
+button:hover {
+    transform: scale(0.9);
+}
+

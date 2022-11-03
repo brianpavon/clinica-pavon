@@ -5,6 +5,7 @@ import { TurnosRoutingModule } from './turnos-routing.module';
 import { TurnosComponent } from './turnos.component';
 import { SolicitarTurnoComponent } from './solicitar-turno/solicitar-turno.component';
 import { MaterialModule } from '../material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     TurnosRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class TurnosModule { }

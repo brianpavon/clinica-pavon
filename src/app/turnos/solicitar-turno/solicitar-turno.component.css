@@ -6,3 +6,7 @@
     width: 100vw;
     background-color: rgb(138, 105, 138);
 }
+
+hr{
+    border-top: 1px solid whitesmoke;
+}

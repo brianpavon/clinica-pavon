@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Disponibilidad } from 'src/app/interfaces/disponibilidad';
 import { Usuarios } from 'src/app/interfaces/usuarios';
 import { DisponibilidadService } from 'src/app/services/disponibilidad.service';
@@ -20,9 +21,16 @@ export class SolicitarTurnoComponent implements OnInit {
   dias : string[] = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];  
   diasDelMedico : string[] = [];
   horasLibres : string[]  =[];
+  formTurno !: FormGroup;
+  esInvalido : boolean = true;
   
-  constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService) { 
-
+  constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService,private fb : FormBuilder) { 
+    this.formTurno = this.fb.group({
+      'especialidad':[],
+      'medico':[],
+      'fecha':[],
+      'horario':[]
+    })
   }
 
   ngOnInit(): void {
@@ -45,6 +53,12 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   filtrarAlMedico(especialidad:string){
+    this.formTurno.get('especialidad')?.patchValue(especialidad);
+    this.formTurno.get('medico')?.patchValue('');
+    this.formTurno.get('fecha')?.patchValue('');
+    this.formTurno.get('horario')?.patchValue('');
+    this.esInvalido= true;
+
     ///this.dispFiltradas = this.todasLasDisp;
     this.medicosDisponibles = [];
     this.fechasFiltradasPorMedico = [];
@@ -63,6 +77,11 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   cargarFechas(medico:Usuarios){
+    this.formTurno.get('medico')?.patchValue(`${medico.nombre} ${medico.apellido}`);
+    this.formTurno.get('fecha')?.patchValue('');
+    this.formTurno.get('horario')?.patchValue('');
+    this.esInvalido= true;
+
     //console.log(this.dispFiltradas);
     this.fechasFiltradasPorMedico = [];
     this.fechasDisponibles = [];
@@ -103,9 +122,16 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   cargarTurnos(fecha:string){
+    this.formTurno.get('horario')?.patchValue('');
+    this.esInvalido= true;
+    
     //console.log(fecha.split(':')[0]);
     this.horasLibres = []
     let diaElegido = fecha.split(':')[0];
+    let fechaElegida = fecha.split(':')[1]
+    
+    this.formTurno.get('fecha')?.patchValue(fechaElegida);
+    
     this.fechasFiltradasPorMedico.forEach(
       disp=>{
         disp.dias.forEach(dia=>{
@@ -122,6 +148,11 @@ export class SolicitarTurnoComponent implements OnInit {
     )    
   }
 
+  cargarHora(horario:string){
+    this.formTurno.get('horario')?.patchValue(horario);
+    this.esInvalido= false;
+  }
+
   getDatesInRange(startDate:Date, endDate:Date){
     const date = new Date(startDate.getTime());
 
@@ -132,6 +163,11 @@ export class SolicitarTurnoComponent implements OnInit {
       date.setDate(date.getDate() + 1);
     }
     return dates;
+  }
+
+  turnoNuevo(){
+    console.log(this.formTurno.value);
+    
   }
     
 
