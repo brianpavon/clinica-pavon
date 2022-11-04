@@ -5,6 +5,7 @@ import { Usuarios } from 'src/app/interfaces/usuarios';
 import { AuthService } from 'src/app/services/auth.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-turnos-paciente',
@@ -16,6 +17,8 @@ export class TurnosPacienteComponent implements OnInit {
 
   turnosPaciente : Turnos[] = [];
   usuarioLogueado !: Usuarios | undefined;
+  dataSource !: any
+  turnosAux : Turnos[] = [];
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { 
 
@@ -35,9 +38,62 @@ export class TurnosPacienteComponent implements OnInit {
         
         this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id)
         //console.log(this.turnosPaciente);
+        this.dataSource = new MatTableDataSource(this.turnosPaciente);
         
       })
     })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  filtrarTabla(event: Event | any) {
+    
+    const filterValue = (event.target as HTMLInputElement).value;
+    
+    let filtrar = true;
+    
+    if(filterValue.length == 1 && event.key != 'Backspace'){
+      this.turnosAux = this.turnosPaciente;      
+      
+      //console.log('entro');      
+    }else if(filterValue.length == 0 && event.key == 'Backspace'){
+      this.turnosPaciente = this.turnosAux;
+      filtrar=false;
+    }
+    //console.log(this.turnosAux);
+    
+    if(filtrar){
+      //console.log(this.todosLosTurnos);
+      let turnosFiltrados : Turnos[] = [];
+      
+      this.turnosAux.forEach(
+        t=>{
+          if(t.especialidad.toLowerCase().includes(filterValue)){
+            //console.log('entro');            
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+          if(t.medico.nombre.toLowerCase().includes(filterValue)){
+            //console.log('entro al 2');
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+          if(t.medico.apellido.toLowerCase().includes(filterValue)){
+            //console.log('entro al 2');
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+        }
+      )
+      this.turnosPaciente = turnosFiltrados;
+    }
+    
   }
 
 }

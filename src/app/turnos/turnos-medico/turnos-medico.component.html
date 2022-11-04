@@ -3,7 +3,13 @@
         <mat-toolbar class="justify-content-center mt-2 mb-2">
             <span>Mis Turnos</span>
         </mat-toolbar>
-        <div class="row justify-content-center">            
+        <div class="row justify-content-center">
+            
+            <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
+                <mat-label>Filtre los Resultados</mat-label>
+                <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input>
+            </mat-form-field>
+
             <table mat-table [dataSource]="turnosMedico" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="paciente">
@@ -38,7 +44,7 @@
                         <button class="mr-1" mat-flat-button color="warn">Cancelar</button>
                         <button class="mr-1" mat-flat-button color="warn">Rechazar</button>                        
                         <button class="mr-1" mat-flat-button color="accent">Finalizar</button>
-                        <button class="mr-1" mat-flat-button style="border: 1px solid; border-radius:10px;">Ver Reseña</button>
+                        <button class="mr-1 botonGris" mat-flat-button>Ver Reseña</button>
                     </td>
                 </ng-container>                
 

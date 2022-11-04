@@ -23,3 +23,7 @@ button:hover {
     transform: scale(0.9);
 }
 
+.botonGris{
+    border: 1px solid !important; 
+    border-radius:10px !important;
+}

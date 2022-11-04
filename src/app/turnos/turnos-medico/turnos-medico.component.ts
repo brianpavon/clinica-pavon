@@ -17,6 +17,7 @@ export class TurnosMedicoComponent implements OnInit {
 
   turnosMedico : Turnos[] = [];
   medicoLogueado !: Usuarios | undefined;
+  turnosAux : Turnos[] = [];
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { }
 
@@ -36,7 +37,54 @@ export class TurnosMedicoComponent implements OnInit {
         //console.log(this.turnosPaciente);
         
       })
-    })
+    })    
+  }
+
+  filtrarTabla(event: Event | any) {
+    
+    const filterValue = (event.target as HTMLInputElement).value;
+    
+    let filtrar = true;
+    
+    if(filterValue.length == 1 && event.key != 'Backspace'){
+      this.turnosAux = this.turnosMedico;      
+      
+      //console.log('entro');      
+    }else if(filterValue.length == 0 && event.key == 'Backspace'){
+      this.turnosMedico = this.turnosAux;
+      filtrar=false;
+    }
+    //console.log(this.turnosAux);
+    
+    if(filtrar){
+      //console.log(this.todosLosTurnos);
+      let turnosFiltrados : Turnos[] = [];
+      
+      this.turnosAux.forEach(
+        t=>{
+          if(t.especialidad.toLowerCase().includes(filterValue)){
+            //console.log('entro');            
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+          if(t.paciente.nombre.toLowerCase().includes(filterValue)){
+            //console.log('entro al 2');
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+          if(t.paciente.apellido.toLowerCase().includes(filterValue)){
+            //console.log('entro al 2');
+            if(!turnosFiltrados.includes(t)){
+              turnosFiltrados.push(t)
+            }
+          }
+        }
+      )
+      this.turnosMedico = turnosFiltrados;
+    }
+    
   }
 
 }
