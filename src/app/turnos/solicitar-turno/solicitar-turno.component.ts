@@ -9,6 +9,7 @@ import { DisponibilidadService } from 'src/app/services/disponibilidad.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -32,6 +33,13 @@ export class SolicitarTurnoComponent implements OnInit {
   formTurno !: FormGroup;
   esInvalido : boolean = true;
   nuevoTurno !: Turnos;
+
+  //agregados Sprint 2
+  todosLosMedicos : Usuarios[] = [];
+  todosLosMedicosAux : Usuarios[] = [];
+  todosLosIds : number[] = [];
+  especialidadesDelMedico : string[] = [];
+  
   
   constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService,private fb : FormBuilder, private auth : AuthService,private spinner: NgxSpinnerService,private userServ : UsuariosService) { 
     this.formTurno = this.fb.group({
@@ -60,17 +68,30 @@ export class SolicitarTurnoComponent implements OnInit {
       disp =>{
         
         this.todasLasDisp = disp;        
-        this.todasLasDisp.forEach(d => {
-          
-          if(!this.especialidadesDisponibles.includes(d.especialidad)){
-            this.especialidadesDisponibles.push(d.especialidad);
+        this.todasLasDisp.forEach(d => {          
+          // if(!this.especialidadesDisponibles.includes(d.especialidad)){
+          //   this.especialidadesDisponibles.push(d.especialidad);
+          // }
+          if(!this.todosLosIds.includes(d.medico.id)){
+            this.todosLosIds.push(d.medico.id)
           }
+          this.todosLosMedicosAux.push(d.medico)
         })
+        for (let i = 0; i < this.todosLosIds.length; i++) {
+          for (let j = 0; j < this.todosLosMedicosAux.length; j++) {            
+            if(this.todosLosMedicosAux[j].id == this.todosLosIds[i]){
+              this.todosLosMedicos.push(this.todosLosMedicosAux[j])
+              break;              
+            }
+          }
+        }
       }
     )
+    
   }
 
   filtrarAlMedico(especialidad:string){
+    
     this.formTurno.get('especialidad')?.patchValue(especialidad);
     this.formTurno.get('medico')?.patchValue('');
     this.formTurno.get('fecha')?.patchValue('');
@@ -216,6 +237,48 @@ export class SolicitarTurnoComponent implements OnInit {
     this.formTurno.get('horario')?.patchValue('');
     this.esInvalido= true;
     this.formTurno.reset();
+  }
+
+  cargarEspecialidades(medico:Usuarios){
+    //console.log(medico);
+    this.especialidadesDelMedico = [];
+    this.medicoElegido = medico;
+    this.todasLasDisp.forEach(d=>{
+      if(d.medico.id == medico.id){
+        
+        this.especialidadesDelMedico.push(d.especialidad);        
+      }
+    })    
+  }
+
+  cargarFechasEspec(espec : string){
+    // console.log(espec);
+    // console.log(this.medicoElegido.apellido);
+    this.fechasFiltradasPorMedico = this.todasLasDisp.filter(disp => disp.medico.id == this.medicoElegido.id && disp.especialidad == espec);
+    
+    this.fechasFiltradasPorMedico.forEach(disp=>{
+      disp.dias.forEach(d=>{
+        this.diasDelMedico.push(d.dia);        
+      })
+    });
+    
+    
+    let hoy = new Date();
+
+    let fechaFutura = new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate() + 14);
+
+    this.fechas = this.turnosServ.obtenerFechasDelRango(hoy,fechaFutura);
+    
+    this.fechas.forEach(
+      fecha=>{
+        
+        if(this.diasDelMedico.includes(this.dias[fecha.getDay()])){
+          
+          this.fechasDisponibles.push(`${this.dias[fecha.getDay()]}: ${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()}`)
+        }
+      }
+    )   
+    
   }
 
 }
