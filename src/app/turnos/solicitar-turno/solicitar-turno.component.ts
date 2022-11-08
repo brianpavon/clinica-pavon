@@ -11,6 +11,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 import { mergeMap } from 'rxjs/operators';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { Especialidades } from 'src/app/interfaces/especialidades';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -40,9 +42,11 @@ export class SolicitarTurnoComponent implements OnInit {
   todosLosMedicosAux : Usuarios[] = [];
   todosLosIds : number[] = [];
   especialidadesDelMedico : string[] = [];
+  dataEspecialidades : Especialidades[] = [];
+  dataEspecialidadesFiltradas : Especialidades[] = [];
   
   
-  constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService,private fb : FormBuilder, private auth : AuthService,private spinner: NgxSpinnerService,private userServ : UsuariosService,private imgServ : ImagenService) { 
+  constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService,private fb : FormBuilder, private auth : AuthService,private spinner: NgxSpinnerService,private userServ : UsuariosService,private imgServ : ImagenService,private servEsp : EspecialidadesService) { 
     this.formTurno = this.fb.group({
       'especialidad':[],
       'medico':[],
@@ -53,7 +57,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarInfoPaciente();
-    this.traerDisponibilidades();
+    this.cargarDatosBasicos();
   }
 
   cargarInfoPaciente(){
@@ -64,7 +68,8 @@ export class SolicitarTurnoComponent implements OnInit {
     )
   }
 
-  traerDisponibilidades(){
+  cargarDatosBasicos(){
+    //traigo las disponibilidades
     this.dispServ.traerDisponibilidades().subscribe(
       disp =>{
         
@@ -94,14 +99,18 @@ export class SolicitarTurnoComponent implements OnInit {
             }
           )
         })
-        console.log(this.todosLosMedicos);
         
-        // this.imgServ.descargarImagen(usuario.fotoPerfil).subscribe(
-        //   url =>{
-        //     usuario.fotoPerfil = url;
-        //     //console.log(url);
-        //   }
-        // )
+      }
+    )
+    //traigo info de especialidades
+    this.servEsp.traerTodasLasEspecialidades().subscribe(
+      espec=>{
+        this.dataEspecialidades = espec;
+        this.dataEspecialidades.forEach(e=>{
+          this.imgServ.descargarImagen(e.urlFoto).subscribe(url=>{
+            e.urlFoto = url;
+          })
+        })
       }
     )
     
@@ -185,7 +194,7 @@ export class SolicitarTurnoComponent implements OnInit {
     //console.log(fecha.split(':')[0]);
     this.horasLibres = []
     let diaElegido = fecha.split(':')[0];
-    let fechaElegida = fecha.split(':')[1]
+    let fechaElegida = fecha.split(':')[1].replace('-','/').replace('-','/');
     
     this.formTurno.get('fecha')?.patchValue(fechaElegida.trim());
     
@@ -198,7 +207,7 @@ export class SolicitarTurnoComponent implements OnInit {
             let horaDesde = parseInt(dia.desde.split(':')[0]);
             let horaHasta = parseInt(dia.hasta.split(':')[0]);
             //console.log(this.turnosServ.definirTurnos(dia.duracion,horaDesde,horaHasta));            
-            this.horasLibres = this.turnosServ.definirTurnos(dia.duracion,horaDesde,horaHasta);            
+            this.horasLibres = this.turnosServ.definirTurnos(dia.duracion,horaDesde,horaHasta);
           }
         })        
       }
@@ -220,7 +229,10 @@ export class SolicitarTurnoComponent implements OnInit {
       fecha:this.formTurno.get('fecha')?.value,
       horario:this.formTurno.get('horario')?.value,
       duracion:30,
-      id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`
+      id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`,
+      resenia:'',
+      comentario:'',
+      calificacion:''
     } 
     
     //console.log(Date.parse(this.nuevoTurno.fecha) );
@@ -247,7 +259,8 @@ export class SolicitarTurnoComponent implements OnInit {
     this.fechasFiltradasPorMedico = [];
     this.fechasDisponibles = [];
     this.diasDelMedico = [];
-    this.horasLibres = []
+    this.horasLibres = [];
+    this.dataEspecialidadesFiltradas = [];
     this.formTurno.get('especialidad')?.patchValue('');
     this.formTurno.get('medico')?.patchValue('');
     this.formTurno.get('fecha')?.patchValue('');
@@ -270,13 +283,26 @@ export class SolicitarTurnoComponent implements OnInit {
     this.diasDelMedico = [];
     this.horasLibres = [];    
     this.especialidadesDelMedico = [];
+    this.dataEspecialidadesFiltradas = [];
     
     this.todasLasDisp.forEach(d=>{
       if(d.medico.id == medico.id){
-        
-        this.especialidadesDelMedico.push(d.especialidad);        
+        //console.log(d.especialidad);        
+        this.especialidadesDelMedico.push(d.especialidad);
       }
-    })    
+    })
+    for (let i = 0; i < this.especialidadesDelMedico.length; i++) {
+      //console.log(this.especialidadesDelMedico[i]);
+      for (let j = 0; j < this.dataEspecialidades.length; j++) {
+        if(this.dataEspecialidades[j].descripcion == this.especialidadesDelMedico[i]){
+          this.dataEspecialidadesFiltradas.push(this.dataEspecialidades[j]);
+        }
+      }
+    }
+    
+    //console.log(this.dataEspecialidadesFiltradas);
+    
+
   }
 
   cargarFechasEspec(espec : string){
@@ -309,7 +335,7 @@ export class SolicitarTurnoComponent implements OnInit {
         
         if(this.diasDelMedico.includes(this.dias[fecha.getDay()])){
           
-          this.fechasDisponibles.push(`${this.dias[fecha.getDay()]}: ${fecha.getDate()}/${fecha.getMonth()+1}/${fecha.getFullYear()}`)
+          this.fechasDisponibles.push(`${this.dias[fecha.getDay()]}: ${fecha.getDate()}-${fecha.getMonth()+1}-${fecha.getFullYear()}`)
         }
       }
     )   

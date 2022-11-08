@@ -17,3 +17,20 @@ hr{
     border-radius: 20px;
     width: 14vh;
 }
+
+.btn-espec{
+    width: 16vh;
+    height: 4vh;
+    font-size: large;
+}
+
+.img-espec{
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.btn-fechas{
+    width: 18vh;
+    height: 15vh;
+    padding: 0px !important;
+}

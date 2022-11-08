@@ -40,7 +40,9 @@ export class TurnosService {
         }else{
           m = minutes;
         }
-        result.push(h + ':' + m);
+        //console.log(h);
+        let ampm = h > 11 ? 'pm' : 'am'
+        result.push(h + ':' + m + ampm);
       }
     }
     result.pop();

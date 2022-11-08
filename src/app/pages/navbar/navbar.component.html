@@ -19,7 +19,7 @@
           <div class="dropdown-menu">            
             <a class="dropdown-item" *ngIf="rol == 'paciente'" routerLink="/turnos/turnos-paciente">Mis Turnos</a>
             <a class="dropdown-item" *ngIf="rol == 'medico'" routerLink="/turnos/turnos-especialista">Mis Turnos</a>
-            <a class="dropdown-item" routerLink="/turnos/pedir-turno">Solicitar Turno</a>
+            <a class="dropdown-item" routerLink="/turnos/pedir-turno" *ngIf="rol == 'paciente'">Solicitar Turno</a>
           </div>
         </li>
         
