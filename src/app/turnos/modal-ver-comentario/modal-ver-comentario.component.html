@@ -1,0 +1,29 @@
+<div class="modal fade" id="modalVerComent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">        
+        <div class="modal-content letrasBlancas fondo-modal">
+            
+            <div class="modal-header">
+                <h3 style="font-size: large;" class="modal-title" id="exampleModalLabel">Comentarios del Turno</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="letrasBlancas" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <h3 class="text-center">El estado del turno es:  <span style="color:red;font-size: large;">{{ turnoParaVer.estado | titlecase}}</span></h3>
+                
+                <div class="d-flex flex-column">                   
+                    <mat-form-field class="example-full-width" appearance="fill">            
+                        <textarea readonly id="inputComentarios" class="letrasBlancas" matInput>{{ turnoParaVer.comentario }}</textarea>
+                    </mat-form-field>
+                </div>
+            
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" mat-flat-button color="warn">Cerrar</button>                
+            </div>
+
+        </div>
+    </div>
+</div>

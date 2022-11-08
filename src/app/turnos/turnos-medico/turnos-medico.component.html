@@ -53,7 +53,7 @@
                         <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="accent" *ngIf="element.estado == 'aceptado'" (click)="cargarComentarios(element,'finalizado')">Finalizar</button>
 
                         <!-- BOTON VER RESEÑA -->
-                        <button class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Ver Reseña</button>
+                        <button data-toggle="modal" data-target="#modalVerComent" class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Ver Reseña</button>
                     </td>
                 </ng-container>                
 
@@ -63,4 +63,5 @@
           </div>
     </div>
     <app-modal-comentarios *ngIf="turnoModal" [turnoElegido]="turnoModal"></app-modal-comentarios>
+    <app-modal-ver-comentario *ngIf="verTurno" [turnoParaVer]="verTurno"></app-modal-ver-comentario>
 </div>

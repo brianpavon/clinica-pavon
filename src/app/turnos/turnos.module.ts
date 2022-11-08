@@ -10,6 +10,7 @@ import { TurnosPacienteComponent } from './turnos-paciente/turnos-paciente.compo
 import { TurnosMedicoComponent } from './turnos-medico/turnos-medico.component';
 import { TurnosTodosComponent } from './turnos-todos/turnos-todos.component';
 import { ModalComentariosComponent } from './modal-comentarios/modal-comentarios.component';
+import { ModalVerComentarioComponent } from './modal-ver-comentario/modal-ver-comentario.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ModalComentariosComponent } from './modal-comentarios/modal-comentarios
     TurnosPacienteComponent,
     TurnosMedicoComponent,
     TurnosTodosComponent,
-    ModalComentariosComponent
+    ModalComentariosComponent,
+    ModalVerComentarioComponent
   ],
   imports: [
     CommonModule,

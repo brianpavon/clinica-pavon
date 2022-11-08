@@ -20,6 +20,7 @@ export class TurnosMedicoComponent implements OnInit {
   medicoLogueado !: Usuarios | undefined;
   turnosAux : Turnos[] = [];
   turnoModal !: any;
+  verTurno !: any;
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { }
 
@@ -106,8 +107,8 @@ export class TurnosMedicoComponent implements OnInit {
   }
 
   verReseniaTurno(turno:Turnos){
-    console.log(turno);
-    
+    //console.log(turno);
+    this.verTurno = turno;    
   }
 
 }

@@ -1,0 +1,13 @@
+.fondo-modal{
+    background-color: #424242;
+};
+
+.rojo{
+    color:red !important;
+    font-size: large;
+}
+
+.ok{
+    color:#28a745 !important;
+    font-size: large;
+}
