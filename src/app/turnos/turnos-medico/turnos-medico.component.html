@@ -39,12 +39,21 @@
 
                 <ng-container matColumnDef="acciones">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element">
-                        <button class="mr-1" mat-flat-button color="primary">Aceptar</button>
-                        <button class="mr-1" mat-flat-button color="warn">Cancelar</button>
-                        <button class="mr-1" mat-flat-button color="warn">Rechazar</button>                        
-                        <button class="mr-1" mat-flat-button color="accent">Finalizar</button>
-                        <button class="mr-1 botonGris" mat-flat-button>Ver Reseña</button>
+                    <td mat-cell *matCellDef="let element"> 
+                        <!-- BOTON ACEPTAR -->
+                        <button class="mr-1" mat-flat-button color="primary" *ngIf="element.estado == 'solicitado'" (click)="modificarEstado(element,'aceptado')">Aceptar</button>
+
+                        <!-- BOTON CANCELAR -->
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="warn" *ngIf="element.estado == 'aceptado'" (click)="cargarComentarios(element,'cancelado')">Cancelar</button>
+
+                        <!-- BOTON RECHAZAR -->
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="warn" *ngIf="element.estado == 'solicitado'" (click)="cargarComentarios(element,'rechazado')">Rechazar</button>  
+
+                        <!-- BOTON FINALIZAR -->
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="accent" *ngIf="element.estado == 'aceptado'" (click)="cargarComentarios(element,'finalizado')">Finalizar</button>
+
+                        <!-- BOTON VER RESEÑA -->
+                        <button class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Ver Reseña</button>
                     </td>
                 </ng-container>                
 
@@ -53,4 +62,5 @@
             </table>
           </div>
     </div>
+    <app-modal-comentarios *ngIf="turnoModal" [turnoElegido]="turnoModal"></app-modal-comentarios>
 </div>

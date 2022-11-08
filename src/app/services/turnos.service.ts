@@ -73,4 +73,8 @@ export class TurnosService {
       )
       .toPromise();
   }
+
+  actualizarTurno(atributo: any, id: string){
+    this.firestore.collection('turnos').doc(id).set(atributo,{merge:true});
+  }
 }

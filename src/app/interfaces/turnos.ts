@@ -8,8 +8,7 @@ export interface Turnos {
     fecha:string;
     horario:string;    
     duracion:number;
-    id:string;
-    resenia:string;
+    id:string;    
     comentario:string;
     calificacion:string;
 }

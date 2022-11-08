@@ -1,0 +1,35 @@
+<div class="modal fade" id="modalComentarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content fondo-modal letrasBlancas">
+
+            <div class="modal-header">
+            <h3 style="font-size: large;" class="modal-title" id="exampleModalLabel">Deje un comentario</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="letrasBlancas" aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+            <form [formGroup] = "formComentario" (ngSubmit)="guardarComentario()">
+                <div class="modal-body">
+                    <div class="d-flex flex-column">
+                        <mat-label *ngIf="turnoElegido.estado == 'cancelado'" class="mb-2 letrasBlancas">Por favor indique el motivo de la cancelación</mat-label>
+                        <mat-label *ngIf="turnoElegido.estado == 'rechazado'" class="mb-2 letrasBlancas">Por favor indique el motivo de rechazo</mat-label>
+                        <mat-label *ngIf="turnoElegido.estado == 'finalizado'" class="mb-2 letrasBlancas">Escriba un resumen de la atención</mat-label>
+                            <div class="invalid">
+                                <p *ngIf="formComentario.controls.comentario.errors?.required && formComentario.controls.comentario.touched">Por favor, deje un comentario.</p>                
+                                <p *ngIf="formComentario.controls.comentario.errors?.['minlength']">Debe tener al menos 10 caracteres.</p>
+                            </div> 
+                        <mat-form-field class="example-full-width" appearance="fill">            
+                            <textarea id="inputComentarios" class="letrasBlancas" matInput formControlName="comentario"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="mr-2 botonGris"  mat-flat-button data-dismiss="modal" (click)="resetearForm()">Volver</button>
+                    <button type="submit" mat-flat-button color="primary" [disabled]="formComentario.invalid">Guardar</button>
+                </div>
+            </form>
+        </div>      
+    </div>
+</div>

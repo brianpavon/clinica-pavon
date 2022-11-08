@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { mergeMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-turnos-medico',
@@ -18,6 +19,7 @@ export class TurnosMedicoComponent implements OnInit {
   turnosMedico : Turnos[] = [];
   medicoLogueado !: Usuarios | undefined;
   turnosAux : Turnos[] = [];
+  turnoModal !: any;
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { }
 
@@ -84,6 +86,27 @@ export class TurnosMedicoComponent implements OnInit {
       )
       this.turnosMedico = turnosFiltrados;
     }
+    
+  }
+
+  modificarEstado(turno:Turnos,estado:string){
+    
+    const data = {   
+      estado: estado
+    };
+    this.turnServ.actualizarTurno(data,turno.id);
+    Swal.fire({
+      title:`El turno fue ${estado}.`,
+      icon:'success',      
+    })
+  }
+
+  cargarComentarios(turno:Turnos,estado:string){
+    this.turnoModal = {turno: turno,estado:estado}
+  }
+
+  verReseniaTurno(turno:Turnos){
+    console.log(turno);
     
   }
 
