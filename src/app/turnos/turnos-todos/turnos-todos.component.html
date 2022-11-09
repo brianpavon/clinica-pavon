@@ -45,7 +45,7 @@
                 <ng-container matColumnDef="acciones">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <button class="mr-1" mat-flat-button color="warn">Cancelar</button>
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="warn" *ngIf="element.estado == 'solicitado'" (click)="cargarComentarios(element,'cancelado')">Cancelar</button>
                     </td>
                 </ng-container>
 
@@ -55,6 +55,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
         </div>
+        <app-modal-comentarios *ngIf="turnoParaCancelar" [turnoElegido]="turnoParaCancelar"></app-modal-comentarios>
         <div class="row justify-content-center mt-2 mb-5">
             <a data-toggle="tooltip" data-placement="bottom" title="Volver" routerLink="/panel-control">
               <img src="assets/images/back.png" alt="flecha-volver" />

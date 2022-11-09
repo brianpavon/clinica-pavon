@@ -17,6 +17,7 @@ export class TurnosTodosComponent implements OnInit {
   dataSource !: any;
 
   turnosAux : Turnos[] = [];
+  turnoParaCancelar : any;
 
   constructor(private turnServ : TurnosService) { }
 
@@ -79,6 +80,10 @@ export class TurnosTodosComponent implements OnInit {
       this.todosLosTurnos = turnosFiltrados;
     }
     
+  }
+
+  cargarComentarios(turno:Turnos,estado:string){
+    this.turnoParaCancelar = {turno: turno,estado:estado}
   }
 
 }
