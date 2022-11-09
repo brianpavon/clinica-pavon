@@ -4,7 +4,17 @@
             <!-- BOTONES -->
             <div class="col-md-8">
                 
-                <div class="row">
+                <div class="row" *ngIf="esAdmin && todosLosPacientes.length">
+                    
+                    <div class="example-button-row">
+                        <h2 class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija el paciente</h2>
+                        <button class="botonGris mr-2 ml-2" *ngFor="let pac of todosLosPacientes" mat-flat-button (click)="cargarPaciente(pac)">{{ pac.nombre }} {{ pac.apellido }}</button>
+                    </div>
+                    
+                </div>
+                <hr class="mb-3" *ngIf="esAdmin && todosLosPacientes.length">
+                
+                <div class="row" *ngIf="mostrarEspec">
                     <div class="example-button-row">
                         <h2 *ngIf="todosLosMedicos.length" class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija un Médico</h2>            
                         <button class="mr-2 ml-2 boton-imagen" *ngFor="let medico of todosLosMedicos" mat-flat-button (click)="cargarEspecialidades(medico)" title="{{medico.nombre}} {{medico.apellido}}">
@@ -13,15 +23,6 @@
                     </div>                    
                 </div>
 
-                <!-- <hr *ngIf="especialidadesDelMedico.length">
-                <div class="row mt-3">
-                    
-                    <div class="example-button-row">
-                        <h2 *ngIf="especialidadesDelMedico.length" class="h3 mb-3 font-weight-normal text-center letrasBlancas">Elija una Especialidad</h2>
-                        <button class="mr-2 ml-2" *ngFor="let espec of especialidadesDelMedico" mat-flat-button color="accent" (click)="cargarFechasEspec(espec)">{{ espec }}</button>            
-                    </div>
-                    
-                </div> -->
                 
                 <hr *ngIf="dataEspecialidadesFiltradas.length">
                 <div class="row mt-3 mb-5">
@@ -63,6 +64,14 @@
                 <h2  class="h3 mb-3 font-weight-normal text-center letrasBlancas d-flex justify-content-end" >Detalle del Turno</h2>
                 <div class="justify-content-center">
                     <form [formGroup]="formTurno" (ngSubmit)="turnoNuevo()">
+                        <div *ngIf="esAdmin" class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                    <mat-label>Paciente</mat-label>
+                                    <input class="letrasBlancas" matInput readonly formControlName="paciente">
+                                </mat-form-field>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field appearance="fill" class="text-center letrasBlancas">
@@ -103,6 +112,11 @@
 
             </div>
 
+        </div>
+        <div *ngIf="esAdmin" class="row">
+            <a data-toggle="tooltip" data-placement="bottom" title="Volver" routerLink="/panel-control">
+              <img src="assets/images/back.png" alt="flecha-volver" />
+            </a>
         </div>
     </div>
 </div>

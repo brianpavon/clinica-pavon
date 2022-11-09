@@ -11,6 +11,7 @@ export class UsuariosService {
   itemsCollection !: AngularFirestoreCollection<Usuarios>;
   todosLosUsuarios !: Observable<Usuarios[]>;
   todosLosEspecialistas:Usuarios[] = [];
+  todosLosPacientes:Usuarios[] = [];
   constructor(private firestore:AngularFirestore) {
 
    }
@@ -37,6 +38,19 @@ export class UsuariosService {
       )
       return this.todosLosEspecialistas;
    }
+
+  devolverPacientes(){
+    this.traerUsuarios().subscribe(
+      usuarios=>{
+        usuarios.forEach(usuario => {
+          if(usuario.rol == "paciente"){
+            this.todosLosPacientes.push(usuario);
+          }
+        });
+      }
+    )
+    return this.todosLosPacientes;
+ }
 
   devolverUnUsuario(id:any){
     return  this.firestore.collection<Usuarios>('usuarios').doc(id).get();

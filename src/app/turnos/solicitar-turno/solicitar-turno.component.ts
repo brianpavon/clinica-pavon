@@ -36,6 +36,9 @@ export class SolicitarTurnoComponent implements OnInit {
   formTurno !: FormGroup;
   esInvalido : boolean = true;
   nuevoTurno !: Turnos;
+  esAdmin : boolean = false;
+  mostrarEspec : boolean = true;
+  todosLosPacientes : Usuarios[] = []
 
   //agregados Sprint 2
   todosLosMedicos : Usuarios[] = [];
@@ -43,7 +46,7 @@ export class SolicitarTurnoComponent implements OnInit {
   todosLosIds : number[] = [];
   especialidadesDelMedico : string[] = [];
   dataEspecialidades : Especialidades[] = [];
-  dataEspecialidadesFiltradas : Especialidades[] = [];
+  dataEspecialidadesFiltradas : Especialidades[] = [];  
   
   
   constructor(private dispServ: DisponibilidadService, private turnosServ : TurnosService,private fb : FormBuilder, private auth : AuthService,private spinner: NgxSpinnerService,private userServ : UsuariosService,private imgServ : ImagenService,private servEsp : EspecialidadesService) { 
@@ -51,7 +54,8 @@ export class SolicitarTurnoComponent implements OnInit {
       'especialidad':[],
       'medico':[],
       'fecha':[],
-      'horario':[]
+      'horario':[],
+      'paciente':[]
     })
   }
 
@@ -64,6 +68,17 @@ export class SolicitarTurnoComponent implements OnInit {
     this.auth.obtenerUsuarioLogueado().subscribe(
       async usuarioLogueado =>{
         this.paciente = await this.userServ.devolverDataUsuarioDB(usuarioLogueado?.uid);
+        //si es admin no cargo el paciente, así lo puede elegir despues
+        if(this.paciente?.rol == 'admin'){
+          this.esAdmin = true;
+          this.mostrarEspec = false;
+          this.userServ.traerUsuarios().subscribe(usuarios=>{
+            this.todosLosPacientes = usuarios;
+            this.todosLosPacientes = this.todosLosPacientes.filter(pac => pac.rol == 'paciente');
+            //console.log(this.todosLosPacientes);
+          })
+          
+        }
       }
     )
   }
@@ -194,7 +209,7 @@ export class SolicitarTurnoComponent implements OnInit {
     //console.log(fecha.split(':')[0]);
     this.horasLibres = []
     let diaElegido = fecha.split(':')[0];
-    let fechaElegida = fecha.split(':')[1].replace('-','/').replace('-','/');
+    let fechaElegida = fecha.split(':')[1];//.replace('-','/').replace('-','/');
     
     this.formTurno.get('fecha')?.patchValue(fechaElegida.trim());
     
@@ -221,6 +236,13 @@ export class SolicitarTurnoComponent implements OnInit {
 
   async turnoNuevo(){
     //console.log(this.formTurno.value);
+    let anio = this.formTurno.get('fecha')?.value.split('-')[2]
+    let mes = this.formTurno.get('fecha')?.value.split('-')[1]
+    let dia = this.formTurno.get('fecha')?.value.split('-')[0]
+    let fechaParaParsear = anio+'/'+mes+'/'+dia;
+
+    //console.log(fechaParaParsear,Date.parse(fechaParaParsear),Date.parse('2022/11/14'),Date.parse('14/11/22'));
+    
     this.nuevoTurno = {
       medico:this.medicoElegido,
       paciente:this.paciente,
@@ -229,11 +251,13 @@ export class SolicitarTurnoComponent implements OnInit {
       fecha:this.formTurno.get('fecha')?.value,
       horario:this.formTurno.get('horario')?.value,
       duracion:30,
-      id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`,      
+      id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(fechaParaParsear)}-${this.formTurno.get('horario')?.value}`,      
       comentario:'',
       calificacion:'',
       encuesta:[]
     } 
+    //console.log(Date.parse('2022/11/14'),Date.parse('14/11/22'));
+    
     
     //console.log(Date.parse(this.nuevoTurno.fecha) );
     //antes de guardar verificar si hay un turno con el mismo id
@@ -245,8 +269,10 @@ export class SolicitarTurnoComponent implements OnInit {
       })
     }else{
       this.turnosServ.guardarTurno(this.nuevoTurno);
+      //console.log(this.nuevoTurno);
+      
       Swal.fire({
-        title:`Se agendó su turno.`,
+        title:`Se agendó el turno.`,
         icon:'success',      
       })
     }
@@ -255,6 +281,10 @@ export class SolicitarTurnoComponent implements OnInit {
   }  
   
   resetearTodo(){
+    if(this.esAdmin){
+      this.mostrarEspec = false;
+      this.formTurno.get('paciente')?.patchValue('');
+    }
     this.medicosDisponibles = [];
     this.fechasFiltradasPorMedico = [];
     this.fechasDisponibles = [];
@@ -340,6 +370,25 @@ export class SolicitarTurnoComponent implements OnInit {
       }
     )   
     
+  }
+
+  cargarPaciente(paciente : Usuarios){
+    this.formTurno.get('paciente')?.patchValue(`${paciente.nombre} ${paciente.apellido}`);
+    this.formTurno.get('medico')?.patchValue('');
+    this.formTurno.get('fecha')?.patchValue('');
+    this.formTurno.get('horario')?.patchValue('');
+    this.formTurno.get('especialidad')?.patchValue('');
+
+    this.fechasFiltradasPorMedico = [];
+    this.fechasDisponibles = [];
+    this.diasDelMedico = [];
+    this.horasLibres = [];    
+    this.especialidadesDelMedico = [];
+    this.dataEspecialidadesFiltradas = [];
+    
+    this.esInvalido= true;
+    this.mostrarEspec = true;
+    this.paciente = paciente;
   }
 
 }
