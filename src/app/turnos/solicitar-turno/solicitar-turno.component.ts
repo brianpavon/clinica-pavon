@@ -231,7 +231,8 @@ export class SolicitarTurnoComponent implements OnInit {
       duracion:30,
       id:`${this.medicoElegido.id}-${this.formTurno.get('especialidad')?.value}-${Date.parse(this.formTurno.get('fecha')?.value)}-${this.formTurno.get('horario')?.value}`,      
       comentario:'',
-      calificacion:''
+      calificacion:'',
+      encuesta:[]
     } 
     
     //console.log(Date.parse(this.nuevoTurno.fecha) );

@@ -11,6 +11,7 @@ import { TurnosMedicoComponent } from './turnos-medico/turnos-medico.component';
 import { TurnosTodosComponent } from './turnos-todos/turnos-todos.component';
 import { ModalComentariosComponent } from './modal-comentarios/modal-comentarios.component';
 import { ModalVerComentarioComponent } from './modal-ver-comentario/modal-ver-comentario.component';
+import { ModalEncuestaComponent } from './modal-encuesta/modal-encuesta.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ModalVerComentarioComponent } from './modal-ver-comentario/modal-ver-co
     TurnosMedicoComponent,
     TurnosTodosComponent,
     ModalComentariosComponent,
-    ModalVerComentarioComponent
+    ModalVerComentarioComponent,
+    ModalEncuestaComponent
   ],
   imports: [
     CommonModule,

@@ -52,7 +52,7 @@
                         <button data-toggle="modal" data-target="#modalVerComent" class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Reseña</button>
 
                         <!-- btn completar encuesta -->
-                        <button class="mr-1" mat-flat-button color="accent" *ngIf="element.comentario && element.estado == 'realizado'">Encuesta</button>
+                        <button data-toggle="modal" data-target="#modalEncuesta" class="mr-1" mat-flat-button color="accent" *ngIf="element.comentario && element.estado == 'realizado' && !element.encuesta" (click)="completarEncuesta(element)">Encuesta</button>
 
                         <!-- btn calificar -->
                         <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="primary" *ngIf="element.estado == 'realizado' && !element.calificacion" (click)="cargarComentarios(element,'calificar')">Calificar</button>
@@ -67,5 +67,6 @@
           </div>
           <app-modal-comentarios *ngIf="turnoElegido" [turnoElegido]="turnoElegido"></app-modal-comentarios>
           <app-modal-ver-comentario *ngIf="verTurno" [turnoParaVer]="verTurno"></app-modal-ver-comentario>
+          <app-modal-encuesta *ngIf="turnoEncuesta" [turnoEncuesta]="turnoEncuesta"></app-modal-encuesta>
     </div>
 </div>

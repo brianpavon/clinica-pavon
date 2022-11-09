@@ -1,0 +1,64 @@
+<div class="modal fade" id="modalEncuesta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">        
+        <div class="modal-content letrasBlancas fondo-modal">
+            
+            <div class="modal-header">
+                <h3 style="font-size: large;" class="modal-title" id="exampleModalLabel">Complete una breve encuesta</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="letrasBlancas" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form [formGroup]="formEncuesta" (ngSubmit)="guardarEncuesta()">
+                <div class="modal-body">
+                    <h3 class="text-center">Encuesta de Satisfacción</h3>
+
+                    <div class="d-flex flex-column letrasBlancas">
+                        <mat-label class="mb-2 letrasBlancas">Por favor califique del 1 al 10, al Especialista.</mat-label>
+                        <mat-slider
+                        thumbLabel
+                        [displayWith]="formatLabel"
+                        tickInterval="1"
+                        step="1"
+                        min="0"
+                        max="10"
+                        aria-label="units" formControlName="califEspec"></mat-slider>
+                        <div class="invalid" *ngIf="formEncuesta.controls.califEspec.errors?.required">
+                            Por favor califique al profesional.
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-column letrasBlancas">
+                        <label id="example-radio-group-label">Cómo fue la atención en nuestra clínica?</label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="califClinica">
+                            
+                            <mat-radio-button class="d-flex flex-column" value="muy-mala">Muy Mala</mat-radio-button>
+                            <mat-radio-button class="d-flex flex-column" value="mala">Mala</mat-radio-button>
+                            <mat-radio-button class="d-flex flex-column" value="regular">Regular</mat-radio-button>
+                            <mat-radio-button class="d-flex flex-column" value="buena">Buena</mat-radio-button>
+                            <mat-radio-button class="d-flex flex-column" value="muy-buena">Muy Buena</mat-radio-button>
+                            
+                        </mat-radio-group>
+                        <div class="invalid" *ngIf="formEncuesta.controls.califClinica.errors?.required">
+                            Debe seleccionar una opción.
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="d-flex flex-column">
+                        <mat-label class="mb-2 letrasBlancas" style="font-size: large;">Si tiene sugerencias, puede dejarlas acá</mat-label>                        
+                        <mat-form-field class="example-full-width" appearance="fill">            
+                            <textarea readonly class="letrasBlancas" matInput formControlName="sugerencias"></textarea>
+                        </mat-form-field>
+                    </div>
+                
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" mat-flat-button color="warn" (click)="resetForm()">Cerrar</button>
+                    <button type="submit" [disabled]="formEncuesta.invalid" class="ml-2" type="submit" mat-flat-button color="accent">Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
