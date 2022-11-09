@@ -45,10 +45,17 @@
                 <ng-container matColumnDef="acciones">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <button class="mr-1" mat-flat-button color="warn">Cancelar</button>
-                        <button class="mr-1" mat-flat-button color="accent">Reseña</button>
-                        <button class="mr-1" mat-flat-button color="accent">Encuesta</button>
-                        <button class="mr-1" mat-flat-button color="primary">Calificar</button>
+                        <!-- btn cancelar -->
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="warn" *ngIf="element.estado == 'solicitado'" (click)="cargarComentarios(element,'cancelado')">Cancelar</button>
+
+                        <!-- btn ver reseña -->
+                        <button data-toggle="modal" data-target="#modalVerComent" class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Reseña</button>
+
+                        <!-- btn completar encuesta -->
+                        <button class="mr-1" mat-flat-button color="accent" *ngIf="element.comentario && element.estado == 'realizado'">Encuesta</button>
+
+                        <!-- btn calificar -->
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="primary" *ngIf="element.estado == 'realizado' && !element.calificacion" (click)="cargarComentarios(element,'calificar')">Calificar</button>
                     </td>
                 </ng-container>
 
@@ -58,5 +65,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
           </div>
+          <app-modal-comentarios *ngIf="turnoElegido" [turnoElegido]="turnoElegido"></app-modal-comentarios>
+          <app-modal-ver-comentario *ngIf="verTurno" [turnoParaVer]="verTurno"></app-modal-ver-comentario>
     </div>
 </div>

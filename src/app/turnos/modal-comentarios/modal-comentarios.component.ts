@@ -23,9 +23,16 @@ export class ModalComentariosComponent implements OnInit {
   }
 
   guardarComentario(){
-    let data = {
-      comentario:this.formComentario.get('comentario')?.value,
-      estado:this.turnoElegido.estado
+    let data;
+    if(this.turnoElegido.estado == 'calificar'){
+      data = {
+        calificacion:this.formComentario.get('comentario')?.value,        
+      }
+    }else{
+      data = {
+        comentario:this.formComentario.get('comentario')?.value,
+        estado:this.turnoElegido.estado
+      }
     }
     //console.log(data);
     this.turnServ.actualizarTurno(data,this.turnoElegido.turno.id);

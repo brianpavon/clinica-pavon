@@ -50,7 +50,7 @@
                         <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="warn" *ngIf="element.estado == 'solicitado'" (click)="cargarComentarios(element,'rechazado')">Rechazar</button>  
 
                         <!-- BOTON FINALIZAR -->
-                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="accent" *ngIf="element.estado == 'aceptado'" (click)="cargarComentarios(element,'finalizado')">Finalizar</button>
+                        <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="accent" *ngIf="element.estado == 'aceptado'" (click)="cargarComentarios(element,'realizado')">Finalizar</button>
 
                         <!-- BOTON VER RESEÑA -->
                         <button data-toggle="modal" data-target="#modalVerComent" class="mr-1 botonGris" mat-flat-button *ngIf="element.comentario" (click)="verReseniaTurno(element)">Ver Reseña</button>

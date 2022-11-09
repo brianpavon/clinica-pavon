@@ -15,7 +15,8 @@
                     <div class="d-flex flex-column">
                         <mat-label *ngIf="turnoElegido.estado == 'cancelado'" class="mb-2 letrasBlancas">Por favor indique el motivo de la cancelación</mat-label>
                         <mat-label *ngIf="turnoElegido.estado == 'rechazado'" class="mb-2 letrasBlancas">Por favor indique el motivo de rechazo</mat-label>
-                        <mat-label *ngIf="turnoElegido.estado == 'finalizado'" class="mb-2 letrasBlancas">Escriba un resumen de la atención</mat-label>
+                        <mat-label *ngIf="turnoElegido.estado == 'realizado'" class="mb-2 letrasBlancas">Escriba un resumen de la atención</mat-label>
+                        <mat-label *ngIf="turnoElegido.estado == 'calificar'" class="mb-2 letrasBlancas">Escriba un comentario de como fue la atención</mat-label>
                             <div class="invalid">
                                 <p *ngIf="formComentario.controls.comentario.errors?.required && formComentario.controls.comentario.touched">Por favor, deje un comentario.</p>                
                                 <p *ngIf="formComentario.controls.comentario.errors?.['minlength']">Debe tener al menos 10 caracteres.</p>

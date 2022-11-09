@@ -19,6 +19,8 @@ export class TurnosPacienteComponent implements OnInit {
   usuarioLogueado !: Usuarios | undefined;
   dataSource !: any
   turnosAux : Turnos[] = [];
+  turnoElegido !: any;
+  verTurno !: any;
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { 
 
@@ -94,6 +96,15 @@ export class TurnosPacienteComponent implements OnInit {
       this.turnosPaciente = turnosFiltrados;
     }
     
+  }
+
+  cargarComentarios(turno:Turnos,estado:string){
+    this.turnoElegido = {turno: turno,estado:estado}
+  }
+
+  verReseniaTurno(turno:Turnos){
+    //console.log(turno);
+    this.verTurno = turno;    
   }
 
 }
