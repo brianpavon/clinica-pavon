@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 import { Turnos } from 'src/app/interfaces/turnos';
+import { HistClinService } from 'src/app/services/hist-clin.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historia-clinica',
@@ -9,10 +13,11 @@ import { Turnos } from 'src/app/interfaces/turnos';
 })
 export class HistoriaClinicaComponent implements OnInit {
 
-  formHE !: FormGroup;
   @Input() turnoElegido !: Turnos;
+  formHE !: FormGroup;
+  nuevaHistClinica !: HistoriaClinica;
 
-  constructor(private fb : FormBuilder) {
+  constructor(private fb : FormBuilder,private hcServ : HistClinService,private userServ : UsuariosService) {
     this.formHE = this.fb.group({
       "altura" : ['',[Validators.required]],
       "peso": ['',[Validators.required]],
@@ -31,9 +36,39 @@ export class HistoriaClinicaComponent implements OnInit {
   }
 
   guardarHe(){
-    console.log(this.formHE.value);
+    //console.log(this.formHE.value);
+    let altura = this.formHE.get('altura')?.value;
+    let peso = this.formHE.get('peso')?.value;
+    let temperatura = this.formHE.get('temp')?.value;
+    let presion = this.formHE.get('presion')?.value;  
+    let datoDinamico = {
+      [this.formHE.get('dato1')?.value] : this.formHE.get('valorDato1')?.value,
+      [this.formHE.get('dato2')?.value] : this.formHE.get('valorDato2')?.value,
+      [this.formHE.get('dato3')?.value] : this.formHE.get('valorDato3')?.value,
+    }
+    console.log(datoDinamico);
+      
+    
+    this.nuevaHistClinica = {
+      altura: altura,
+      peso: peso,
+      temperatura: temperatura,
+      presion: presion,
+      datosDinamicos :datoDinamico,
+      turno:this.turnoElegido.id
+    }
+    let data = {
+      historiaClinica:this.nuevaHistClinica
+    }
+    //console.log(this.nuevaHistClinica);
+    this.userServ.actualizarUsuario(data,this.turnoElegido.paciente.id);
+    this.formHE.reset();
     //@ts-ignore
-    $('#modalHE').modal('hide')
+    $('#modalHE').modal('hide');
+    Swal.fire({
+      title:`Historia Clínica guardada correctamente.`,
+      icon:'success',      
+    })
   }
 
 }

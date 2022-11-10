@@ -36,11 +36,18 @@ export class ModalComentariosComponent implements OnInit {
       }
     }
     //console.log(data);
-    //this.turnServ.actualizarTurno(data,this.turnoElegido.turno.id);
-    Swal.fire({
-      title:`Se actualizó el estado del turno y el comentario fue guardado.`,
-      icon:'success',      
-    })
+    this.turnServ.actualizarTurno(data,this.turnoElegido.turno.id);
+    if(this.turnoElegido.estado == 'realizado'){
+      Swal.fire({
+        title:`Se actualizó el turno y el comentario fue guardado.\n Recuerde que debe completar la Historia Clínica.`,
+        icon:'success',      
+      })
+    }else{
+      Swal.fire({
+        title:`Se actualizó el turno y el comentario fue guardado.`,
+        icon:'success',      
+      })
+    }
     setTimeout(() => {
       //@ts-ignore
       $('#modalComentarios').modal('hide');      

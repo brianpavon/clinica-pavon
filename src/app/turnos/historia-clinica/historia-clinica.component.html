@@ -15,15 +15,21 @@
                         
                         <div class="col-md-6 text-center">
                             <mat-form-field appearance="fill" class="text-center letrasBlancas">
-                                <mat-label>Altura</mat-label>
-                                <input class="letrasBlancas" matInput formControlName="altura">
+                                <mat-label>Altura(en cm)</mat-label>
+                                <input type="number" class="letrasBlancas" matInput formControlName="altura">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.altura.errors?.required && formHE.controls.altura.touched">Debe completar la altura.</p>
+                            </div>
                         </div>
                         <div class="col-md-6 text-center">
                             <mat-form-field appearance="fill" class="text-center letrasBlancas">
-                                <mat-label>Peso</mat-label>
-                                <input class="letrasBlancas" matInput formControlName="peso">
+                                <mat-label>Peso(en kg)</mat-label>
+                                <input type="number" class="letrasBlancas" matInput formControlName="peso">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.peso.errors?.required && formHE.controls.peso.touched">Debe completar el peso.</p>
+                            </div>
                         </div>
                         
                     </div>
@@ -32,16 +38,22 @@
                         
                         <div class="col-md-6 text-center">
                             <mat-form-field appearance="fill" class="text-center letrasBlancas">
-                                <mat-label>Temperatura</mat-label>
-                                <input class="letrasBlancas" matInput formControlName="temp">
+                                <mat-label>Temperatura(en ºcelsius)</mat-label>
+                                <input type="number" class="letrasBlancas" matInput formControlName="temp">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.temp.errors?.required && formHE.controls.temp.touched">Debe completar la temperatura.</p>
+                            </div>
                         </div>
 
                         <div class="col-md-6 text-center">
                             <mat-form-field appearance="fill" class="text-center letrasBlancas">
                                 <mat-label>Presión</mat-label>
-                                <input class="letrasBlancas" matInput formControlName="presion">
+                                <input type="number" class="letrasBlancas" matInput formControlName="presion">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.presion.errors?.required && formHE.controls.presion.touched">Debe completar la presión.</p>
+                            </div>
                         </div>
                         
                     </div>
@@ -51,6 +63,7 @@
                     <h3 class="text-center">Cargue datos adicionales que considere necesarios. Por ej: Caries: 4</h3>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-6 text-right">
+                            
                             <mat-form-field appearance="fill" class="text-center letrasBlancas">
                                 <mat-label>Dato 1</mat-label>
                                 <input class="letrasBlancas" matInput formControlName="dato1">
@@ -62,6 +75,9 @@
                                 <mat-label>Valor dato 1</mat-label>
                                 <input class="letrasBlancas" matInput formControlName="valorDato1">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.dato1.value && !formHE.controls.valorDato1.value">Debe completar este campo.</p>
+                            </div>
                         </div>
                         
                     </div>
@@ -80,6 +96,9 @@
                                 <mat-label>Valor dato 2</mat-label>
                                 <input class="letrasBlancas" matInput formControlName="valorDato2">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.dato2.value && !formHE.controls.valorDato2.value">Debe completar este campo.</p>
+                            </div>
                         </div>
                         
                     </div>
@@ -98,6 +117,9 @@
                                 <mat-label>Valor dato 3</mat-label>
                                 <input class="letrasBlancas" matInput formControlName="valorDato3">
                             </mat-form-field>
+                            <div class="invalid">
+                                <p *ngIf="formHE.controls.dato3.value && !formHE.controls.valorDato3.value">Debe completar este campo.</p>
+                            </div>
                         </div>
                         
                     </div>
