@@ -60,7 +60,7 @@ export class MiPerfilComponent implements OnInit {
     this.auth.obtenerUsuarioLogueado().subscribe(
       async usuarioLogueado =>{
         this.dataUsuario = await this.userServ.devolverDataUsuarioDB(usuarioLogueado?.uid);
-        //console.log(this.dataUsuario?.especialidad);
+        //console.log(typeof this.dataUsuario.historiaClinica.datosDinamicos);
         // if(this.dataUsuario.rol == 'medico'){
         //   this.especialidades = this.dataUsuario.especialidad;          
         // }

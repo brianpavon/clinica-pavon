@@ -7,13 +7,15 @@ import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MaterialModule } from '../material/material.module';
 import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-especialista.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.component';
 
 
 @NgModule({
   declarations: [
     PerfilUsuarioComponent,
     MiPerfilComponent,
-    HorariosEspecialistaComponent
+    HorariosEspecialistaComponent,    
+    VerHistClinicaComponent
   ],
   imports: [
     CommonModule,

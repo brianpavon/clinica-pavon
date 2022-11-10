@@ -69,6 +69,9 @@
                                         <div class="row">
                                             <div class="col-sm-6">                                                
                                                 <h6 class="text-muted f-w-400">{{ dataUsuario.obraSocial }}</h6>
+                                            </div>
+                                            <div class="col-sm-6" *ngIf="dataUsuario && dataUsuario.rol == 'paciente' && dataUsuario.historiaClinica">                                                
+                                                <button data-toggle="modal" data-target="#modalVerHistClin" class="mr-1 botonGris" mat-flat-button >Historia Clínica</button>
                                             </div>                                            
                                         </div>
 
@@ -82,3 +85,5 @@
         </div>
     </div>
 </div>
+
+<app-ver-hist-clinica *ngIf="dataUsuario && dataUsuario.rol == 'paciente' && dataUsuario.historiaClinica" [histClin]="dataUsuario.historiaClinica"></app-ver-hist-clinica>
