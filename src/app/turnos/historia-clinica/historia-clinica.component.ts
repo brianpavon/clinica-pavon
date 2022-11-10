@@ -46,7 +46,12 @@ export class HistoriaClinicaComponent implements OnInit {
       [this.formHE.get('dato2')?.value] : this.formHE.get('valorDato2')?.value,
       [this.formHE.get('dato3')?.value] : this.formHE.get('valorDato3')?.value,
     }
-    console.log(datoDinamico);
+    //console.log(datoDinamico);
+    for (const key in datoDinamico) {
+      if (!key) {
+        delete datoDinamico[key];
+      }
+    }
       
     
     this.nuevaHistClinica = {

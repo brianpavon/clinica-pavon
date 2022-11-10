@@ -7,6 +7,7 @@ import { PanelPrincipalComponent } from './panel-principal/panel-principal.compo
 import { MaterialModule } from '../material/material.module';
 import { EspecialistasComponent } from './especialistas/especialistas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { PerfilUsuarioModule } from '../perfil-usuario/perfil-usuario.module';
 
 
 @NgModule({
@@ -14,12 +15,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     DashboardComponent,
     PanelPrincipalComponent,
     EspecialistasComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PerfilUsuarioModule
   ]
 })
 export class DashboardModule { }

@@ -23,6 +23,9 @@ import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.com
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+  ],
+  exports:[
+    VerHistClinicaComponent
   ]
 })
 export class PerfilUsuarioModule { }
