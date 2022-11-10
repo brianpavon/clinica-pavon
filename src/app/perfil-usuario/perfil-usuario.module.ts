@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-especialista.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.component';
+import { PacientesAtendidosComponent } from './pacientes-atendidos/pacientes-atendidos.component';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.com
     PerfilUsuarioComponent,
     MiPerfilComponent,
     HorariosEspecialistaComponent,    
-    VerHistClinicaComponent
+    VerHistClinicaComponent, PacientesAtendidosComponent
   ],
   imports: [
     CommonModule,
