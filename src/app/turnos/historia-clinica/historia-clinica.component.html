@@ -1,0 +1,115 @@
+<!-- modal historia clinica -->
+<div class="modal fade" id="modalHE" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">        
+        <div class="modal-content letrasBlancas fondo-modal">
+            
+            <div class="modal-header">
+                <h3 style="font-size: large;" class="modal-title" id="exampleModalLabel">Historia Clínica de {{turnoElegido.paciente.nombre}} {{turnoElegido.paciente.apellido}}</h3>               
+            </div>
+
+            <form [formGroup]="formHE" (ngSubmit)="guardarHe()">
+                <div class="modal-body">
+                    <h3 class="text-center">Complete los datos del paciente</h3>
+
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-md-6 text-center">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Altura</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="altura">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Peso</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="peso">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-md-6 text-center">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Temperatura</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="temp">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Presión</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="presion">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <hr class="hrBlanco">
+                    
+                    <!-- DATOS DINAMICOS -->
+                    <h3 class="text-center">Cargue datos adicionales que considere necesarios. Por ej: Caries: 4</h3>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6 text-right">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Dato 1</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="dato1">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 text-left">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Valor dato 1</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="valorDato1">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <hr class="hrBlanco">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-md-6 text-right">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Dato2</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="dato2">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 text-left">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Valor dato 2</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="valorDato2">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <hr class="hrBlanco">
+                    <div class="row d-flex justify-content-center">
+                        
+                        <div class="col-md-6 text-right">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Dato 3</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="dato3">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 text-left">
+                            <mat-form-field appearance="fill" class="text-center letrasBlancas">
+                                <mat-label>Valor dato 3</mat-label>
+                                <input class="letrasBlancas" matInput formControlName="valorDato3">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+    
+                <div class="modal-footer">                    
+                    <button type="submit" [disabled]="formHE.invalid" class="ml-2" type="submit" mat-flat-button color="accent">Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

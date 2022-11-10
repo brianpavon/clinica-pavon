@@ -11,12 +11,13 @@ import Swal from 'sweetalert2';
 export class ModalComentariosComponent implements OnInit {
 
   @Input() turnoElegido : any;
-  formComentario !: FormGroup;
+  formComentario !: FormGroup;  
 
   constructor(private turnServ : TurnosService,private fb : FormBuilder) {
     this.formComentario = this.fb.group({
       "comentario" :['',[Validators.required,Validators.minLength(10)]]
     })
+    
   }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class ModalComentariosComponent implements OnInit {
       }
     }
     //console.log(data);
-    this.turnServ.actualizarTurno(data,this.turnoElegido.turno.id);
+    //this.turnServ.actualizarTurno(data,this.turnoElegido.turno.id);
     Swal.fire({
       title:`Se actualizó el estado del turno y el comentario fue guardado.`,
       icon:'success',      
@@ -43,6 +44,10 @@ export class ModalComentariosComponent implements OnInit {
     setTimeout(() => {
       //@ts-ignore
       $('#modalComentarios').modal('hide');      
+      if(this.turnoElegido.estado == 'realizado'){
+        //@ts-ignore
+        $('#modalHE').modal('show')
+      }
     }, 1000);
     
     this.resetearForm()
@@ -51,6 +56,10 @@ export class ModalComentariosComponent implements OnInit {
 
   resetearForm(){
     this.formComentario.reset();
+  }
+
+  guardarHe(){
+
   }
 
 }

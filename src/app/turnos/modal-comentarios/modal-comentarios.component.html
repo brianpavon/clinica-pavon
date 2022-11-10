@@ -28,9 +28,15 @@
                 </div>
                 <div class="modal-footer">
                     <button class="mr-2 botonGris"  mat-flat-button data-dismiss="modal" (click)="resetearForm()">Volver</button>
-                    <button type="submit" mat-flat-button color="primary" [disabled]="formComentario.invalid">Guardar</button>
+                    
+                    <button *ngIf="turnoElegido.estado != 'realizado'" type="submit" mat-flat-button color="primary" [disabled]="formComentario.invalid">Guardar</button>
+                    
+                    <button *ngIf="turnoElegido.estado == 'realizado'" type="submit" mat-flat-button color="primary" [disabled]="formComentario.invalid">Guardar</button>
                 </div>
             </form>
         </div>      
     </div>
 </div>
+
+<app-historia-clinica [turnoElegido]="turnoElegido.turno"></app-historia-clinica>
+
