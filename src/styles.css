@@ -27,3 +27,8 @@ button:hover {
     border: 1px solid !important; 
     border-radius:10px !important;
 }
+
+.tablasTurnos{
+    height: 50vh !important;
+    overflow-y: scroll !important;
+}
