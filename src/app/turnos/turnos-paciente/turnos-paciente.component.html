@@ -4,11 +4,13 @@
             <span>Mis Turnos</span>
         </mat-toolbar>
         <div class="row justify-content-center">
-            
             <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
                 <mat-label>Filtre los Resultados</mat-label>
                 <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input>
             </mat-form-field>
+        </div>
+        <div class="row justify-content-center tablasTurnos">
+            
 
             <table mat-table [dataSource]="turnosPaciente" class="mat-elevation-z8">
 
@@ -58,9 +60,6 @@
                         <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="primary" *ngIf="element.estado == 'realizado' && !element.calificacion" (click)="cargarComentarios(element,'calificar')">Calificar</button>
                     </td>
                 </ng-container>
-
-                
-
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>

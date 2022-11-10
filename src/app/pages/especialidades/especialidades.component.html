@@ -5,6 +5,7 @@
     <li *ngFor="let especialidad of listaEspecialidades" class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
             <mat-checkbox color="accent" class="example-margin" value="{{ especialidad.descripcion }}" (change)="pasarEspecialidad($event)">{{ especialidad.descripcion }}</mat-checkbox>
+            <img [src]="especialidad.urlFoto?.startsWith('https') ? especialidad.urlFoto : '/assets/images/gif-buscar.gif'" alt="imagen especialidad">
         </div>
     </li>
     <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -37,10 +38,14 @@
                             <input matInput formControlName="descripcion">
                         </mat-form-field>
                     </div>
+                    <div class="col-md-6">
+                        <button type="button"  mat-flat-button color="accent" (click)="fotoEspec.click()">Suba Imagen de la Especialidad</button>
+                        <input name="fotoEspec" #fotoEspec hidden type="file" accept=".jpg, .png, .jpeg, .svg" (change)="cargarImagen($event)">
+                    </div>
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="button" mat-flat-button color="warn" data-dismiss="modal">Cancelar</button>
+                <button type="button" mat-flat-button color="warn" data-dismiss="modal" class="mr-2" (click)="resetear()">Cancelar</button>
                 <button [disabled]="formEspecialidad.invalid" type="submit" mat-flat-button color="accent">Guardar</button>
             </div>
         </form>

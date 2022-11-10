@@ -4,11 +4,13 @@
             <span>Mis Turnos</span>
         </mat-toolbar>
         <div class="row justify-content-center">
-            
             <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
                 <mat-label>Filtre los Resultados</mat-label>
                 <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input>
             </mat-form-field>
+        </div>
+        <div class="row justify-content-center tablasTurnos">
+            
 
             <table mat-table [dataSource]="turnosMedico" class="mat-elevation-z8">
 
