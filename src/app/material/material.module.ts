@@ -13,6 +13,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSlideToggleModule,
     MatDialogModule,
     MatRadioModule,
+    MatTableExporterModule,
   ],
   exports:[
     MatSliderModule,
@@ -47,6 +49,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSlideToggleModule,
     MatDialogModule,
     MatRadioModule,
+    MatTableExporterModule,
   ]
 })
 export class MaterialModule { }
