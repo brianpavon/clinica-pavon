@@ -50,7 +50,7 @@ export class EspecialidadesComponent implements OnInit {
 
   async nuevaEspecialidad(){
     this.especialidadNueva = this.formEspecialidad.value;
-    this.especialidadNueva.urlFoto = this.urlImgEsp;
+    this.especialidadNueva.urlFoto = this.urlImgEsp ? this.urlImgEsp : 'medicine.png';
     
     //console.log(this.especialidadNueva);
     this.servEsp.guardarEspecialidad(this.especialidadNueva);
