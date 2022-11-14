@@ -9,5 +9,9 @@
 
 table {
     width: 100%;
-  }
-  
+}
+
+.card-usuario{
+    background-color: #424242;
+    border-radius: 10px;
+}

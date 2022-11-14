@@ -36,3 +36,14 @@ button:hover {
 .hrBlanco{
     border-top: 1px solid whitesmoke;
 }
+
+.btn-pac{
+    width: 14vh;
+    height: 14vh;
+    font-size: large;    
+}
+
+.img-pac{
+    max-width: 95%;
+    max-height: 95%;
+}

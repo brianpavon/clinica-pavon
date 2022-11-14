@@ -1,3 +1,5 @@
+import { HistoriaClinica } from "./historia-clinica";
+
 export interface Usuarios {
     id:number;
     rol:string;
@@ -12,5 +14,6 @@ export interface Usuarios {
     fotoPerfil:string;
     fotoDos?:string;
     estado:boolean;
-    habilitado?:boolean
+    habilitado?:boolean;
+    historiaClinica ?:HistoriaClinica
 }

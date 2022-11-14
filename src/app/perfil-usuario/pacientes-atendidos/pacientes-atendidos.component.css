@@ -6,14 +6,3 @@
     width: 100vw;
     background-color: rgb(124 79 108);
 }
-
-.btn-pac{
-    width: 14vh;
-    height: 14vh;
-    font-size: large;    
-}
-
-.img-pac{
-    max-width: 95%;
-    max-height: 95%;
-}

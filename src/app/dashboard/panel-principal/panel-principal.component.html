@@ -7,14 +7,14 @@
             <div class="col-md-4 scale-in-center">
                 <mat-card class="example-card">
                     <mat-card-title-group>
-                        <mat-card-title>Pacientes</mat-card-title>
+                        <mat-card-title>Usuarios</mat-card-title>
                         <mat-card-subtitle>
                             <a routerLink="/panel-control/usuarios" mat-stroked-button color="accent">Ver</a>
                         </mat-card-subtitle>
                         <img mat-card-sm-image src="/assets/images/pacientes.png" >
                     </mat-card-title-group>
                     <mat-card-content>
-                        Acceda a la información de los pacientes.
+                        Acceda a la información de todos los usuarios.
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -53,13 +53,12 @@
             </div>
         </div>
         
-        <hr>
+        <hr class="hrBlanco">
         
         <!-- <h2 class="h3 mb-3 font-weight-normal text-center">Sección Turnos</h2> -->
         <mat-toolbar class="justify-content-center"color="primary">            
             <span >Sección Turnos</span>            
         </mat-toolbar>
-
         <div class="row mt-2 justify-content-center d-flex">
             <div class="col-md-4 scale-in-center">
                 <mat-card class="example-card">
@@ -90,5 +89,27 @@
                 </mat-card>
             </div>
         </div>
+
+        <hr class="hrBlanco">
+        <mat-toolbar class="justify-content-center mb-2">            
+            <span>Gráficos y Estadísticas</span>            
+        </mat-toolbar>
+        <div class="row mt-2 justify-content-center d-flex">
+            <div class="col-md-4 scale-in-center">
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                        <mat-card-title>Gráficos</mat-card-title>
+                        <mat-card-subtitle>
+                            <a mat-stroked-button color="accent">Entrar</a>
+                        </mat-card-subtitle>
+                        <img mat-card-sm-image src="/assets/images/graficos.png" >
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        Visualice las estadísticas de la clínica.
+                    </mat-card-content>
+                </mat-card>
+            </div>            
+        </div>
+
     </div>
 </div>

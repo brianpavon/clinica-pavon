@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 import { Usuarios } from 'src/app/interfaces/usuarios';
+import { ImagenService } from 'src/app/services/imagen.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -9,11 +10,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'apellido', 'dni', 'email','estado','acciones'];
-  todosLosPacientes :Usuarios[] = [];
+  displayedColumns: string[] = ['nombre', 'apellido', 'rol' ,'dni', 'email','estado'];
+  todosLosUsuarios :Usuarios[] = [];
   histClinPaciente !: HistoriaClinica;
 
-  constructor(private userServ:UsuariosService) { }
+  constructor(private userServ:UsuariosService,private imgServ : ImagenService) { }
 
   ngOnInit(): void {
     this.cargarPacientes();
@@ -22,8 +23,18 @@ export class UsuariosComponent implements OnInit {
   cargarPacientes(){
     this.userServ.traerUsuarios().subscribe(
       usuarios=>{
-        this.todosLosPacientes = usuarios;
-        this.todosLosPacientes = this.todosLosPacientes.filter(paciente => paciente.rol === "paciente");        
+        this.todosLosUsuarios = usuarios;
+        this.todosLosUsuarios.forEach(
+          usuario=>{
+            this.imgServ.descargarImagen(usuario.fotoPerfil).subscribe(
+              url=>{
+                usuario.fotoPerfil = url;
+              }
+            )
+          }
+        )
+        //console.log(this.todosLosUsuarios);
+        
       }
     );
   }
@@ -31,5 +42,10 @@ export class UsuariosComponent implements OnInit {
 
   verHistClin(histClin:HistoriaClinica){
     this.histClinPaciente = histClin;
+  }
+
+  bajarInfoAtencion(paciente:Usuarios){
+    console.log(paciente);
+    
   }
 }
