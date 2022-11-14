@@ -33,6 +33,9 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     MaterialModule,
     ReactiveFormsModule,
     FormsModule
+  ],
+  exports:[
+    ModalVerComentarioComponent
   ]
 })
 export class TurnosModule { }

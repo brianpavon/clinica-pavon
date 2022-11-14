@@ -9,6 +9,7 @@ import { HorariosEspecialistaComponent } from './horarios-especialista/horarios-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.component';
 import { PacientesAtendidosComponent } from './pacientes-atendidos/pacientes-atendidos.component';
+import { TurnosModule } from '../turnos/turnos.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PacientesAtendidosComponent } from './pacientes-atendidos/pacientes-ate
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    TurnosModule
   ],
   exports:[
     VerHistClinicaComponent

@@ -1,5 +1,57 @@
-<div class="body">
-    <div class="contain">
-        <p>pacientes-atendidos works!</p>
+<div class="body">    
+    
+    <div class="container-fluid">
+        <mat-toolbar class="justify-content-center mt-2 mb-2">
+            <span>Pacientes Atendidos</span>
+        </mat-toolbar>
+        <div class="row d-flex justify-content-around">
+            
+            <div class="col-md-4">
+                
+                <div class="row">
+                    <div *ngFor="let paciente of pacientesAtendidos" class="text-center letrasBlancas mr-2">
+                        <button mat-raised-button class="m-2 btn-pac rounded-circle">
+                            <img [src]="paciente.fotoPerfil.startsWith('https') ? paciente.fotoPerfil : '/assets/images/gif-buscar.gif'" alt="img-perfil-paciente" class="img-pac rounded-circle" (click)="verTurnosPaciente(paciente.id)">                
+                        </button>
+                        <p style="font-size: large;">{{ paciente.nombre }} {{ paciente.apellido }}</p>                
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6" style="border-left: 2px solid whitesmoke;" *ngIf="detalleTurnosPaciente.length > 0">
+
+                <div class="tablasTurnos">
+
+                    <table mat-table [dataSource]="detalleTurnosPaciente" class="mat-elevation-z8 w-100">
+
+                        <ng-container matColumnDef="especialidad">
+                            <th mat-header-cell *matHeaderCellDef>Especialidad</th>
+                            <td mat-cell *matCellDef="let element">{{ element.especialidad | titlecase }}</td>
+                        </ng-container>
+              
+                        <ng-container matColumnDef="fecha">
+                            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                            <td mat-cell *matCellDef="let element">{{ element.fecha }} {{ element.horario | titlecase }}</td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">                                
+                                <!-- btn ver reseña -->
+                                <button data-toggle="modal" data-target="#modalVerComent" class="mr-1 botonGris" mat-flat-button (click)="verResenia(element)">Reseña</button>
+
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </div>
+<app-modal-ver-comentario *ngIf="turnoResenia" [turnoParaVer]="turnoResenia"></app-modal-ver-comentario>
