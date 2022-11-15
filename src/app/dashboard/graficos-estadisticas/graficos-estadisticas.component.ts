@@ -18,6 +18,7 @@ export class GraficosEstadisticasComponent implements OnInit {
   //por medico
   idsMedico : string[] =[];
   turnosPorMedico : any[] = [];
+  turnosFiltradosFecha : Turnos[] = [];
 
 
   constructor(private turnServ : TurnosService) { }
@@ -30,10 +31,10 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.turnServ.traerTurnos().subscribe(
       t=>{
         this.todosLosTurnos = t;
-        //console.log(this.todosLosTurnos);
+        console.log(this.todosLosTurnos);
         
         this.todosLosTurnos.forEach(turno=>{
-          console.log(turno.medico.apellido);
+          //console.log(turno.medico.apellido);
           
           //guardo especialidades
           if(!this.especialidades.includes(turno.especialidad)){
@@ -97,38 +98,46 @@ export class GraficosEstadisticasComponent implements OnInit {
   }
 
   totalTurnosPorMedico(){
-    // let hoy = new Date();
+    let hoy = new Date();
 
-    // let fechaFutura = new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate() + 14);
-    
-    // //let turnosFecha = this.todosLosTurnos.filter(t=> Date.parse(t.fecha) > hoy && Date.parse(t.fecha) < fechaFutura )
-    // this.todosLosTurnos.forEach(
-    //   t=>{
-    //     console.log(Date.parse(t.fecha));
+    let fechaAnterior = new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate() - 14);
+    this.todosLosTurnos.forEach(
+      t=>{
+        //console.log(this.formatearFecha(t.fecha));
+        //console.log(t.fecha);
         
-    //   }
-    // )
-    //console.log(turnosFecha);
-    
+        let fechaTurno = this.formatearFecha(t.fecha);
+        if(fechaTurno < hoy && fechaTurno > fechaAnterior){
+          this.turnosFiltradosFecha.push(t);
+        }
+      }
+    )
     for (let i = 0; i < this.idsMedico.length; i++) {
       let contador = 0;
       let medico = {
         "nombre" : this.idsMedico[i],
         "cantidad":contador
       }
-      for (let j = 0; j < this.todosLosTurnos.length; j++) {
-        if(this.todosLosTurnos[j].medico.id == this.idsMedico[i]){
+      for (let j = 0; j < this.turnosFiltradosFecha.length; j++) {
+        if(this.turnosFiltradosFecha[j].medico.id == this.idsMedico[i]){
           if(contador == 0){
-            medico.nombre = `${this.todosLosTurnos[j].medico.nombre} ${this.todosLosTurnos[j].medico.apellido}`
+            medico.nombre = `${this.turnosFiltradosFecha[j].medico.nombre} ${this.turnosFiltradosFecha[j].medico.apellido}`
           }
           contador++
         }
       }
       medico.cantidad = contador;
-      this.turnosPorMedico.push(medico);
-      
+      this.turnosPorMedico.push(medico);      
     }
     console.log(this.turnosPorMedico);
+  }
+
+  formatearFecha(fecha :string){
+    let anio = fecha.split('/')[2]
+    let mes = fecha.split('/')[1]
+    let dia = fecha.split('/')[0]
+    let fechaParseada = new Date(anio+'/'+mes+'/'+dia);
+    return fechaParseada;
   }
 
 }
