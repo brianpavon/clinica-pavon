@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HistoriaClinica } from '../interfaces/historia-clinica';
 import { Turnos } from '../interfaces/turnos';
 import { Usuarios } from '../interfaces/usuarios';
 
@@ -22,6 +23,8 @@ export class PdfServiceService {
   constructor() { }
 
   async descargarHistClinica(paciente : Usuarios){
+    let dataHistoria = this.crearHeader(paciente.historiaClinica);
+    //console.log(dataHistoria);
     
     this.TDocumentDefinitions = {
       content: [
@@ -47,11 +50,25 @@ export class PdfServiceService {
             // headers are automatically repeated if the table spans over multiple pages
             // you can declare how many rows should be treated as headers
             headerRows: 1,
-            widths: [ '*', 'auto', 100, '*' ],
+            widths: [ 'auto', 'auto', 'auto', 'auto' ],
     
             body: [  
               [ 'Altura', 'Peso', 'Presion', 'Temperatura' ],
               [  paciente.historiaClinica?.altura, paciente.historiaClinica?.peso, paciente.historiaClinica?.presion, paciente.historiaClinica?.temperatura ]
+            ]
+          }
+        },
+        {
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            // headers are automatically repeated if the table spans over multiple pages
+            // you can declare how many rows should be treated as headers
+            headerRows: 1,
+            widths: dataHistoria.widthDinamico,
+    
+            body: [  
+              dataHistoria.headerDinamico,
+              dataHistoria.valuesDinamico
             ]
           }
         },
@@ -192,6 +209,32 @@ export class PdfServiceService {
 
   inicialMayuscula(str:string) {
     return str[0].toUpperCase() + str.slice(1);
+  }
+
+  crearHeader(historiaClinica:HistoriaClinica | undefined){
+    
+    let arrayHeaderDinamico = [];
+    let arrayValuesDinamico = [];    
+    let arrayWidthDinamico = [];
+
+    for (const key in historiaClinica) {
+      if(key == 'datosDinamicos'){          
+        for (const clave in historiaClinica[key]){
+          arrayHeaderDinamico.push(this.inicialMayuscula(clave))
+          arrayValuesDinamico.push(historiaClinica[key][clave as keyof HistoriaClinica])
+        }          
+      }
+    }
+    
+    for (let i = 0; i < arrayHeaderDinamico.length; i++) {
+      arrayWidthDinamico.push('auto');
+      
+    }
+    return {      
+      headerDinamico:arrayHeaderDinamico,      
+      valuesDinamico:arrayValuesDinamico,      
+      widthDinamico: arrayWidthDinamico
+    };
   }
 
 

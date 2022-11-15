@@ -73,7 +73,7 @@
                                             <div class="col-md-8" *ngIf="dataUsuario && dataUsuario.rol == 'paciente' && dataUsuario.historiaClinica">
                                                 <div class="row d-flex justify-content-center">
                                                     <button data-toggle="modal" data-target="#modalVerHistClin" class="mr-1 botonGris" mat-flat-button >Historia Clínica</button>
-                                                    <a style="cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Descargar PDF" (click)="bajarHistClinica(dataUsuario)">
+                                                    <a class="btn-pdf" data-toggle="tooltip" data-placement="bottom" title="Descargar PDF" (click)="bajarHistClinica(dataUsuario)">
                                                         <img src="assets/images/pdf-icon.png" alt="descargarPdf">
                                                     </a>
                                                 </div>
