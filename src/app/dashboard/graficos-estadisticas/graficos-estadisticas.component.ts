@@ -19,7 +19,8 @@ export class GraficosEstadisticasComponent implements OnInit {
   idsMedico : string[] =[];
   turnosPorMedico : any[] = [];
   turnosFiltradosFecha : Turnos[] = [];
-
+  turnosFiltradosFechaFinalizados : Turnos[] = [];
+  turnosPorMedicoFinalizados : any[] = [];
 
   constructor(private turnServ : TurnosService) { }
 
@@ -109,9 +110,13 @@ export class GraficosEstadisticasComponent implements OnInit {
         let fechaTurno = this.formatearFecha(t.fecha);
         if(fechaTurno < hoy && fechaTurno > fechaAnterior){
           this.turnosFiltradosFecha.push(t);
+          if(t.estado == 'realizado'){
+            this.turnosFiltradosFechaFinalizados.push(t);
+          }
         }
       }
     )
+    //obtengo la cantidad de turnos por medico sin importar el estado
     for (let i = 0; i < this.idsMedico.length; i++) {
       let contador = 0;
       let medico = {
@@ -129,8 +134,31 @@ export class GraficosEstadisticasComponent implements OnInit {
       medico.cantidad = contador;
       this.turnosPorMedico.push(medico);      
     }
-    console.log(this.turnosPorMedico);
+
+    //obtengo la cantidad de turnos por medico finalizados
+    for (let i = 0; i < this.idsMedico.length; i++) {
+      let contador = 0;
+      let medico = {
+        "nombre" : '',
+        "cantidad":contador
+      }      
+      for (let j = 0; j < this.turnosFiltradosFechaFinalizados.length; j++) {
+        if(this.turnosFiltradosFechaFinalizados[j].medico.id == this.idsMedico[i]){
+          if(contador == 0){
+            medico.nombre = `${this.turnosFiltradosFechaFinalizados[j].medico.nombre} ${this.turnosFiltradosFechaFinalizados[j].medico.apellido}`
+          }
+          contador++
+        }
+      }
+      if(contador > 0){
+        medico.cantidad = contador;
+        this.turnosPorMedicoFinalizados.push(medico);
+      }
+    }
+    // console.log(this.turnosPorMedico);
+    // console.log(this.turnosPorMedicoFinalizados);
   }
+
 
   formatearFecha(fecha :string){
     let anio = fecha.split('/')[2]
@@ -139,5 +167,6 @@ export class GraficosEstadisticasComponent implements OnInit {
     let fechaParseada = new Date(anio+'/'+mes+'/'+dia);
     return fechaParseada;
   }
+
 
 }
