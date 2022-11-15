@@ -26,14 +26,19 @@ export class PdfServiceService {
     this.TDocumentDefinitions = {
       content: [
         {
+          text: 'Clínica La Online',
+          style: 'header'
+        },
+        {
           // you can also fit the image inside a rectangle
           image:await this.getBase64ImageFromURL(this.logoClinica) ,
-          fit: [100, 100]
+          fit: [100, 100],
+          style:'imagen'
         },
         {
           toc: {
             id: 'mainToc',
-            title: {text: `Historia Clínica: ${paciente.apellido} ${paciente.nombre}`, style: 'header'}
+            title: {text: `Historia Clínica: ${paciente.apellido} ${paciente.nombre}`, style: 'subheader'}
           }
         },
         {
@@ -52,14 +57,31 @@ export class PdfServiceService {
         },
         {
           text: 'Fecha de emision: ' + this.hoy + '/' + this.mesActual + '/' + this.anioActual,
-          style: 'header'
+          style: 'subheader'
         }
-      ]
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          // margin: [left, top, right, bottom]
+          margin: [0,0,0,20]
+        },
+        imagen:{
+          margin: [0,0,0,20]
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true,
+          margin: [0,20,0,20]
+        }
+      }
       
     }
 
     const pdf = pdfMake.createPdf(this.TDocumentDefinitions);
-    pdf.download();
+    pdf.download(`historiaClinica-${paciente.apellido}-${paciente.nombre}`);
   }
 
   async descargarTurnosPaciente(turnosPaciente : Turnos[]){
@@ -67,14 +89,19 @@ export class PdfServiceService {
     this.TDocumentDefinitions = {
       content: [
         {
+          text: 'Clínica La Online',
+          style: 'header'
+        },
+        {
           // you can also fit the image inside a rectangle
           image:await this.getBase64ImageFromURL(this.logoClinica) ,
-          fit: [100, 100]
+          fit: [100, 100],
+          style:'imagen'
         },
         {
           toc: {
             id: 'mainToc',
-            title: {text: `Detalle de turnos del paciente: ${turnosPaciente[0].paciente.apellido} ${turnosPaciente[0].paciente.nombre}`, style: 'header'}
+            title: {text: `Detalle de turnos del paciente: ${turnosPaciente[0].paciente.apellido} ${turnosPaciente[0].paciente.nombre}`, style: 'subheader'}
           }
         },
         {
@@ -93,16 +120,31 @@ export class PdfServiceService {
         },
         {
           text: 'Fecha de emision: ' + this.hoy + '/' + this.mesActual + '/' + this.anioActual,
-          style: 'header'
+          style: 'subheader'
         }
-      ]
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          // margin: [left, top, right, bottom]
+          margin: [0,0,0,20]
+        },
+        imagen:{
+          margin: [0,0,0,20]
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true,
+          margin: [0,20,0,20]
+        }
+      }
       
     }
 
     const pdf = pdfMake.createPdf(this.TDocumentDefinitions);
-    pdf.download();
-    
-
+    pdf.download(`turnos-${turnosPaciente[0].paciente.apellido}-${turnosPaciente[0].paciente.nombre}`);
   }
 
 
@@ -142,13 +184,13 @@ export class PdfServiceService {
         {text: `${t.especialidad}`},
         {text:t.fecha},
         {text:t.horario},
-        {text:this.capitalizeFirstLetter(t.estado)}
+        {text:this.inicialMayuscula(t.estado)}
       ])
     }
     return tableData;
   }
 
-  capitalizeFirstLetter(str:string) {
+  inicialMayuscula(str:string) {
     return str[0].toUpperCase() + str.slice(1);
   }
 

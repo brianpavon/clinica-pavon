@@ -57,12 +57,12 @@ export class LoginComponent implements OnInit {
             this.listaUsuarios.push(usuario);
           }
           //el paciente tiene 2 fotos, asi que tomo la primera
-          if(usuario.rol == 'paciente' && this.pacientes > 0){
+          if(usuario.rol == 'paciente' && this.pacientes > 0 && usuario.email !='sofiarodriguez95@hotmail.com'){
             //usuario.fotos = usuario.fotos.split(',')[0];
             this.listaUsuarios.push(usuario);
             this.pacientes--;
           }
-          if(usuario.rol == 'medico' && this.medicos>0 && usuario.email != 'rfrrdfd@dd.dd'){
+          if(usuario.rol == 'medico' && this.medicos>0 && usuario.email != 'micaweilenmann@gmail.com'){
             this.listaUsuarios.push(usuario);
             this.medicos--;
           }
