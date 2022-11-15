@@ -80,6 +80,14 @@
                                             </div>                                            
                                         </div>
 
+
+                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 text-center" *ngIf="dataUsuario && dataUsuario.rol == 'paciente' && medicosPaciente.length >0">Descargue las atenciones según especialista</h6>
+                                        <div class="row justify-content-center" *ngIf="dataUsuario && dataUsuario.rol == 'paciente' && medicosPaciente.length >0">                                            
+                                            <div class="example-button-row">                                                          
+                                                <button class="mr-2 ml-2 mt-1" *ngFor="let medico of medicosPaciente" mat-flat-button color="accent" (click)="descargarAtencionPorMedico(medico)">{{ medico.nombre }} {{ medico.apellido }}</button>            
+                                            </div>                                            
+                                        </div>
+
                                     </div>                                    
                                 </div>                                
                             </div>

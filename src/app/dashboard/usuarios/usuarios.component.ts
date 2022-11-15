@@ -62,7 +62,7 @@ export class UsuariosComponent implements OnInit {
     //this.pdfServ.descargarHistClinica(paciente);
     let turnosPaciente = this.todosLosTurnos.filter(t=>t.paciente.id == paciente.id)
     
-    console.log(turnosPaciente);
+    //console.log(turnosPaciente);
     this.pdfServ.descargarTurnosPaciente(turnosPaciente);
     
   }

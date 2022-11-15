@@ -6,7 +6,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DisponibilidadService } from 'src/app/services/disponibilidad.service';
 import { ImagenService } from 'src/app/services/imagen.service';
 import { PdfServiceService } from 'src/app/services/pdf-service.service';
+import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Turnos } from 'src/app/interfaces/turnos';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -23,8 +26,12 @@ export class MiPerfilComponent implements OnInit {
   especialidadesDelMedico : string[] = [];
   dispoFirestore : Disponibilidad[] = [];
   dispoCargadas : Disponibilidad[] = [];
+  pacienteLogueado : Usuarios | any;
+  turnosPaciente !: Turnos[];
+  idsMedicos : string[] = [];
+  medicosPaciente : Usuarios[] = [];
 
-  constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService,private dispServ : DisponibilidadService,private spinner: NgxSpinnerService,private pdfServ : PdfServiceService){ 
+  constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService,private dispServ : DisponibilidadService,private spinner: NgxSpinnerService,private pdfServ : PdfServiceService,private turnServ : TurnosService){ 
 
   }
 
@@ -32,6 +39,7 @@ export class MiPerfilComponent implements OnInit {
     this.spinner.show();
     this.cargaInfoUsuario();
     this.traerDisponibilidades();
+    this.traerMisMedicos();
   
     setTimeout(() => {
       
@@ -61,10 +69,7 @@ export class MiPerfilComponent implements OnInit {
     this.auth.obtenerUsuarioLogueado().subscribe(
       async usuarioLogueado =>{
         this.dataUsuario = await this.userServ.devolverDataUsuarioDB(usuarioLogueado?.uid);
-        //console.log(typeof this.dataUsuario.historiaClinica.datosDinamicos);
-        // if(this.dataUsuario.rol == 'medico'){
-        //   this.especialidades = this.dataUsuario.especialidad;          
-        // }
+        
         //obtengo la imagen de perfil
         this.imgServ.descargarImagen(this.dataUsuario.fotoPerfil).subscribe(
           url=>{
@@ -80,6 +85,38 @@ export class MiPerfilComponent implements OnInit {
         }
       }
     )
+  }
+
+  traerMisMedicos(){
+    this.auth.obtenerUsuarioLogueado().pipe(
+      mergeMap(async res1 => this.pacienteLogueado = await this.userServ.devolverDataUsuarioDB(res1?.uid))
+    ).subscribe(data =>{
+      this.turnServ.traerTurnos().subscribe(turnos => {
+        
+        //console.log(turnos);        
+        this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id && t.estado == 'realizado')
+        
+        //console.log(this.turnosMedico);
+        this.turnosPaciente.forEach(
+          tp=>{
+            if(!this.idsMedicos.includes(tp.medico.id)){
+              this.idsMedicos.push(tp.medico.id)
+            }
+          }
+        )        
+        
+        for (let j = 0; j < this.idsMedicos.length; j++) {
+          for (let i = 0; i < this.turnosPaciente.length; i++) {
+            if(this.turnosPaciente[i].medico.id == this.idsMedicos[j]){
+              
+              this.medicosPaciente.push(this.turnosPaciente[i].medico);              
+              break;
+            }
+          }
+        }
+
+      })
+    })
   }
 
   pasarDisp(esp:any){
@@ -111,6 +148,15 @@ export class MiPerfilComponent implements OnInit {
 
   bajarHistClinica(paciente:Usuarios){
     this.pdfServ.descargarHistClinica(paciente);
+  }
+
+  descargarAtencionPorMedico(medico:Usuarios){
+    //console.log(medico);
+    let turnosPaciente = this.turnosPaciente.filter(t=>t.medico.id == medico.id)
+    
+    //console.log(turnosPaciente);
+    this.pdfServ.descargarTurnosPaciente(turnosPaciente);
+    
   }
 
 
