@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { EspecialistasComponent } from './especialistas/especialistas.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PerfilUsuarioModule } from '../perfil-usuario/perfil-usuario.module';
+import { GraficosEstadisticasComponent } from './graficos-estadisticas/graficos-estadisticas.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { PerfilUsuarioModule } from '../perfil-usuario/perfil-usuario.module';
     PanelPrincipalComponent,
     EspecialistasComponent,
     UsuariosComponent,
+    GraficosEstadisticasComponent,
     
   ],
   imports: [
