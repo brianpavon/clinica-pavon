@@ -83,7 +83,7 @@ export class PacientesAtendidosComponent implements OnInit {
 
   verResenia(turno : Turnos){
     this.turnoResenia = turno;
-    this.turnoResenia.verResenia = true;
+    this.turnoResenia.verCalificacion = true;
   }
 
   verHistClin(histClin : HistoriaClinica){

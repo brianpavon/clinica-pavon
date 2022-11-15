@@ -106,9 +106,10 @@ export class TurnosMedicoComponent implements OnInit {
     this.turnoModal = {turno: turno,estado:estado}
   }
 
-  verReseniaTurno(turno:Turnos){
+  verReseniaTurno(turno:any){
     //console.log(turno);
     this.verTurno = turno;    
+    this.verTurno.verCalificacion = true;
   }
 
 }

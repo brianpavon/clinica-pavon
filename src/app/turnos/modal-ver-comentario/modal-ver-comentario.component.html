@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-            <div class="modal-body" *ngIf="!turnoParaVer.verResenia">
+            <div class="modal-body" *ngIf="!turnoParaVer.verCalificacion">
                 <h3 class="text-center">El estado del turno es:  <span style="color:red;font-size: large;">{{ turnoParaVer.estado | titlecase}}</span></h3>
                 
                 <div class="d-flex flex-column">                   
@@ -20,7 +20,7 @@
             
             </div>
 
-            <div class="modal-body"*ngIf="turnoParaVer.verResenia">
+            <div class="modal-body"*ngIf="turnoParaVer.verCalificacion">
                 <h3 class="text-center" *ngIf="turnoParaVer.calificacion">Comentarios del paciente</h3>
                 <h3 class="text-center" *ngIf="!turnoParaVer.calificacion">El Paciente aún no dejó una reseña por este turno</h3>
                 
