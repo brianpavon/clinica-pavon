@@ -9,6 +9,7 @@ import { TurnosService } from 'src/app/services/turnos.service';
 })
 export class GraficosEstadisticasComponent implements OnInit {
   todosLosTurnos : Turnos[] = [];
+  totalDeTurnos : number = 0;
   //por especialidad
   turnosPorEspecialidad : any[] = [];
   especialidades : string[] =[];
@@ -32,7 +33,9 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.turnServ.traerTurnos().subscribe(
       t=>{
         this.todosLosTurnos = t;
-        console.log(this.todosLosTurnos);
+        //console.log(this.todosLosTurnos);
+        this.totalDeTurnos = this.todosLosTurnos.length;
+        //console.log(this.totalDeTurnos);
         
         this.todosLosTurnos.forEach(turno=>{
           //console.log(turno.medico.apellido);
