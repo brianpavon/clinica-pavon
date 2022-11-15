@@ -42,7 +42,7 @@
                                 <button data-toggle="modal" data-target="#modalVerComent" class="mr-2 botonGris" mat-flat-button (click)="verResenia(element)">Reseña</button>
                                 
                                 <!-- btn historia clínica  *ngIf="element.historiaClinica"-->
-                                <button data-toggle="modal" data-target="#modalVerHistClin" mat-flat-button color="accent"  (click)="verHistClin(element.paciente)">Historia Clínica</button>
+                                <button *ngIf="element.historiaClinica" data-toggle="modal" data-target="#modalVerHistClin" mat-flat-button color="accent"  (click)="verHistClin(element.historiaClinica)">Historia Clínica</button>
                             </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

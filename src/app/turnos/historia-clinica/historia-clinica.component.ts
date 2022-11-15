@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 import { Turnos } from 'src/app/interfaces/turnos';
 import { HistClinService } from 'src/app/services/hist-clin.service';
+import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,7 @@ export class HistoriaClinicaComponent implements OnInit {
   formHE !: FormGroup;
   nuevaHistClinica !: HistoriaClinica;
 
-  constructor(private fb : FormBuilder,private hcServ : HistClinService,private userServ : UsuariosService) {
+  constructor(private fb : FormBuilder,private hcServ : HistClinService,private userServ : UsuariosService,private turnServ : TurnosService) {
     this.formHE = this.fb.group({
       "altura" : ['',[Validators.required]],
       "peso": ['',[Validators.required]],
@@ -66,6 +67,7 @@ export class HistoriaClinicaComponent implements OnInit {
       historiaClinica:this.nuevaHistClinica
     }
     //console.log(this.nuevaHistClinica);
+    this.turnServ.actualizarTurno(data,this.turnoElegido.id)
     this.userServ.actualizarUsuario(data,this.turnoElegido.paciente.id);
     this.formHE.reset();
     //@ts-ignore

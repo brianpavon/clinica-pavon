@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
+import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 import { Turnos } from 'src/app/interfaces/turnos';
 import { Usuarios } from 'src/app/interfaces/usuarios';
 import { AuthService } from 'src/app/services/auth.service';
@@ -85,11 +86,9 @@ export class PacientesAtendidosComponent implements OnInit {
     this.turnoResenia.verResenia = true;
   }
 
-  async verHistClin(paciente : Usuarios){
-    let pacAux = await this.userServ.devolverDataUsuarioDB(paciente.id.toString())
-    
-    this.historiaClinicaPac = pacAux?.historiaClinica;
-    
+  verHistClin(histClin : HistoriaClinica){
+    //console.log(histClin);
+    this.historiaClinicaPac = histClin;
   }
 
 }
