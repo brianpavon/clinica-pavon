@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
+import { Turnos } from 'src/app/interfaces/turnos';
 import { Usuarios } from 'src/app/interfaces/usuarios';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { PdfServiceService } from 'src/app/services/pdf-service.service';
+import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
-var pdfMake = require('pdfmake/build/pdfmake.js');
-var pdfFonts = require('pdfmake/build/vfs_fonts.js');
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-usuarios',
@@ -17,19 +17,13 @@ export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'apellido', 'rol' ,'dni', 'email','estado'];
   todosLosUsuarios :Usuarios[] = [];
   histClinPaciente !: HistoriaClinica;
+  todosLosTurnos : Turnos [] = []
 
-  fecha = new Date();
-  hoy:any = this.fecha.getDate();
-  mesActual:any = this.fecha.getMonth() + 1
-  añoActual = this.fecha.getFullYear()
-
-  TDocumentDefinitions: any;
-  
-
-  constructor(private userServ:UsuariosService,private imgServ : ImagenService) { }
+  constructor(private userServ:UsuariosService,private imgServ : ImagenService, private pdfServ : PdfServiceService, private turnServ : TurnosService) { }
 
   ngOnInit(): void {
     this.cargarPacientes();
+    this.traerTurnos();
   }
 
   cargarPacientes(){
@@ -51,54 +45,25 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
+  traerTurnos(){
+    this.turnServ.traerTurnos().subscribe(
+      t=>{
+        this.todosLosTurnos = t;
+      }
+    )
+  }
+
 
   verHistClin(histClin:HistoriaClinica){
     this.histClinPaciente = histClin;
   }
 
   bajarInfoAtencion(paciente:Usuarios){
-  
-    this.TDocumentDefinitions = {
-      content: [
-        {
-          // you can also fit the image inside a rectangle
-          image:'snow' ,
-          fit: [100, 100]
-        },
-        {
-          toc: {
-            id: 'mainToc',
-            title: {text: 'TITULO: HISTORIAL CLINICO', style: 'header'}
-          }
-        },
-        {
-          layout: 'lightHorizontalLines', // optional
-          table: {
-            // headers are automatically repeated if the table spans over multiple pages
-            // you can declare how many rows should be treated as headers
-            headerRows: 1,
-            widths: [ '*', 'auto', 100, '*' ],
+    //this.pdfServ.descargarHistClinica(paciente);
+    let turnosPaciente = this.todosLosTurnos.filter(t=>t.paciente.id == paciente.id)
     
-            body: [  
-              [ 'Altura', 'Peso', 'Presion', 'Temperatura' ],
-              [  paciente.historiaClinica?.altura, paciente.historiaClinica?.peso, paciente.historiaClinica?.presion, paciente.historiaClinica?.temperatura ]
-            ]
-          }
-        },
-        {
-          text: 'Fecha de emision: ' + this.hoy + '/' + this.mesActual + '/' + this.añoActual,
-          style: 'header'
-        }
-      ],
-      images: {
-        // in browser is supported loading images via url (https or http protocol) (minimal version: 0.1.67)
-        snow: 'https://picsum.photos/id/870/200/300?grayscale&blur=2',
-  
-      }
-    }
-
-    const pdf = pdfMake.createPdf(this.TDocumentDefinitions);
-    pdf.download();
+    console.log(turnosPaciente);
+    this.pdfServ.descargarTurnosPaciente(turnosPaciente);
     
   }
 }

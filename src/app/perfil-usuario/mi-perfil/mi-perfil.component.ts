@@ -5,6 +5,7 @@ import { Usuarios } from 'src/app/interfaces/usuarios';
 import { AuthService } from 'src/app/services/auth.service';
 import { DisponibilidadService } from 'src/app/services/disponibilidad.service';
 import { ImagenService } from 'src/app/services/imagen.service';
+import { PdfServiceService } from 'src/app/services/pdf-service.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class MiPerfilComponent implements OnInit {
   dispoFirestore : Disponibilidad[] = [];
   dispoCargadas : Disponibilidad[] = [];
 
-  constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService,private dispServ : DisponibilidadService,private spinner: NgxSpinnerService){ 
+  constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService,private dispServ : DisponibilidadService,private spinner: NgxSpinnerService,private pdfServ : PdfServiceService){ 
 
   }
 
@@ -106,6 +107,10 @@ export class MiPerfilComponent implements OnInit {
         
       }
     )
+  }
+
+  bajarHistClinica(paciente:Usuarios){
+    this.pdfServ.descargarHistClinica(paciente);
   }
 
 

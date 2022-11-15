@@ -1,4 +1,4 @@
-<div class="body">
+<div class="d-flex justify-content-center align-items-center h-100 w-100 mt-5" style="background-color: rgb(167, 217, 240);">
     <div class="container">
         <mat-toolbar class="justify-content-center mt-2 mb-2">
             <span>Usuarios</span>
@@ -18,7 +18,7 @@
 
         </div>
 
-        <div class="d-none">
+        <div class="row d-flex justify-content-center">
             <table mat-table matTableExporter [dataSource]="todosLosUsuarios" class="mat-elevation-z8" #exporter="matTableExporter">
     
                 <ng-container matColumnDef="nombre">
