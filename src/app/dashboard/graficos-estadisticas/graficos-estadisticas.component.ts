@@ -32,6 +32,10 @@ export class GraficosEstadisticasComponent implements OnInit {
   chartGraficoFecha : any;
   chartGraficoMedico : any;
   chartGraficoMedicoFinalizado : any;
+  
+  hoy = new Date();
+
+  fechaAnterior = new Date(this.hoy.getFullYear(),this.hoy.getMonth(),this.hoy.getDate() - 14);
 
   //graficos
   canvas : any;
@@ -127,16 +131,16 @@ export class GraficosEstadisticasComponent implements OnInit {
   }
 
   totalTurnosPorMedico(){
-    let hoy = new Date();
+    // let hoy = new Date();
 
-    let fechaAnterior = new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate() - 14);
+    // let fechaAnterior = new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate() - 14);
     this.todosLosTurnos.forEach(
       t=>{
         //console.log(this.formatearFecha(t.fecha));
         //console.log(t.fecha);
         
         let fechaTurno = this.formatearFecha(t.fecha);
-        if(fechaTurno < hoy && fechaTurno > fechaAnterior){
+        if(fechaTurno < this.hoy && fechaTurno > this.fechaAnterior){
           this.turnosFiltradosFecha.push(t);
           if(t.estado == 'realizado'){
             this.turnosFiltradosFechaFinalizados.push(t);

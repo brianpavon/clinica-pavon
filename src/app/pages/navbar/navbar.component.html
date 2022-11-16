@@ -35,8 +35,8 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
       <div class="ml-5">
-        <a class="navbar-brand" title="Ir a Mi Perfil" routerLink="/mi-perfil" *ngIf="rol">{{ usuarioLogueado }}</a>
-        <a style="color: red;" class="navbar-brand" routerLink="" *ngIf="rol" (click)="desloguearse()">Salir</a>
+        <a class="navbar-brand" title="Ir a Mi Perfil" routerLink="/mi-perfil" *ngIf="usuarioDB">{{ usuarioDB.nombre }} {{ usuarioDB.apellido }}</a>
+        <a style="color: red;" class="navbar-brand" routerLink="" *ngIf="usuarioDB" (click)="desloguearse()">Salir</a>
       </div>
       
     </div>

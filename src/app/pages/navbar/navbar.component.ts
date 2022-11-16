@@ -10,38 +10,21 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  rol : string = "";  
-  usuarioLogueado : any;
+  rol : string = "";
   usuarioDB : any;
-  constructor(private auth:AngularFireAuth,private authServ:AuthService, private routes:Router, private userService : UsuariosService) { 
-    this.auth.authState.subscribe(
-      async user=>{
-        if(!user) return;
-        if(user?.email == 'admin@mail.com'){
-          this.usuarioDB = await this.userService.devolverDataUsuarioDB("S2lCsK8okfYeSw9L7uAKOOhnVyk2");
-          this.usuarioLogueado = `${this.usuarioDB.nombre}  ${this.usuarioDB.apellido}`;
-          this.rol = 'admin';          
-        }
-        else if (user && user?.emailVerified){
-          this.usuarioDB = await this.userService.devolverDataUsuarioDB(user?.uid);
-          //this.usuarioLogueado = user.email;
-          this.usuarioLogueado = `${this.usuarioDB.nombre}  ${this.usuarioDB.apellido}`;
-          //console.log(this.usuarioDB);
-          
-          this.rol = this.usuarioDB?.rol;          
-        }
-        
-      }
-    )
-
+  constructor(private authServ:AuthService, private routes:Router, private userService : UsuariosService) {     
   }
 
   ngOnInit(): void {
+    this.authServ.obtenerUsuarioLogueado().subscribe(async user=>{
+      
+        this.usuarioDB = await this.userService.devolverDataUsuarioDB(user?.uid);
+        this.rol = this.usuarioDB?.rol;
+    })
   }
 
   desloguearse(){
-    this.authServ.logout();    
-    this.usuarioLogueado = '';
+    this.authServ.logout();
     this.usuarioDB = '';
     this.rol = '';    
   }

@@ -59,6 +59,10 @@ export class PdfServiceService {
           }
         },
         {
+          text: 'Datos Dinámicos',
+          style: 'subheader'
+        },
+        {
           layout: 'lightHorizontalLines', // optional
           table: {
             // headers are automatically repeated if the table spans over multiple pages
@@ -330,8 +334,12 @@ export class PdfServiceService {
     for (const key in historiaClinica) {
       if(key == 'datosDinamicos'){          
         for (const clave in historiaClinica[key]){
-          arrayHeaderDinamico.push(this.inicialMayuscula(clave))
-          arrayValuesDinamico.push(historiaClinica[key][clave as keyof HistoriaClinica])
+          
+          if(clave != 'null'){
+            arrayHeaderDinamico.push(this.inicialMayuscula(clave))
+            arrayValuesDinamico.push(historiaClinica[key][clave as keyof HistoriaClinica])
+          }
+          
         }          
       }
     }

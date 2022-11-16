@@ -71,7 +71,10 @@
             </table>
         </div>
         <div class="row d-flex justify-content-center mt-2 mb-5">            
-            <button mat-flat-button color="primary" (click)="exporter.exportTable('xls',{fileName:'usuarios'})">Descargar Excel</button>
+            <button class="pr-0" mat-flat-button color="accent" (click)="exporter.exportTable('xls',{fileName:'usuarios'})">
+                Descargar Excel                
+                <img src="assets/images/xls-icon.png" alt="descargarExcel">
+            </button>
         </div>
         
         <div class="row justify-content-center mt-2 mb-5">

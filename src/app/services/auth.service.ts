@@ -16,14 +16,14 @@ export class AuthService {
   usuarioDB : any
   nuevoLog !: Logs;
   constructor(private auth:AngularFireAuth,private router:Router,private userService : UsuariosService,private logServ : LogService) { 
-    auth.authState.subscribe(user=>{
-      //console.log(user);
-    });
+    // auth.authState.subscribe(user=>{
+    //   //console.log(user);
+    // });
     this.toast= Swal.mixin({
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -41,15 +41,15 @@ export class AuthService {
         //console.log(this.nuevoLog);
         this.nuevoLog = {usuario:mail,fecha:fecha};
         //console.log(this.nuevoLog);
-        
-        this.logServ.guardarLog(this.nuevoLog);
+       
         
         if(e.user?.email == 'admin@mail.com' ){
+          this.logServ.guardarLog(this.nuevoLog);
           this.router.navigate(['/panel-control']);
           setTimeout(() => {
             this.loginExitoso('Bienvenido nuevamente!');        
           }, 2000);
-        }else if(e.user?.emailVerified && e.user?.email != 'admin@mail.com' ){
+        }else if(e.user?.emailVerified){
           //console.log(e.user.uid);
                   
           this.usuarioDB = await this.userService.devolverDataUsuarioDB(e.user.uid);
@@ -59,9 +59,11 @@ export class AuthService {
                 if(this.usuarioDB.habilitado){
                   this.router.navigate(['/home']);
                   setTimeout(() => {
+                    this.logServ.guardarLog(this.nuevoLog);
                     this.loginExitoso('Bienvenido nuevamente!');        
                   }, 2000);
                 }else{
+                  this.logout();
                   this.medicoNoActivo();
                 }              
               break;
@@ -69,6 +71,7 @@ export class AuthService {
             case 'paciente':
               this.router.navigate(['/home']);
               setTimeout(() => {
+                this.logServ.guardarLog(this.nuevoLog);
                 this.loginExitoso('Bienvenido nuevamente!');        
               }, 2000);
               break;
@@ -76,6 +79,7 @@ export class AuthService {
             case 'admin':
               this.router.navigate(['/panel-control']);
               setTimeout(() => {
+                this.logServ.guardarLog(this.nuevoLog);
                 this.loginExitoso('Bienvenido nuevamente!');        
               }, 2000);
               break;
@@ -84,7 +88,8 @@ export class AuthService {
               break;
           }
 
-        }else{
+        }else if(e.user?.emailVerified !== true){
+          this.logout();          
           this.enviarMailParaVerificar();
           this.cuentaNoVerificada();
         }

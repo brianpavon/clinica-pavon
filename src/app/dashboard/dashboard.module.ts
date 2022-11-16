@@ -9,6 +9,7 @@ import { EspecialistasComponent } from './especialistas/especialistas.component'
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PerfilUsuarioModule } from '../perfil-usuario/perfil-usuario.module';
 import { GraficosEstadisticasComponent } from './graficos-estadisticas/graficos-estadisticas.component';
+import { LogLoginComponent } from './log-login/log-login.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { GraficosEstadisticasComponent } from './graficos-estadisticas/graficos-
     EspecialistasComponent,
     UsuariosComponent,
     GraficosEstadisticasComponent,
+    LogLoginComponent,
     
   ],
   imports: [
