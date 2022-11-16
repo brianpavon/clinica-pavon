@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Turnos } from 'src/app/interfaces/turnos';
 import { TurnosService } from 'src/app/services/turnos.service';
+import { Chart, registerables } from 'chart.js/auto';
+
+Chart.register(...registerables)
 
 @Component({
   selector: 'app-graficos-estadisticas',
@@ -8,6 +11,7 @@ import { TurnosService } from 'src/app/services/turnos.service';
   styleUrls: ['./graficos-estadisticas.component.css']
 })
 export class GraficosEstadisticasComponent implements OnInit {
+  
   todosLosTurnos : Turnos[] = [];
   totalDeTurnos : number = 0;
   //por especialidad
@@ -23,13 +27,23 @@ export class GraficosEstadisticasComponent implements OnInit {
   turnosFiltradosFechaFinalizados : Turnos[] = [];
   turnosPorMedicoFinalizados : any[] = [];
 
+  //graficos
+  canvas : any;
+  ctx : any;
+  @ViewChild('graficoPorEspecialidad') graficoPorEspecialidad !: ElementRef;
+  @ViewChild('graficoPorFecha') graficoPorFecha !: ElementRef;
+  @ViewChild('graficoPorMedico') graficoPorMedico !: ElementRef;
+  @ViewChild('graficoPorMedicoFinalizado') graficoPorMedicoFinalizado !: ElementRef;
+
   constructor(private turnServ : TurnosService) { }
 
   ngOnInit(): void {
     this.traerTurnos();
+    
   }
 
   traerTurnos(){
+    
     this.turnServ.traerTurnos().subscribe(
       t=>{
         this.todosLosTurnos = t;
@@ -55,12 +69,17 @@ export class GraficosEstadisticasComponent implements OnInit {
         })
 
         this.totalTurnosPorEspecialidad()
+        this.graficoPorEspecialidades();
+
         this.totalTurnosPorFecha();
-        this.totalTurnosPorMedico()
-        
-        
+        this.graficoPorFechas();
+
+        this.totalTurnosPorMedico();
+        this.graficoParaMedicos();
+        this.graficoParaMedicosTurnosFinalizados();
       }
     )
+  
   }
 
   totalTurnosPorEspecialidad(){
@@ -171,5 +190,185 @@ export class GraficosEstadisticasComponent implements OnInit {
     return fechaParseada;
   }
 
+  getRandomRgb() {
+    let num = Math.round(0xffffff * Math.random());
+    let r = num >> 16;
+    let g = num >> 8 & 255;
+    let b = num & 255;
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  }
+
+  crearKeyValueTurnoEspecialidad(){
+    //console.log(this.getRandomRgb());
+    
+    let espec : string[] = [];
+    let valores : string[] = [];
+    let colores: string[] = [];
+
+    this.turnosPorEspecialidad.forEach(element => {
+      espec.push(element.especialidad);
+      valores.push(element.cantidad)
+    });
+    for (let i = 0; i < this.turnosPorEspecialidad.length; i++) {
+      colores.push(this.getRandomRgb())
+    }
+    return {espec,valores,colores};
+  }
+
+  crearKeyValueTurnosPorFecha(){
+    let fechas : string[] = [];
+    let valores : string[] = [];
+    let colores: string[] = [];
+
+    this.turnosPorFechas.forEach(element => {
+      fechas.push(element.fecha);
+      valores.push(element.cantidad)
+    });
+    for (let i = 0; i < this.turnosPorFechas.length; i++) {
+      colores.push(this.getRandomRgb())
+    }
+    return {fechas,valores,colores};
+  }
+
+  crearKeyValueTurnosPorMedico(){
+    let nombres : string[] = [];
+    let valores : string[] = [];       
+    let colores : string[] = [];       
+
+    this.turnosPorMedico.forEach(element => {
+      nombres.push(element.nombre);
+      valores.push(element.cantidad)
+    });
+    for (let i = 0; i < this.turnosPorMedico.length; i++) {
+      colores.push(this.getRandomRgb())
+    }
+    return {nombres,valores,colores};
+  }
+
+  crearKeyValueTurnosPorMedicoFinalizados(){
+    let nombres : string[] = [];
+    let valores : string[] = [];
+    let colores : string[] = [];
+
+    this.turnosPorMedicoFinalizados.forEach(element => {
+      nombres.push(element.nombre);
+      valores.push(element.cantidad)
+    });
+    for (let i = 0; i < this.turnosPorMedicoFinalizados.length; i++) {
+      colores.push(this.getRandomRgb())
+    }
+    return {nombres,valores,colores};
+  }
+
+
+  graficoPorEspecialidades(){
+    let dataGrafico = this.crearKeyValueTurnoEspecialidad();
+    //console.log(dataGrafico.espec);
+    
+    this.canvas = this.graficoPorEspecialidad.nativeElement;        
+    this.ctx = this.canvas.getContext('2d');
+
+    new Chart(this.ctx, 
+      {
+        type: 'bar',
+        data: {
+          datasets: 
+          [
+            {
+              label: 'Cantidad de Turnos',
+              data: [...dataGrafico.valores],
+              backgroundColor: [...dataGrafico.colores],              
+            }
+          ],
+          labels: [...dataGrafico.espec]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        },
+      });
+  }
+
+  graficoPorFechas(){
+    let dataGrafico = this.crearKeyValueTurnosPorFecha();
+    //console.log(dataGrafico.espec);
+    
+    this.canvas = this.graficoPorFecha.nativeElement;        
+    this.ctx = this.canvas.getContext('2d');
+
+    new Chart(this.ctx, 
+      {
+        type: 'bar',
+        data: {
+          datasets: 
+          [
+            {
+              label: 'Cantidad de turnos:',
+              data: [...dataGrafico.valores],
+              backgroundColor:[...dataGrafico.colores]
+            }
+          ],
+          labels: [...dataGrafico.fechas]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        },
+      });
+  }
+  
+  graficoParaMedicos(){
+    let dataGrafico = this.crearKeyValueTurnosPorMedico();
+    //console.log(dataGrafico.espec);
+    
+    this.canvas = this.graficoPorMedico.nativeElement;        
+    this.ctx = this.canvas.getContext('2d');
+
+    new Chart(this.ctx, 
+      {
+        type: 'pie',
+        data: {
+          datasets: 
+          [
+            {
+              label: 'Total de Turnos',
+              data: [...dataGrafico.valores],
+              backgroundColor: [...dataGrafico.colores]
+            }
+          ],
+          labels: [...dataGrafico.nombres]
+        },        
+      });
+  }
+
+  graficoParaMedicosTurnosFinalizados(){
+    let dataGrafico = this.crearKeyValueTurnosPorMedicoFinalizados();
+    //console.log(dataGrafico.espec);
+    
+    this.canvas = this.graficoPorMedicoFinalizado.nativeElement;        
+    this.ctx = this.canvas.getContext('2d');
+
+    new Chart(this.ctx, 
+      {
+        type: 'doughnut',
+        data: {
+          datasets: 
+          [
+            {
+              label: 'Total de Turnos',
+              data: [...dataGrafico.valores],
+              backgroundColor: [...dataGrafico.colores]
+            }
+          ],
+          labels: [...dataGrafico.nombres]
+        }
+      });
+  }
 
 }

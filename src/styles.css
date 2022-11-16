@@ -47,3 +47,10 @@ button:hover {
     max-width: 95%;
     max-height: 95%;
 }
+
+.btn-pdf{
+    cursor: pointer;
+}
+.btn-pdf:hover{
+    transform: scale(0.9);
+}

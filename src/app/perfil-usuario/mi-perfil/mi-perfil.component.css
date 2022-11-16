@@ -140,10 +140,3 @@ p {
     width: 100vw;
     background-color: rgb(124 79 108);
 }
-
-.btn-pdf{
-    cursor: pointer;
-}
-.btn-pdf:hover{
-    transform: scale(0.9);
-}

@@ -1,5 +1,110 @@
-<div class="fondo d-flex justify-content-center align-items-center h-100 vh-100">
+
+<div class="fondo d-flex justify-content-center align-items-center h-100 w-100 mt-5">
     <div class="container">
-        <p *ngFor="let turno of turnosPorEspecialidad">espec{{turno.especialidad}} cant:{{turno.cantidad}}</p>
+        <mat-toolbar class="justify-content-center mt-5 mb-1">
+            <span>Gráficos y Estadísticas</span>
+        </mat-toolbar>
+
+        <div class="d-flex justify-content-evenly flex-wrap mx-5 mt-3">
+            <div class="mx-5 bordes mb-2">
+                <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Especialidad</h2>
+                <canvas id="graficoPorEspecialidad" width="600" height="300" #graficoPorEspecialidad></canvas>
+                <div class="d-flex justify-content-center mb-2 mt-2">
+                    <button class="botonGris" mat-flat-button >
+                        <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                        Descargar Archivo
+                    </button>
+                    
+                </div>
+            </div>
+            
+            <div class="mx-5 bordes mb-2">
+                <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Fecha</h2>
+                <canvas id="graficoPorFecha" width="600" height="300" #graficoPorFecha></canvas>
+                <div class="d-flex justify-content-center mb-2 mt-2">
+                    <button class="botonGris" mat-flat-button >
+                        <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                        Descargar Archivo
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mx-5 bordes mb-2">
+                <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Médico</h2>
+                <canvas id="graficoPorMedico" width="400" height="400" #graficoPorMedico></canvas>
+                <div class="d-flex justify-content-center mb-2 mt-2">
+                    <button class="botonGris" mat-flat-button >
+                        <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                        Descargar Archivo
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mx-5 bordes mb-2">
+                <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos Realizados por Médico</h2>
+                <canvas id="graficoPorMedicoFinalizado" width="400" height="400" #graficoPorMedicoFinalizado></canvas>
+                <div class="d-flex justify-content-center mb-2 mt-2">
+                    <button class="botonGris" mat-flat-button >
+                        <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                        Descargar Archivo
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-2 mb-5">
+                
+            <a data-toggle="tooltip" data-placement="bottom" title="Volver" routerLink="/panel-control">
+                <img src="assets/images/back.png" alt="flecha-volver">
+            </a>
+        </div>
+
     </div>
+
+    
+
+    
+
+    <!-- </div>
+        <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Especialidad</h2>
+        <div class="row">
+            <div class="col-md-9">
+                <canvas id="graficoPorEspecialidad" width="500" height="100" #graficoPorEspecialidad></canvas>                
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <a class="btn-pdf" data-toggle="tooltip" data-placement="bottom" title="Descargar PDF">
+                    <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                </a>
+            </div>
+        </div>
+        
+
+        <hr class="hrBlanco">
+        <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Fecha</h2>
+        <div class="row">
+        
+            <div class="col-md-9">
+                <canvas id="graficoPorFecha" width="400" height="100" #graficoPorFecha></canvas>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <a class="btn-pdf" data-toggle="tooltip" data-placement="bottom" title="Descargar PDF">
+                    <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                </a>
+            </div>
+        
+        </div>
+        
+       
+        <hr class="hrBlanco">
+        <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Médico</h2>
+        <div class="row">
+            <div class="col-md-9">
+                <canvas id="graficoPorMedico" width="400" height="100" #graficoPorMedico></canvas>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <a class="btn-pdf" data-toggle="tooltip" data-placement="bottom" title="Descargar PDF">
+                    <img src="assets/images/pdf-icon.png" alt="descargarPdf">
+                </a>
+            </div>
+        </div> -->
 </div>
