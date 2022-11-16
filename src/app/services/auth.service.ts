@@ -262,10 +262,10 @@ export class AuthService {
   }
 
   devolverFecha(){
-    let date = new Date()
-    let mes = date.getMonth()+1;
-    let fecha = `${date.getDate()}/${mes}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-    return fecha;
+    let hora = new Date().getTime()
+    let fecha = new Date(hora);
+    
+    return fecha.toString();
   }
 
   

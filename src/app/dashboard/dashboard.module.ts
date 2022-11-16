@@ -10,6 +10,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PerfilUsuarioModule } from '../perfil-usuario/perfil-usuario.module';
 import { GraficosEstadisticasComponent } from './graficos-estadisticas/graficos-estadisticas.component';
 import { LogLoginComponent } from './log-login/log-login.component';
+import { PipesModuleModule } from '../pipes-module/pipes-module.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { LogLoginComponent } from './log-login/log-login.component';
     CommonModule,
     DashboardRoutingModule,
     MaterialModule,
-    PerfilUsuarioModule
+    PerfilUsuarioModule,
+    PipesModuleModule
   ]
 })
 export class DashboardModule { }

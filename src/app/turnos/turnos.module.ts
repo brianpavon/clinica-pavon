@@ -13,6 +13,7 @@ import { ModalComentariosComponent } from './modal-comentarios/modal-comentarios
 import { ModalVerComentarioComponent } from './modal-ver-comentario/modal-ver-comentario.component';
 import { ModalEncuestaComponent } from './modal-encuesta/modal-encuesta.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
+import { PipesModuleModule } from '../pipes-module/pipes-module.module';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
     TurnosRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PipesModuleModule
   ],
   exports:[
     ModalVerComentarioComponent

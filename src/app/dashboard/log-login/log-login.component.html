@@ -4,7 +4,7 @@
             <span >Logs de Ingresos a la Clínica</span>            
         </mat-toolbar>
         <div class="row d-flex justify-content-center tablasTurnos">
-            <table mat-table matTableExporter [dataSource]="todosLosLogs" class="mat-elevation-z8 w-100" #exporter="matTableExporter">
+            <table mat-table matTableExporter [dataSource]="todosLosLogs | ordenarFechas:'log'" class="mat-elevation-z8 w-100" #exporter="matTableExporter">
     
                 <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef> Usuario </th>
@@ -14,7 +14,7 @@
                 
                 <ng-container matColumnDef="fecha">
                     <th mat-header-cell *matHeaderCellDef> Fecha y Hora </th>
-                    <td mat-cell *matCellDef="let log"> {{log.fecha}} </td>
+                    <td mat-cell *matCellDef="let log"> {{log.fecha | date:'dd/MM/YYYY HH:mm'}} </td>
                 </ng-container>
                 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
