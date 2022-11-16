@@ -164,6 +164,116 @@ export class PdfServiceService {
     pdf.download(`turnos-${turnosPaciente[0].paciente.apellido}-${turnosPaciente[0].paciente.nombre}`);
   }
 
+  async descargarGraficoBar(urlGrafico : string,nombreGrafico:string){
+    this.TDocumentDefinitions = {
+      content: [
+        {
+          text: 'Clínica La Online',
+          style: 'header'
+        },
+        {
+          // you can also fit the image inside a rectangle
+          image:await this.getBase64ImageFromURL(this.logoClinica) ,
+          fit: [100, 100],
+          style:'imagen'
+        },
+        {
+          toc: {
+            id: 'mainToc',
+            title: {text: `${nombreGrafico}`, style: 'subheader'}
+          }
+        },
+        {
+          // you can also fit the image inside a rectangle
+          image:urlGrafico,          
+          width:400,
+          height:300
+        },
+        {
+          text: 'Fecha de emision: ' + this.hoy + '/' + this.mesActual + '/' + this.anioActual,
+          style: 'subheader'
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          // margin: [left, top, right, bottom]
+          margin: [0,0,0,20]
+        },
+        imagen:{
+          margin: [0,0,0,20]
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true,
+          margin: [0,20,0,20]
+        }
+      }
+      
+    }
+    //console.log(nombreGrafico.toLocaleLowerCase().replace(' ','-').replace(' ','-'));
+    
+    const pdf = pdfMake.createPdf(this.TDocumentDefinitions);
+    pdf.download(`grafico-${nombreGrafico.toLocaleLowerCase().replace(' ','-').replace(' ','-')}`);
+  }
+
+  async descargarGraficoRedondos(urlGrafico : string,nombreGrafico:string){
+    this.TDocumentDefinitions = {
+      content: [
+        {
+          text: 'Clínica La Online',
+          style: 'header'
+        },
+        {
+          // you can also fit the image inside a rectangle
+          image:await this.getBase64ImageFromURL(this.logoClinica) ,
+          fit: [100, 100],
+          style:'imagen'
+        },
+        {
+          toc: {
+            id: 'mainToc',
+            title: {text: `${nombreGrafico}`, style: 'subheader'}
+          }
+        },
+        {
+          // you can also fit the image inside a rectangle
+          image:urlGrafico,          
+          width:300,
+          height:300
+        },
+        {
+          text: 'Fecha de emision: ' + this.hoy + '/' + this.mesActual + '/' + this.anioActual,
+          style: 'subheader'
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          alignment: 'center',
+          // margin: [left, top, right, bottom]
+          margin: [0,0,0,20]
+        },
+        imagen:{
+          margin: [0,0,0,20]
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true,
+          margin: [0,20,0,20]
+        }
+      }
+      
+    }
+    //console.log(nombreGrafico.toLocaleLowerCase().replace(' ','-').replace(' ','-'));
+    
+    const pdf = pdfMake.createPdf(this.TDocumentDefinitions);
+    pdf.download(`grafico-${nombreGrafico.toLocaleLowerCase().replace(' ','-').replace(' ','-').replace(' ','-')}`);
+  }
+
 
   getBase64ImageFromURL(url:string) {
     return new Promise((resolve, reject) => {

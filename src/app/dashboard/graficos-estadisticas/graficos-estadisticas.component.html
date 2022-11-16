@@ -10,9 +10,9 @@
                 <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Especialidad</h2>
                 <canvas id="graficoPorEspecialidad" width="600" height="300" #graficoPorEspecialidad></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
-                    <button class="botonGris" mat-flat-button >
+                    <button class="botonGris" mat-flat-button (click)="descargarGraficoPDF('especialidad')">
                         <img src="assets/images/pdf-icon.png" alt="descargarPdf">
-                        Descargar Archivo
+                        Descargar
                     </button>
                     
                 </div>
@@ -22,9 +22,9 @@
                 <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Fecha</h2>
                 <canvas id="graficoPorFecha" width="600" height="300" #graficoPorFecha></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
-                    <button class="botonGris" mat-flat-button >
+                    <button class="botonGris" mat-flat-button (click)="descargarGraficoPDF('fecha')">
                         <img src="assets/images/pdf-icon.png" alt="descargarPdf">
-                        Descargar Archivo
+                        Descargar
                     </button>
                 </div>
             </div>
@@ -33,9 +33,9 @@
                 <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Médico</h2>
                 <canvas id="graficoPorMedico" width="400" height="400" #graficoPorMedico></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
-                    <button class="botonGris" mat-flat-button >
+                    <button class="botonGris" mat-flat-button (click)="descargarGraficoPDF('medico')">
                         <img src="assets/images/pdf-icon.png" alt="descargarPdf">
-                        Descargar Archivo
+                        Descargar
                     </button>
                 </div>
             </div>
@@ -44,9 +44,9 @@
                 <h2 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos Realizados por Médico</h2>
                 <canvas id="graficoPorMedicoFinalizado" width="400" height="400" #graficoPorMedicoFinalizado></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
-                    <button class="botonGris" mat-flat-button >
+                    <button class="botonGris" mat-flat-button (click)="descargarGraficoPDF('medicoFinalizado')">
                         <img src="assets/images/pdf-icon.png" alt="descargarPdf">
-                        Descargar Archivo
+                        Descargar
                     </button>
                 </div>
             </div>

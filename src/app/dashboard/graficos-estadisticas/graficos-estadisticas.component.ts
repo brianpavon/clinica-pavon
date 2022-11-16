@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Turnos } from 'src/app/interfaces/turnos';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { Chart, registerables } from 'chart.js/auto';
+import { PdfServiceService } from 'src/app/services/pdf-service.service';
 
 Chart.register(...registerables)
 
@@ -27,6 +28,11 @@ export class GraficosEstadisticasComponent implements OnInit {
   turnosFiltradosFechaFinalizados : Turnos[] = [];
   turnosPorMedicoFinalizados : any[] = [];
 
+  chartGraficoEspecialidad : any;
+  chartGraficoFecha : any;
+  chartGraficoMedico : any;
+  chartGraficoMedicoFinalizado : any;
+
   //graficos
   canvas : any;
   ctx : any;
@@ -35,7 +41,7 @@ export class GraficosEstadisticasComponent implements OnInit {
   @ViewChild('graficoPorMedico') graficoPorMedico !: ElementRef;
   @ViewChild('graficoPorMedicoFinalizado') graficoPorMedicoFinalizado !: ElementRef;
 
-  constructor(private turnServ : TurnosService) { }
+  constructor(private turnServ : TurnosService,private pdfServ : PdfServiceService) { }
 
   ngOnInit(): void {
     this.traerTurnos();
@@ -268,7 +274,7 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.canvas = this.graficoPorEspecialidad.nativeElement;        
     this.ctx = this.canvas.getContext('2d');
 
-    new Chart(this.ctx, 
+    this.chartGraficoEspecialidad = new Chart(this.ctx, 
       {
         type: 'bar',
         data: {
@@ -299,7 +305,7 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.canvas = this.graficoPorFecha.nativeElement;        
     this.ctx = this.canvas.getContext('2d');
 
-    new Chart(this.ctx, 
+    this.chartGraficoFecha = new Chart(this.ctx, 
       {
         type: 'bar',
         data: {
@@ -330,7 +336,7 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.canvas = this.graficoPorMedico.nativeElement;        
     this.ctx = this.canvas.getContext('2d');
 
-    new Chart(this.ctx, 
+    this.chartGraficoMedico = new Chart(this.ctx, 
       {
         type: 'pie',
         data: {
@@ -354,7 +360,7 @@ export class GraficosEstadisticasComponent implements OnInit {
     this.canvas = this.graficoPorMedicoFinalizado.nativeElement;        
     this.ctx = this.canvas.getContext('2d');
 
-    new Chart(this.ctx, 
+    this.chartGraficoMedicoFinalizado = new Chart(this.ctx, 
       {
         type: 'doughnut',
         data: {
@@ -369,6 +375,34 @@ export class GraficosEstadisticasComponent implements OnInit {
           labels: [...dataGrafico.nombres]
         }
       });
+  }
+
+  descargarGraficoPDF(grafico : string){
+  
+    switch (grafico) {
+      case 'especialidad':
+        //console.log(grafico);
+        this.pdfServ.descargarGraficoBar(this.chartGraficoEspecialidad.toBase64Image('image/png,1'),'Turnos Por Especialidad');
+        break;
+      
+      case 'fecha':
+        //console.log(grafico);
+        this.pdfServ.descargarGraficoBar(this.chartGraficoFecha.toBase64Image('image/png,1'),'Turnos Por Fechas');
+        break;
+      
+      case 'medico':
+        //console.log(grafico);
+        this.pdfServ.descargarGraficoRedondos(this.chartGraficoMedico.toBase64Image('image/png,1'),'Turnos Por Medicos');
+        break;
+
+      case 'medicoFinalizado':
+        //console.log(grafico);
+        this.pdfServ.descargarGraficoRedondos(this.chartGraficoMedicoFinalizado.toBase64Image('image/png,1'),'Turnos Realizados por Medico');
+        break;
+    
+      default:
+        break;
+    }
   }
 
 }
