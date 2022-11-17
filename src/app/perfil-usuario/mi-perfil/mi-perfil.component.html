@@ -7,7 +7,7 @@
             <div class="padding">
 
                 <div class="row container d-flex justify-content-center">
-                    <div class="col-xl-10 col-md-12">
+                    <div class="col-xl-12 col-md-12">
                         <div class="card user-card-full">
                             <div class="row m-l-0 m-r-0">
                                 <div class="col-sm-3 bg-c-lite-green user-profile">
@@ -20,17 +20,17 @@
                                         <div class="m-b-25">
                                             <img src="{{urlSegImg ? urlSegImg : '/assets/images/gif-buscar.gif' }}" class="img-radius" alt="User-Profile-Image" width="70%"/>
                                         </div>                                        
-                                    </div>
+                                    </div>                                    
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="card-block">
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600">{{ dataUsuario.nombre }} {{ dataUsuario.apellido }}</h6>
                                         <div class="row">
-                                            <div class="col-sm-6">
-                                                <p class="m-b-10 f-w-600">Email</p>
+                                            <div class="col-md-4">
+                                                <p class="m-b-10 f-w-600 text-center">Email</p>
                                                 <h6 class="text-muted f-w-400" *ngIf="dataUsuario">{{ dataUsuario.email }}</h6>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-2">
                                                 <p class="m-b-10 f-w-600">DNI</p>
                                                 <h6 class="text-muted f-w-400" *ngIf="dataUsuario">{{ dataUsuario.dni}}</h6>
                                             </div>
@@ -38,6 +38,11 @@
                                                 <p class="m-b-10 f-w-600">Edad</p>
                                                 <h6 class="text-muted f-w-400" *ngIf="dataUsuario">{{ dataUsuario.edad}}</h6>
                                             </div>
+                                            <div class="col-sm-4" *ngIf="turnosPipe">
+                                                <p class="m-b-10 f-w-600 text-center">Días desde la última visita</p>
+                                                <h6 class="text-muted f-w-400 text-center">{{ turnosPipe | ultimaVisita}}</h6>
+                                                <!-- <h6 class="text-muted f-w-400 text-center" *ngIf="turnosPipe">{{ turnosPipe | ultimaVisita}}</h6> -->
+                                            </div>                                            
                                         </div>
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600" *ngIf="dataUsuario && dataUsuario.rol == 'medico'">Especialidades</h6>
                                         <div *ngIf="dataUsuario && dataUsuario.rol == 'medico'" class="row">

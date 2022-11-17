@@ -31,6 +31,8 @@ export class MiPerfilComponent implements OnInit {
   idsMedicos : string[] = [];
   medicosPaciente : Usuarios[] = [];
 
+  turnosPipe !: Turnos[];
+
   constructor(private userServ : UsuariosService,private imgServ : ImagenService, private auth : AuthService,private dispServ : DisponibilidadService,private spinner: NgxSpinnerService,private pdfServ : PdfServiceService,private turnServ : TurnosService){ 
 
   }
@@ -94,7 +96,8 @@ export class MiPerfilComponent implements OnInit {
       this.turnServ.traerTurnos().subscribe(turnos => {
         
         //console.log(turnos);        
-        this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id && t.estado == 'realizado')
+        this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id && t.estado == 'realizado');
+        this.turnosPipe = turnos.filter(t => t.paciente.id == data?.id && t.estado == 'realizado');
         
         //console.log(this.turnosMedico);
         this.turnosPaciente.forEach(

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerHistClinicaComponent } from './ver-hist-clinica/ver-hist-clinica.component';
 import { PacientesAtendidosComponent } from './pacientes-atendidos/pacientes-atendidos.component';
 import { TurnosModule } from '../turnos/turnos.module';
+import { PipesModuleModule } from '../pipes-module/pipes-module.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TurnosModule } from '../turnos/turnos.module';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    TurnosModule
+    TurnosModule,
+    PipesModuleModule
   ],
   exports:[
     VerHistClinicaComponent
