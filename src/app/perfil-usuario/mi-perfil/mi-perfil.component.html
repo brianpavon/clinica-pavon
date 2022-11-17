@@ -38,7 +38,7 @@
                                                 <p class="m-b-10 f-w-600">Edad</p>
                                                 <h6 class="text-muted f-w-400" *ngIf="dataUsuario">{{ dataUsuario.edad}}</h6>
                                             </div>
-                                            <div class="col-sm-4" *ngIf="turnosPipe">
+                                            <div class="col-sm-4" *ngIf="turnosPipe && dataUsuario.rol == 'paciente'">
                                                 <p class="m-b-10 f-w-600 text-center">Días desde la última visita</p>
                                                 <h6 class="text-muted f-w-400 text-center">{{ turnosPipe | ultimaVisita}}</h6>
                                                 <!-- <h6 class="text-muted f-w-400 text-center" *ngIf="turnosPipe">{{ turnosPipe | ultimaVisita}}</h6> -->

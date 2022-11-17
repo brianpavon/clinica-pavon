@@ -14,6 +14,7 @@ import { ModalVerComentarioComponent } from './modal-ver-comentario/modal-ver-co
 import { ModalEncuestaComponent } from './modal-encuesta/modal-encuesta.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { PipesModuleModule } from '../pipes-module/pipes-module.module';
+import { DirectivesModule } from '../directives/directives.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { PipesModuleModule } from '../pipes-module/pipes-module.module';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    PipesModuleModule
+    PipesModuleModule,
+    DirectivesModule
   ],
   exports:[
     ModalVerComentarioComponent
