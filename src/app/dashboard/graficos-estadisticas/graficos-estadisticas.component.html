@@ -6,7 +6,7 @@
         </mat-toolbar>
 
         <div class="d-flex justify-content-evenly flex-wrap mx-5 mt-3">
-            <div class="mx-5 bordes mb-2">
+            <div class="mx-5 mb-2" appBordes>
                 <h3 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Especialidad</h3>
                 <canvas id="graficoPorEspecialidad" width="600" height="300" #graficoPorEspecialidad></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             
-            <div class="mx-5 bordes mb-2">
+            <div class="mx-5 mb-2" appBordes>
                 <h3 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Fechas</h3>
                 <canvas id="graficoPorFecha" width="600" height="300" #graficoPorFecha></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             
-            <div class="mx-5 bordes mb-2">
+            <div class="mx-5 mb-2" appBordes>
                 <h3 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos por Médico entre el {{ fechaAnterior | date:'dd/MM/YYYY' }} y {{ hoy | date:'dd/MM/YYYY' }}</h3>
                 <canvas id="graficoPorMedico" width="400" height="400" #graficoPorMedico></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             
-            <div class="mx-5 bordes mb-2">
+            <div class="mx-5 mb-2" appBordes>
                 <h3 class="h3 mb-3 font-weight-normal text-center">Cantidad de Turnos Realizados por Médico entre el {{ fechaAnterior | date:'dd/MM/YYYY' }} y {{ hoy | date:'dd/MM/YYYY' }}</h3>
                 <canvas id="graficoPorMedicoFinalizado" width="400" height="400" #graficoPorMedicoFinalizado></canvas>
                 <div class="d-flex justify-content-center mb-2 mt-2">
