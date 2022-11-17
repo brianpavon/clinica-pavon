@@ -19,6 +19,9 @@ export class TurnosTodosComponent implements OnInit {
   turnosAux : Turnos[] = [];
   turnoParaCancelar : any;
 
+  //string para el pipe
+  filtroTabla : string = ''
+
   constructor(private turnServ : TurnosService) { }
 
   ngOnInit(): void {

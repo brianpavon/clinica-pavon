@@ -13,7 +13,7 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./turnos-paciente.component.css']
 })
 export class TurnosPacienteComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'medico', 'especialidad', 'fecha','hora','estado','acciones'];
+  displayedColumns: string[] = [ 'medico', 'especialidad', 'fecha','hora','estado','acciones'];
 
   turnosPaciente : Turnos[] = [];
   usuarioLogueado !: Usuarios | undefined;
@@ -22,6 +22,8 @@ export class TurnosPacienteComponent implements OnInit {
   turnoElegido !: any;
   verTurno !: any;
   turnoEncuesta !: Turnos;
+  //string para el pipe
+  filtroTabla : string = ''
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { 
 

@@ -6,18 +6,15 @@
         <div class="row justify-content-center">
             <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
                 <mat-label>Filtre los Resultados</mat-label>
-                <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input>
+                <!-- <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input> -->
+                <input matInput [(ngModel)]="filtroTabla"placeholder="Filtre la Tabla" #input>
             </mat-form-field>
         </div>
         <div class="row justify-content-center tablasTurnos">
             
 
-            <table mat-table [dataSource]="turnosPaciente | ordenarFechas:'turnos'" class="mat-elevation-z8">
-
-                <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef>Paciente</th>
-                    <td mat-cell *matCellDef="let element">{{ element.paciente.nombre | titlecase }} {{ element.paciente.apellido | titlecase }}</td>
-                </ng-container>
+            <table mat-table [dataSource]="turnosPaciente | ordenarFechas:'turnos' | filtroTabla:filtroTabla:'pacientes'" class="mat-elevation-z8">
+                
       
                 <ng-container matColumnDef="medico">
                     <th mat-header-cell *matHeaderCellDef>Especialista</th>

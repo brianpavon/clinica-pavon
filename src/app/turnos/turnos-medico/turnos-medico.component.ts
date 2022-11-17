@@ -21,6 +21,8 @@ export class TurnosMedicoComponent implements OnInit {
   turnosAux : Turnos[] = [];
   turnoModal !: any;
   verTurno !: any;
+  //string para el pipe
+  filtroTabla : string = ''
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { }
 
