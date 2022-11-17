@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OrdenarFechasPipe } from './ordenar-fechas.pipe';
 import { UltimaVisitaPipe } from './ultima-visita.pipe';
 import { FiltroTablaPipe } from './filtro-tabla.pipe';
+import { FiltroHistoriaClinicaPipe } from './filtro-historia-clinica.pipe';
 
 
 
@@ -10,7 +11,8 @@ import { FiltroTablaPipe } from './filtro-tabla.pipe';
   declarations: [
     OrdenarFechasPipe,
     UltimaVisitaPipe,
-    FiltroTablaPipe
+    FiltroTablaPipe,
+    FiltroHistoriaClinicaPipe
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { FiltroTablaPipe } from './filtro-tabla.pipe';
   exports:[
     OrdenarFechasPipe,
     UltimaVisitaPipe,
-    FiltroTablaPipe
+    FiltroTablaPipe,
+    FiltroHistoriaClinicaPipe
   ]
 })
 export class PipesModuleModule { }

@@ -30,7 +30,7 @@ import { DirectivesModule } from '../directives/directives.module';
     MaterialModule,
     PerfilUsuarioModule,
     PipesModuleModule,
-    DirectivesModule
+    DirectivesModule,
   ]
 })
 export class DashboardModule { }

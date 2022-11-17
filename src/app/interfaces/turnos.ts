@@ -1,3 +1,4 @@
+import { HistoriaClinica } from "./historia-clinica";
 import { Usuarios } from "./usuarios";
 
 export interface Turnos {    
@@ -12,4 +13,5 @@ export interface Turnos {
     comentario:string;
     calificacion:string;
     encuesta:string[];
+    historiaClinica?:HistoriaClinica
 }

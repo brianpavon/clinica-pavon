@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Turnos } from 'src/app/interfaces/turnos';
 import { TurnosService } from 'src/app/services/turnos.service';
 import {MatTableDataSource} from '@angular/material/table';
+import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 
 @Component({
   selector: 'app-turnos-todos',
@@ -18,9 +19,11 @@ export class TurnosTodosComponent implements OnInit {
 
   turnosAux : Turnos[] = [];
   turnoParaCancelar : any;
+  historiaClinicaPac !: any;
 
   //string para el pipe
   filtroTabla : string = ''
+  filtroTablaHistClin : string = ''
 
   constructor(private turnServ : TurnosService) { }
 
@@ -33,7 +36,6 @@ export class TurnosTodosComponent implements OnInit {
     this.turnServ.traerTurnos().subscribe(
       turnos=>{
         this.todosLosTurnos = turnos;
-        this.dataSource = new MatTableDataSource(turnos);
       }
     )
   }
@@ -87,6 +89,11 @@ export class TurnosTodosComponent implements OnInit {
 
   cargarComentarios(turno:Turnos,estado:string){
     this.turnoParaCancelar = {turno: turno,estado:estado}
+  }
+
+  verHistClin(histClin : HistoriaClinica){
+    //console.log(histClin);
+    this.historiaClinicaPac = histClin;
   }
 
 }

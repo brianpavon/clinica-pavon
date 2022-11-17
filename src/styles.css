@@ -54,3 +54,7 @@ button:hover {
 .btn-pdf:hover{
     transform: scale(0.9);
 }
+
+.fondo-modal{
+    background-color: #424242;
+}

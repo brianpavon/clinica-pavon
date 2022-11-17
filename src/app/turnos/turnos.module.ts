@@ -15,6 +15,7 @@ import { ModalEncuestaComponent } from './modal-encuesta/modal-encuesta.componen
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { PipesModuleModule } from '../pipes-module/pipes-module.module';
 import { DirectivesModule } from '../directives/directives.module';
+import { ModalhistclinComponent } from './modalhistclin/modalhistclin.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DirectivesModule } from '../directives/directives.module';
     ModalComentariosComponent,
     ModalVerComentarioComponent,
     ModalEncuestaComponent,
-    HistoriaClinicaComponent
+    HistoriaClinicaComponent,
+    ModalhistclinComponent,
   ],
   imports: [
     CommonModule,
