@@ -3,19 +3,19 @@
         <mat-toolbar class="justify-content-center mt-2 mb-2" color="primary">
             <span>Todos los Turnos</span>
         </mat-toolbar>
-        <div class="row d-flex justify-content-center mb-2">
+        <div class="row d-flex justify-content-center colorTabla" >
             <div class="col-md-6">
-                <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
+                <mat-form-field class="inputFiltro" appearance="fill" >
                     <mat-label>Filtre los Resultados</mat-label>                
-                    <input matInput [(ngModel)]="filtroTabla" placeholder="Filtre la Tabla">
+                    <input matInput [(ngModel)]="filtroTabla" placeholder="Filtre por médico, paciente, especialidad, fecha, horario, estado">
                 </mat-form-field>
 
             </div>
             <div class="col-md-6">
                 
-                <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
+                <mat-form-field appearance="fill" class="inputFiltro">
                     <mat-label>Filtre por los datos de la Historia Clínica</mat-label>
-                    <input [(ngModel)]="filtroTablaHistClin" matInput placeholder="Filtre la Tabla">
+                    <input [(ngModel)]="filtroTablaHistClin" matInput placeholder="Filtre por los datos de la Historia Clínica">
                 </mat-form-field>
             </div>
         </div>
@@ -69,8 +69,11 @@
                 <tr [appColorTr]="row.estado" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
         </div>
+        
+        <!-- modal -->
         <app-modal-comentarios *ngIf="turnoParaCancelar" [turnoElegido]="turnoParaCancelar"></app-modal-comentarios>
         <app-modalhistclin *ngIf="historiaClinicaPac" [histClin]="historiaClinicaPac"></app-modalhistclin>
+
         <div class="row justify-content-center mt-2 mb-5">
             <a data-toggle="tooltip" data-placement="bottom" title="Volver" routerLink="/panel-control">
               <img src="assets/images/back.png" alt="flecha-volver" />

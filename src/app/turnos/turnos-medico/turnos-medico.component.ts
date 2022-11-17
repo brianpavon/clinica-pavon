@@ -6,6 +6,7 @@ import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { mergeMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 
 @Component({
   selector: 'app-turnos-medico',
@@ -23,6 +24,9 @@ export class TurnosMedicoComponent implements OnInit {
   verTurno !: any;
   //string para el pipe
   filtroTabla : string = ''
+  filtroTablaHistClin : string = '';
+
+  historiaClinicaPac !: any;
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { }
 
@@ -112,6 +116,11 @@ export class TurnosMedicoComponent implements OnInit {
     //console.log(turno);
     this.verTurno = turno;    
     this.verTurno.verCalificacion = true;
+  }
+
+  verHistClin(histClin : HistoriaClinica){
+    //console.log(histClin);
+    this.historiaClinicaPac = histClin;
   }
 
 }

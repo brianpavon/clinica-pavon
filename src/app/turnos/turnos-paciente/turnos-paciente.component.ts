@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import {MatTableDataSource} from '@angular/material/table';
+import { HistoriaClinica } from 'src/app/interfaces/historia-clinica';
 
 @Component({
   selector: 'app-turnos-paciente',
@@ -23,7 +24,10 @@ export class TurnosPacienteComponent implements OnInit {
   verTurno !: any;
   turnoEncuesta !: Turnos;
   //string para el pipe
-  filtroTabla : string = ''
+  filtroTabla : string = '';
+  filtroTablaHistClin : string = '';
+
+  historiaClinicaPac !: any;
 
   constructor(private auth:AuthService,private userServ : UsuariosService,private turnServ : TurnosService) { 
 
@@ -41,9 +45,7 @@ export class TurnosPacienteComponent implements OnInit {
       this.turnServ.traerTurnos().subscribe(turnos => {
         //console.log(turnos);
         
-        this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id)
-        //console.log(this.turnosPaciente);
-        this.dataSource = new MatTableDataSource(this.turnosPaciente);
+        this.turnosPaciente = turnos.filter(t => t.paciente.id == data?.id)        
         
       })
     })
@@ -112,6 +114,11 @@ export class TurnosPacienteComponent implements OnInit {
 
   completarEncuesta(turno:Turnos){
     this.turnoEncuesta = turno;
+  }
+
+  verHistClin(histClin : HistoriaClinica){
+    //console.log(histClin);
+    this.historiaClinicaPac = histClin;
   }
 
 }

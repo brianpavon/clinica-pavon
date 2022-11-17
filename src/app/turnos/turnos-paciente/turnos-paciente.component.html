@@ -3,17 +3,28 @@
         <mat-toolbar class="justify-content-center mt-2 mb-2">
             <span>Mis Turnos</span>
         </mat-toolbar>
-        <div class="row justify-content-center">
-            <mat-form-field appearance="fill" style="font-size: 14px;width: 100%;background-color: #424242;color: white;">
-                <mat-label>Filtre los Resultados</mat-label>
-                <!-- <input matInput (keyup)="filtrarTabla($event)" placeholder="Filtre la Tabla" #input> -->
-                <input matInput [(ngModel)]="filtroTabla"placeholder="Filtre la Tabla" #input>
-            </mat-form-field>
+
+        <div class="row d-flex justify-content-center colorTabla">
+            <div class="col-md-6">
+                <mat-form-field appearance="fill" class="inputFiltro">
+                    <mat-label>Filtre los Resultados</mat-label>                
+                    <input matInput [(ngModel)]="filtroTabla" placeholder="Filtre por médico, especialidad, fecha, horario, estado">
+                </mat-form-field>
+
+            </div>
+            <div class="col-md-6">
+                
+                <mat-form-field appearance="fill" class="inputFiltro">
+                    <mat-label>Filtre por los datos de la Historia Clínica</mat-label>
+                    <input [(ngModel)]="filtroTablaHistClin" matInput placeholder="Filtre por los datos de la Historia Clínica">
+                </mat-form-field>
+            </div>
         </div>
+
         <div class="row justify-content-center tablasTurnos">
             
 
-            <table mat-table [dataSource]="turnosPaciente | ordenarFechas:'turnos' | filtroTabla:filtroTabla:'pacientes'" class="mat-elevation-z8">
+            <table mat-table [dataSource]="turnosPaciente | ordenarFechas:'turnos' | filtroTabla:filtroTabla:'pacientes' | filtroHistoriaClinica:filtroTablaHistClin" class="mat-elevation-z8">
                 
       
                 <ng-container matColumnDef="medico">
@@ -55,14 +66,20 @@
 
                         <!-- btn calificar -->
                         <button data-toggle="modal" data-target="#modalComentarios" class="mr-1" mat-flat-button color="primary" *ngIf="element.estado == 'realizado' && !element.calificacion" (click)="cargarComentarios(element,'calificar')">Calificar</button>
+
+                        <!-- historia clinica -->
+                        <button data-toggle="modal" data-target="#modalHistClin" class="mr-1" mat-flat-button color="accent" *ngIf="element.historiaClinica" (click)="verHistClin(element.historiaClinica)">Historia Clinica</button>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr [appColorTr]="row.estado" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
           </div>
+          
+          <!-- modal -->
           <app-modal-comentarios *ngIf="turnoElegido" [turnoElegido]="turnoElegido"></app-modal-comentarios>
           <app-modal-ver-comentario *ngIf="verTurno" [turnoParaVer]="verTurno"></app-modal-ver-comentario>
           <app-modal-encuesta *ngIf="turnoEncuesta" [turnoEncuesta]="turnoEncuesta"></app-modal-encuesta>
+          <app-modalhistclin *ngIf="historiaClinicaPac" [histClin]="historiaClinicaPac"></app-modalhistclin>
     </div>
 </div>
